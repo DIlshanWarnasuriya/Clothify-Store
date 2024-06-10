@@ -50,7 +50,7 @@
             </Pane>
             <Pane layoutX="236.0" prefHeight="30.0" prefWidth="964.0" style="-fx-background-radius: 6; -fx-background-color: #153448;">
                <children>
-                  <Label layoutX="427.0" layoutY="8.0" text="Clothify Store - Home" textFill="#d9dff5">
+                  <Label layoutX="416.0" layoutY="8.0" text="Clothify Store - Customer" textFill="#d9dff5">
                      <font>
                         <Font name="System Bold" size="11.0" />
                      </font>
@@ -222,30 +222,25 @@
             <Pane layoutX="316.0" layoutY="83.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
                <children>
                   <JFXTextField focusColor="#405aa800" layoutX="14.0" layoutY="6.0" prefHeight="25.0" prefWidth="160.0" promptText="Enter Customer Id" unFocusColor="#4d4d4d00" />
-                  <Button layoutX="183.0" layoutY="2.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="45.0" style="-fx-background-color: #3248AD; -fx-background-radius: 18;">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="198.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons/search.png" />
                      </image>
                   </ImageView>
+                  <Pane layoutX="183.0" layoutY="2.0" prefHeight="32.0" prefWidth="45.0" style="-fx-background-color: #3248AD; -fx-background-radius: 18;">
+                     <children>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="16.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/search.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
                </children>
             </Pane>
-            <Button layoutX="464.0" layoutY="277.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="27.0" style="-fx-background-color: #D9D9D9; -fx-border-radius: 18; -fx-border-color: #000000; -fx-background-radius: 18;">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/camera.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
             <Pane layoutX="316.0" layoutY="400.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
                <children>
                   <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
@@ -313,6 +308,18 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Pane layoutX="467.0" layoutY="278.0" prefHeight="23.0" prefWidth="27.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18; -fx-border-color: #000000; -fx-border-radius: 18;">
+               <children>
+                  <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/camera.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
          </children></AnchorPane>
     </children>
 </StackPane>
