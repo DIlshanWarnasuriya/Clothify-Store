@@ -112,10 +112,7 @@ public class UserController implements Initializable {
         ObservableList<UserTable> tableData = FXCollections.observableArrayList();
         for (User user : userBo.getAll()){
             if (!user.getStatus().equals("deleted")){
-                double width = 50;
-                double height = 50;
-                Circle circle = new Circle(width / 2, height / 2, width / 2);
-                circle.setStrokeWidth(2);
+                Circle circle = new Circle(25, 25, 25);
                 circle.setFill(new ImagePattern(new Image(user.getImageUrl())));
 
                 tableData.add(new UserTable(circle, user.getId(), user.getName(), user.getContactNo(), user.getEmail(), user.getAddress(), user.getUserType()));
@@ -154,10 +151,7 @@ public class UserController implements Initializable {
             ObservableList<UserTable> tableData = FXCollections.observableArrayList();
             for (User user : userBo.search(data)){
                 if (!user.getStatus().equals("deleted")){
-                    double width = 50;
-                    double height = 50;
-                    Circle circle = new Circle(width / 2, height / 2, width / 2);
-                    circle.setStrokeWidth(2);
+                    Circle circle = new Circle(25, 25, 25);
                     circle.setFill(new ImagePattern(new Image(user.getImageUrl())));
 
                     tableData.add(new UserTable(circle, user.getId(), user.getName(), user.getContactNo(), user.getEmail(), user.getAddress(), user.getUserType()));
@@ -266,6 +260,7 @@ public class UserController implements Initializable {
                     if (res) {
                         new Alert(Alert.AlertType.INFORMATION, "User Update success").show();
                         refreshOnAction();
+                        selectUser=null;
                     }
                     else new Alert(Alert.AlertType.ERROR, "User Update Fail").show();
                 }
@@ -287,6 +282,7 @@ public class UserController implements Initializable {
             if (res){
                 new Alert(Alert.AlertType.INFORMATION, "User Delete success").show();
                 refreshOnAction();
+                selectUser=null;
             }
             else new Alert(Alert.AlertType.ERROR, "User Delete Fail").show();
         }
