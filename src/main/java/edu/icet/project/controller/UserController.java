@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import edu.icet.project.bo.BoFactory;
 import edu.icet.project.bo.custom.UserBo;
 import edu.icet.project.dto.User;
+import edu.icet.project.dto.table.UserTable;
 import edu.icet.project.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -47,7 +50,7 @@ public class UserController implements Initializable {
     private JFXComboBox<String> cmbUserType;
 
     @FXML
-    private TableView<?> userTable;
+    private TableView<UserTable> userTable;
     @FXML
     private TableColumn<?, ?> colAddress;
     @FXML
@@ -64,13 +67,24 @@ public class UserController implements Initializable {
     private TableColumn<?, ?> colType;
 
     private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
+    private User user = null;
 
     String url = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colNumber.setCellValueFactory(new PropertyValueFactory<>("contactNo"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colType.setCellValueFactory(new PropertyValueFactory<>("userType"));
+
         setTypeOfUsers();
         setGenders();
+        loadTable();
+        selectRowInTable();
     }
 
     private void setTypeOfUsers() {
@@ -87,9 +101,74 @@ public class UserController implements Initializable {
         cmbGender.setItems(type);
     }
 
+    private void loadTable(){
+
+        ObservableList<UserTable> tableData = FXCollections.observableArrayList();
+        for (User users : userBo.getAll()){
+            double width = 50;
+            double height = 50;
+            Circle circle = new Circle(width / 2, height / 2, Math.min(width, height) / 2);
+            circle.setStrokeWidth(2);
+            circle.setFill(new ImagePattern(new Image(users.getImageUrl())));
+
+            tableData.add(new UserTable(circle, users.getId(), users.getName(), users.getContactNo(), users.getEmail(), users.getAddress(), users.getUserType()));
+        }
+        FXCollections.reverse(tableData);
+        userTable.setItems(tableData);
+    }
+
+    private void selectRowInTable(){
+        userTable.getSelectionModel().selectedItemProperty().addListener((observableValue, userTable1, select) -> {
+            if (select != null){
+                for (User users : userBo.getAll()){
+                    if (Objects.equals(users.getId(), select.getId())){
+                        user = users;
+
+                        imageCircle.setFill(new ImagePattern(new Image(users.getImageUrl())));
+                        txtName.setText(users.getName());
+                        txtEmail.setText(users.getEmail());
+                        txtAddress.setText(users.getAddress());
+                        txtContactNo.setText(users.getContactNo());
+                        cmbGender.setValue(users.getGender());
+                        cmbUserType.setValue(users.getUserType());
+                        return;
+                    }
+                }
+            }
+        });
+    }
+
     @FXML
     void searchUserOnAction(MouseEvent event) {
+        if (txtSearch.getText().isEmpty()){
+            new Alert(Alert.AlertType.WARNING, "Please enter searching data").show();
+        }
+        else {
+            String search = txtSearch.getText();
+            ObservableList<UserTable> tableData = FXCollections.observableArrayList();
 
+            for (User users : userBo.getAll()){
+                if (users.getId().toString().equals(search) || users.getName().equals(search) || users.getEmail().equals(search) || users.getAddress().equals(search) || users.getContactNo().equals(search) || users.getGender().equals(search) || users.getUserType().equals(search)){
+
+                    double width = 50;
+                    double height = 50;
+                    Circle circle = new Circle(width / 2, height / 2, Math.min(width, height) / 2);
+                    circle.setStrokeWidth(2);
+                    circle.setFill(new ImagePattern(new Image(users.getImageUrl())));
+
+                    tableData.add(new UserTable(circle, users.getId(), users.getName(), users.getContactNo(), users.getEmail(), users.getAddress(), users.getUserType()));
+                }
+            }
+
+            if (tableData.isEmpty()){
+                new Alert(Alert.AlertType.WARNING, "No user found").show();
+                txtSearch.setText("");
+            }
+            else{
+                FXCollections.reverse(tableData);
+                userTable.setItems(tableData);
+            }
+        }
     }
 
     @FXML
@@ -120,7 +199,10 @@ public class UserController implements Initializable {
                 User user = new User (name, email, password, address, contactNo, gender, userType, imageUrl, "Active");
                 boolean res = userBo.saveUser(user);
 
-                if (res) new Alert(Alert.AlertType.INFORMATION, "User added success").show();
+                if (res) {
+                    new Alert(Alert.AlertType.INFORMATION, "User added success").show();
+                    loadTable();
+                }
                 else new Alert(Alert.AlertType.ERROR, "User added Fail").show();
             }
         }catch (RuntimeException ex){
@@ -135,6 +217,11 @@ public class UserController implements Initializable {
 
     @FXML
     void deleteUserOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void refreshOnAction(MouseEvent event) {
 
     }
 

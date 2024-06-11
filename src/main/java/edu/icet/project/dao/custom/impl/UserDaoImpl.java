@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     @Override
@@ -35,8 +36,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ArrayList<UserEntity> getAll() {
-        return null;
+    public List<UserEntity> getAll() {
+        Session session = HibernateUtil.getSession();
+        List<UserEntity> fromUser = session.createQuery("FROM UserEntity", UserEntity.class).list();
+        session.close();
+
+        return fromUser;
     }
 
     @Override

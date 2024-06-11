@@ -45,3 +45,5 @@ o
 ?src/main/java/edu/icet/project/dao/custom/impl/UserDaoImpl.java,0\b\0be5949b507278fbb43a8461f2440e019aaf46d2
 `
 0src/main/java/edu/icet/project/dao/SuperDao.java,c\8\c8c1ac56219f29efe2fa05203eaadebf0d9c5513
+g
+7src/main/java/edu/icet/project/dto/table/UserTable.java,f\e\fefb821f61165fd53f09b2d5067db21ccbe32d57

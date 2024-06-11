@@ -123,13 +123,13 @@
             </Button>
             <Pane layoutX="316.0" layoutY="70.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
                <children>
-                  <JFXTextField fx:id="txtSearch" focusColor="#405aa800" layoutX="14.0" layoutY="6.0" prefHeight="25.0" prefWidth="160.0" promptText="Enter Customer Id" unFocusColor="#4d4d4d00" />
+                  <JFXTextField fx:id="txtSearch" focusColor="#405aa800" layoutX="14.0" layoutY="6.0" prefHeight="25.0" prefWidth="160.0" promptText="Enter User Id" unFocusColor="#4d4d4d00" />
                   <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="198.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons/search.png" />
                      </image>
                   </ImageView>
-                  <Pane layoutX="183.0" layoutY="2.0" onDragDetected="#searchUserOnAction" prefHeight="32.0" prefWidth="45.0" style="-fx-background-color: #3248AD; -fx-background-radius: 18;">
+                  <Pane layoutX="183.0" layoutY="2.0" onDragDetected="#searchUserOnAction" onMouseClicked="#searchUserOnAction" prefHeight="32.0" prefWidth="45.0" style="-fx-background-color: #3248AD; -fx-background-radius: 18;">
                      <children>
                         <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="16.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -154,9 +154,9 @@
                               <TableColumn fx:id="colId" prefWidth="68.79998779296875" style="-fx-alignment: CENTER;" text="id" />
                               <TableColumn fx:id="colName" prefWidth="147.199951171875" style="-fx-alignment: CENTER;" text="Name" />
                               <TableColumn fx:id="colNumber" prefWidth="149.5999755859375" style="-fx-alignment: CENTER;" text="Contact No" />
-                              <TableColumn fx:id="colEmail" prefWidth="216.0" style="-fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 10;" text="Email" />
+                              <TableColumn fx:id="colEmail" prefWidth="216.0" style="-fx-alignment: CENTER;" text="Email" />
                               <TableColumn fx:id="colAddress" prefWidth="229.5999755859375" style="-fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 10;" text="Address" />
-                              <TableColumn fx:id="colType" prefWidth="62.39990234375" style="-fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 10;" text="Type" />
+                              <TableColumn fx:id="colType" prefWidth="62.39990234375" style="-fx-alignment: CENTER;" text="Type" />
                            </columns>
                         </TableView>
                      </children>
@@ -191,6 +191,14 @@
                   <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="919.0" layoutY="6.0" onDragDetected="#minimizeOnAction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons/minimize.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="897.0" layoutY="5.0" onDragDetected="#refreshOnAction" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/refresh.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
