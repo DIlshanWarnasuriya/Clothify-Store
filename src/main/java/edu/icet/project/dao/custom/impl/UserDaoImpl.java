@@ -5,8 +5,6 @@ import edu.icet.project.entity.UserEntity;
 import edu.icet.project.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
@@ -17,22 +15,31 @@ public class UserDaoImpl implements UserDao {
 
         try{
             session.persist(entity);
+            transaction.commit();
+            return true;
         }catch (Exception e){
             transaction.rollback();
+            return false;
         }finally {
             session.close();
         }
-        return true;
     }
 
     @Override
     public boolean update(UserEntity entity) {
-        return false;
-    }
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
 
-    @Override
-    public boolean delete(String id) {
-        return false;
+        try {
+            session.update(entity);
+            transaction.commit();
+            return true;
+        }catch (Exception e){
+            transaction.rollback();
+            return false;
+        }finally {
+            session.close();
+        }
     }
 
     @Override
@@ -43,10 +50,4 @@ public class UserDaoImpl implements UserDao {
 
         return fromUser;
     }
-
-    @Override
-    public UserEntity search(String id) {
-        return null;
-    }
-
 }

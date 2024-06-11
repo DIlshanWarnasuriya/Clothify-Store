@@ -15,15 +15,11 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @Column(unique = true, nullable = false)
     private String email;
-    @Column(nullable = false)
     private String password;
     private String address;
-    @Column(unique = true, nullable = false)
     private String contactNo;
     private String gender;
-    @Column(nullable = false)
     private String userType;
     private String imageUrl;
     private String status;

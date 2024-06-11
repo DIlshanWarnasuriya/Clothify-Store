@@ -18,7 +18,7 @@ public class AppInitializer extends Application {
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/User.fxml"))));
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        //stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
 }
