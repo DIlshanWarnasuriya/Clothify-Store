@@ -1,6 +1,11 @@
 package edu.icet.project.dao;
 
-import edu.icet.project.bo.SuperBo;
+import java.util.ArrayList;
 
-public interface CrudDao extends SuperBo {
+public interface CrudDao<T> extends SuperDao {
+    boolean save(T entity);
+    boolean update(T entity);
+    boolean delete(String id);
+    ArrayList<T> getAll();
+    T search(String id);
 }

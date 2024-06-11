@@ -1,8 +1,7 @@
 
 v
-java:S1121
-".Extract the assignment out of this expression.(ê—¨¼ıÿÿÿÿ8¾®æ²€2J$a3e0e91c-d33d-4333-83e4-44af7d013244
+java:S1121".Extract the assignment out of this expression.(ê—¨¼ıÿÿÿÿ8Øœäº€2J$dda0daec-ab0f-4a4c-b58a-3d93341b6bfd
 á
-java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(§İüáşÿÿÿÿ8ëåî²€2J$bfad9b5c-6524-4d58-a421-09e6b8776fc3
-s
-java:S1172"+Remove this unused method parameter "type".(¼íùüÿÿÿÿ8ëåî²€2J$fd98c5a8-ccc2-4d6f-a374-5720cdf35986
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(§İüáşÿÿÿÿ8Ùœäº€2J$409bdb1b-8ec6-43e8-ba4d-0b52fd1e199d
+
+java:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ÜŸ•8Ûœäº€2J$58d354bd-5360-4567-a8ff-5cf545de8e89

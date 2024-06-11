@@ -1,5 +1,6 @@
 package edu.icet.project.dao;
 
+import edu.icet.project.dao.custom.impl.UserDaoImpl;
 import edu.icet.project.util.DaoType;
 
 public class DaoFactory {
@@ -11,6 +12,9 @@ public class DaoFactory {
     }
 
     public <T extends SuperDao> T getDao(DaoType type){
+        switch (type){
+            case USER: return (T) new UserDaoImpl();
+        }
         return null;
     }
 }

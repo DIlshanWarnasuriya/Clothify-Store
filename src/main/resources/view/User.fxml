@@ -16,10 +16,133 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-radius: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.project.controller.testCo">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-radius: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.project.controller.UserController">
     <children>
         <AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4;" stylesheets="@../css/TableStyle.css">
          <children>
+            <Pane layoutX="316.0" layoutY="284.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+               <children>
+                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/name.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtName" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Name" unFocusColor="#4d4d4d00" />
+               </children>
+            </Pane>
+            <Pane layoutX="316.0" layoutY="331.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+               <children>
+                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/email.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtEmail" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Email" unFocusColor="#4d4d4d00" />
+               </children>
+            </Pane>
+            <Pane layoutX="316.0" layoutY="378.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+               <children>
+                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/password.png" />
+                     </image>
+                  </ImageView>
+                  <JFXPasswordField fx:id="txtPassword" focusColor="#405aa800" layoutX="41.0" layoutY="6.0" promptText="Enter password" unFocusColor="#4d4d4d00" />
+               </children>
+            </Pane>
+            <Pane layoutX="316.0" layoutY="425.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+               <children>
+                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/address.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtAddress" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Address" unFocusColor="#4d4d4d00" />
+               </children>
+            </Pane>
+            <Pane layoutX="316.0" layoutY="473.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+               <children>
+                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/call.png" />
+                     </image>
+                  </ImageView>
+                  <JFXTextField fx:id="txtContactNo" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Contact No." unFocusColor="#4d4d4d00" />
+               </children>
+            </Pane>
+            <Pane layoutX="316.0" layoutY="520.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+               <children>
+                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/gender.png" />
+                     </image>
+                  </ImageView>
+                  <JFXComboBox fx:id="cmbGender" focusColor="#405aa800" layoutX="41.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Select Gender" unFocusColor="#4d4d4d00">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXComboBox>
+               </children>
+            </Pane>
+            <Pane layoutX="316.0" layoutY="567.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+               <children>
+                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/gender.png" />
+                     </image>
+                  </ImageView>
+                  <JFXComboBox fx:id="cmbUserType" focusColor="#405aa800" layoutX="41.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Select User Type" unFocusColor="#4d4d4d00">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXComboBox>
+               </children>
+            </Pane>
+            <Button layoutX="318.0" layoutY="625.0" mnemonicParsing="false" onAction="#addUserOnAction" prefHeight="28.0" prefWidth="70.0" style="-fx-background-color: #27AE60; -fx-background-radius: 19;" text="Add" textFill="#f3f0f0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="393.0" layoutY="625.0" mnemonicParsing="false" onAction="#updateUserOnAction" prefHeight="28.0" prefWidth="75.0" style="-fx-background-color: #D07F00; -fx-background-radius: 19;" text="Update" textFill="#f3f0f0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="473.0" layoutY="625.0" mnemonicParsing="false" onAction="#deleteUserOnAction" prefHeight="28.0" prefWidth="70.0" style="-fx-background-color: #C0392B; -fx-background-radius: 19;" text="Delete" textFill="#f3f0f0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Pane layoutX="316.0" layoutY="70.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+               <children>
+                  <JFXTextField fx:id="txtSearch" focusColor="#405aa800" layoutX="14.0" layoutY="6.0" prefHeight="25.0" prefWidth="160.0" promptText="Enter Customer Id" unFocusColor="#4d4d4d00" />
+                  <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="198.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/search.png" />
+                     </image>
+                  </ImageView>
+                  <Pane layoutX="183.0" layoutY="2.0" onDragDetected="#searchUserOnAction" prefHeight="32.0" prefWidth="45.0" style="-fx-background-color: #3248AD; -fx-background-radius: 18;">
+                     <children>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="16.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icons/search.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Pane>
+               </children>
+            </Pane>
             <Pane layoutX="615.0" layoutY="79.0" prefHeight="574.0" prefWidth="518.0" style="-fx-background-color: #d9d9d9; -fx-background-radius: 18;">
                <children>
                   <Pane layoutX="11.0" layoutY="10.0" prefHeight="553.0" prefWidth="496.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 18;">
@@ -73,16 +196,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-               </children>
-            </Pane>
-            <Pane layoutX="316.0" layoutY="364.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
-               <children>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/email.png" />
-                     </image>
-                  </ImageView>
-                  <JFXTextField fx:id="txtEmail" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Email" unFocusColor="#4d4d4d00" />
                </children>
             </Pane>
             <Pane prefHeight="700.0" prefWidth="245.0" style="-fx-background-color: #153448; -fx-background-radius: 7;">
@@ -220,97 +333,8 @@
                   </Pane>
                </children>
             </Pane>
-            <Circle fx:id="imageCircle" fill="#d9d9d9" layoutX="431.0" layoutY="216.0" radius="70.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-            <Pane layoutX="316.0" layoutY="83.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
-               <children>
-                  <JFXTextField fx:id="txtSearch" focusColor="#405aa800" layoutX="14.0" layoutY="6.0" prefHeight="25.0" prefWidth="160.0" promptText="Enter Customer Id" unFocusColor="#4d4d4d00" />
-                  <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="198.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/search.png" />
-                     </image>
-                  </ImageView>
-                  <Pane layoutX="183.0" layoutY="2.0" onDragDetected="#searchUserOnAction" prefHeight="32.0" prefWidth="45.0" style="-fx-background-color: #3248AD; -fx-background-radius: 18;">
-                     <children>
-                        <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="16.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/icons/search.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Pane>
-               </children>
-            </Pane>
-            <Pane layoutX="316.0" layoutY="413.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
-               <children>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/password.png" />
-                     </image>
-                  </ImageView>
-                  <JFXPasswordField fx:id="txtPassword" focusColor="#405aa800" layoutX="41.0" layoutY="6.0" promptText="Enter password" unFocusColor="#4d4d4d00" />
-               </children>
-            </Pane>
-            <Pane layoutX="316.0" layoutY="461.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
-               <children>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/address.png" />
-                     </image>
-                  </ImageView>
-                  <JFXTextField fx:id="txtAddress" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Address" unFocusColor="#4d4d4d00" />
-               </children>
-            </Pane>
-            <Pane layoutX="316.0" layoutY="509.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
-               <children>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/call.png" />
-                     </image>
-                  </ImageView>
-                  <JFXTextField fx:id="txtContactNo" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Contact No." unFocusColor="#4d4d4d00" />
-               </children>
-            </Pane>
-            <Pane layoutX="316.0" layoutY="558.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
-               <children>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/gender.png" />
-                     </image>
-                  </ImageView>
-                  <JFXComboBox fx:id="cmbUserType" focusColor="#405aa800" layoutX="41.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Select User Type" unFocusColor="#4d4d4d00">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></JFXComboBox>
-               </children>
-            </Pane>
-            <Button layoutX="318.0" layoutY="625.0" mnemonicParsing="false" onAction="#addUserOnAction" prefHeight="28.0" prefWidth="70.0" style="-fx-background-color: #27AE60; -fx-background-radius: 19;" text="Add" textFill="#f3f0f0">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="393.0" layoutY="625.0" mnemonicParsing="false" onAction="#updateUserOnAction" prefHeight="28.0" prefWidth="75.0" style="-fx-background-color: #D07F00; -fx-background-radius: 19;" text="Update" textFill="#f3f0f0">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="473.0" layoutY="625.0" mnemonicParsing="false" onAction="#deleteUserOnAction" prefHeight="28.0" prefWidth="70.0" style="-fx-background-color: #C0392B; -fx-background-radius: 19;" text="Delete" textFill="#f3f0f0">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Pane layoutX="460.0" layoutY="255.0" onDragDetected="#selectImageOnAction" prefHeight="23.0" prefWidth="27.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18; -fx-border-color: #000000; -fx-border-radius: 18;">
+            <Circle fx:id="imageCircle" fill="#d9d9d9" layoutX="431.0" layoutY="194.0" radius="70.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+            <Pane layoutX="460.0" layoutY="233.0" onDragDetected="#selectImageOnAction" prefHeight="23.0" prefWidth="27.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18; -fx-border-color: #000000; -fx-border-radius: 18;">
                <children>
                   <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -321,16 +345,6 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </Pane>
-            <Pane layoutX="316.0" layoutY="316.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
-               <children>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/name.png" />
-                     </image>
-                  </ImageView>
-                  <JFXTextField fx:id="txtName" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Name" unFocusColor="#4d4d4d00" />
-               </children>
             </Pane>
          </children></AnchorPane>
     </children>

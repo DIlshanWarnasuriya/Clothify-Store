@@ -1,5 +1,6 @@
 package edu.icet.project.bo;
 
+import edu.icet.project.bo.custom.impl.UserBoImpl;
 import edu.icet.project.util.BoType;
 
 public class BoFactory {
@@ -11,6 +12,9 @@ public class BoFactory {
     }
 
     public <T extends SuperBo> T getBo(BoType type){
+        switch (type){
+            case USER: return (T) new UserBoImpl();
+        }
         return null;
     }
 }
