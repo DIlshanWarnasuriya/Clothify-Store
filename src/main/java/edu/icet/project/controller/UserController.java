@@ -31,6 +31,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Base64;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -131,11 +132,15 @@ public class UserController implements Initializable {
                 imageCircle.setFill(new ImagePattern(new Image(selectUser.getImageUrl())));
                 txtName.setText(selectUser.getName());
                 txtEmail.setText(selectUser.getEmail());
-                txtPassword.setText(selectUser.getPassword());
                 txtAddress.setText(selectUser.getAddress());
                 txtContactNo.setText(selectUser.getContactNo());
                 cmbGender.setValue(selectUser.getGender());
                 cmbUserType.setValue(selectUser.getUserType());
+
+                //decode password
+                byte[] decodeByte = Base64.getDecoder().decode(selectUser.getPassword());
+                String password = new String(decodeByte);
+                txtPassword.setText(password);
             }
         });
     }
@@ -180,7 +185,7 @@ public class UserController implements Initializable {
                 Path path = new File("src/main/resources/images/profile/" + file.getName()).toPath();
                 Files.copy(file.toPath(), path, StandardCopyOption.REPLACE_EXISTING);
 
-                url = "images/profile/"+ file.getName();
+                url = path.toUri().toString();
 
                 imageCircle.setFill(new ImagePattern(new Image(path.toUri().toString())));
             }
@@ -197,12 +202,12 @@ public class UserController implements Initializable {
         try{
             String name = txtName.getText();
             String email = txtEmail.getText();
-            String password = txtPassword.getText();
             String address = txtAddress.getText();
             String contactNo = txtContactNo.getText();
             String gender = cmbGender.getValue();
             String userType = cmbUserType.getValue();
             String imageUrl = url == null ? (Objects.equals(gender, "Male") ? "images/profile/Male.png" : "images/profile/Female.png") : url;
+            String password = Base64.getEncoder().encodeToString(txtPassword.getText().getBytes());
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()){
                 new Alert(Alert.AlertType.WARNING, "Please Enter all data").show();
@@ -236,34 +241,34 @@ public class UserController implements Initializable {
         try{
             String name = txtName.getText();
             String email = txtEmail.getText();
-            String password = txtPassword.getText();
             String address = txtAddress.getText();
             String contactNo = txtContactNo.getText();
             String gender = cmbGender.getValue();
             String userType = cmbUserType.getValue();
             String imageUrl = url == null ? selectUser.getImageUrl() : url;
+            String password = Base64.getEncoder().encodeToString(txtPassword.getText().getBytes());
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()){
-                new Alert(Alert.AlertType.WARNING, "Please Enter all data").show();
+                new Alert(Alert.AlertType.WARNING, "Please select user form table and change eny details").show();
             }
             else if (contactNo.length() != 10 || contactNo.charAt(0) != '0'){
                 new Alert(Alert.AlertType.WARNING, "Please Enter valid phone No").show();
             }
-
+            else if(!selectUser.getContactNo().equals(contactNo) && userBo.search(contactNo) != null){
+                new Alert(Alert.AlertType.WARNING, "The Contact number is already use").show();
+            }
+            else if(!selectUser.getEmail().equals(email) && userBo.search(email) != null){
+                new Alert(Alert.AlertType.WARNING, "The Email is already use").show();
+            }
             else{
                 User user = new User (selectUser.getId(), name, email, password, address, contactNo, gender, userType, imageUrl, "Active");
-                if (Objects.equals(selectUser, user)){
-                    new Alert(Alert.AlertType.WARNING, "No any changes").show();
+                boolean res = userBo.updateUser(user);
+                if (res) {
+                    new Alert(Alert.AlertType.INFORMATION, "User Update success").show();
+                    refreshOnAction();
+                    selectUser=null;
                 }
-                else{
-                    boolean res = userBo.updateUser(user);
-                    if (res) {
-                        new Alert(Alert.AlertType.INFORMATION, "User Update success").show();
-                        refreshOnAction();
-                        selectUser=null;
-                    }
-                    else new Alert(Alert.AlertType.ERROR, "User Update Fail").show();
-                }
+                else new Alert(Alert.AlertType.ERROR, "User Update Fail").show();
             }
         }catch (RuntimeException ex){
             new Alert(Alert.AlertType.WARNING, "Please Enter all data").show();

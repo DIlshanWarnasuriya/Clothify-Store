@@ -155,7 +155,7 @@
                               <TableColumn fx:id="colName" prefWidth="147.199951171875" style="-fx-alignment: CENTER;" text="Name" />
                               <TableColumn fx:id="colNumber" prefWidth="149.5999755859375" style="-fx-alignment: CENTER;" text="Contact No" />
                               <TableColumn fx:id="colEmail" prefWidth="216.0" style="-fx-alignment: CENTER;" text="Email" />
-                              <TableColumn fx:id="colAddress" prefWidth="229.5999755859375" style="-fx-alignment: CENTER_LEFT; -fx-padding: 0 0 0 10;" text="Address" />
+                              <TableColumn fx:id="colAddress" prefWidth="229.5999755859375" style="-fx-alignment: CENTER;" text="Address" />
                               <TableColumn fx:id="colType" prefWidth="62.39990234375" style="-fx-alignment: CENTER;" text="Type" />
                            </columns>
                         </TableView>
