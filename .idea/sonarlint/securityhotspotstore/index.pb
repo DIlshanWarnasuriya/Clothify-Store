@@ -39,3 +39,7 @@ o
 0src/main/java/edu/icet/project/dao/SuperDao.java,c\8\c8c1ac56219f29efe2fa05203eaadebf0d9c5513
 g
 7src/main/java/edu/icet/project/dto/table/UserTable.java,f\e\fefb821f61165fd53f09b2d5067db21ccbe32d57
+e
+5src/main/java/edu/icet/project/util/AlertMessage.java,d\5\d526f2321c32c7881b5418e2542cbe24d90846aa
+b
+2src/main/java/edu/icet/project/util/AlertType.java,e\2\e214e836fe38b0be885581aaba4bcee509c428c5

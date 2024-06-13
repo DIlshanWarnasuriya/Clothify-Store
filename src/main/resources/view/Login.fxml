@@ -19,7 +19,7 @@
                <children>
                   <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="825.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/icons/Error.png" />
+                        <Image url="@../images/icons/ERROR.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="806.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
