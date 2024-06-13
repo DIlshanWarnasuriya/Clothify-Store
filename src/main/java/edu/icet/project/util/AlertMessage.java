@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 public class AlertMessage {
     private static AlertMessage instance;
     private AlertMessage(){}
-    private Alert alert = new Alert(Alert.AlertType.NONE);
+    private final Alert alert = new Alert(Alert.AlertType.NONE);
 
     public static AlertMessage getInstance(){
         return instance==null ? instance=new AlertMessage() : instance;
