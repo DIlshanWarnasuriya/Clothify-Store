@@ -140,8 +140,14 @@ public class CustomerController implements Initializable {
                     list.add(new CustomerTable(circle, customer.getId(), customer.getName(), customer.getContactNo(), customer.getEmail(), customer.getAddress()));
                 }
             }
-            FXCollections.reverse(list);
-            customerTable.setItems(list);
+            if (list.isEmpty()){
+                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Search Customer not found");
+            }
+            else{
+                FXCollections.reverse(list);
+                customerTable.setItems(list);
+            }
+
         }
     }
 
@@ -172,7 +178,7 @@ public class CustomerController implements Initializable {
             String address = txtAddress.getText();
             String contactNo = txtContactNo.getText();
             String gender = cmbGender.getValue();
-            String imageUrl = url==null ? (gender.equals("Male") ? "images/profile/Male.png" : "images/profile/Female.png") : url;
+            String imageUrl = url;
 
             if (name.isEmpty() || email.isEmpty() || address.isEmpty() || contactNo.isEmpty()){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
@@ -187,6 +193,13 @@ public class CustomerController implements Initializable {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email is already use");
             }
             else{
+                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png") ){
+                    imageUrl = "images/profile/Female.png";
+                }
+                else if(gender.equals("Male") && imageUrl.equals("images/profile/Female.png")){
+                    imageUrl = "images/profile/Male.png";
+                }
+
                 Customer customer = new Customer(name, email, address, contactNo, gender, imageUrl, "Active");
                 boolean res = customerBo.saveCustomer(customer);
                 if (res){

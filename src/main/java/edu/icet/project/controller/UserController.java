@@ -123,8 +123,13 @@ public class UserController implements Initializable {
                 tableData.add(new UserTable(circle, user.getId(), user.getName(), user.getContactNo(), user.getEmail(), user.getAddress(), user.getUserType()));
             }
         }
-        FXCollections.reverse(tableData);
-        userTable.setItems(tableData);
+        if (tableData.isEmpty()){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Search User not found");
+        }
+        else{
+            FXCollections.reverse(tableData);
+            userTable.setItems(tableData);
+        }
     }
 
     private void selectRowInTable(){
@@ -210,7 +215,7 @@ public class UserController implements Initializable {
             String contactNo = txtContactNo.getText();
             String gender = cmbGender.getValue();
             String userType = cmbUserType.getValue();
-            String imageUrl = url == null ? (Objects.equals(gender, "Male") ? "images/profile/Male.png" : "images/profile/Female.png") : url;
+            String imageUrl = url;
             String password = Base64.getEncoder().encodeToString(txtPassword.getText().getBytes());
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()){
@@ -226,6 +231,13 @@ public class UserController implements Initializable {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Email is already use");
             }
             else{
+                if (gender.equals("Female") && selectUser.getImageUrl().equals("images/profile/Male.png")){
+                    imageUrl = "images/profile/Female.png";
+                }
+                else if (gender.equals("Male") && selectUser.getImageUrl().equals("images/profile/Female.png")){
+                    imageUrl = "images/profile/Male.png";
+                }
+
                 User user = new User (name, email, password, address, contactNo, gender, userType, imageUrl, "Active");
                 boolean res = userBo.saveUser(user);
 
