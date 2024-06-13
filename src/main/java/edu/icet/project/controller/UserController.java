@@ -144,7 +144,9 @@ public class UserController implements Initializable {
                 //decode password
                 byte[] decodeByte = Base64.getDecoder().decode(selectUser.getPassword());
                 String password = new String(decodeByte);
-                txtPassword.setText(password);
+                selectUser.setPassword(password);
+                txtPassword.setText(selectUser.getPassword());
+                url = selectUser.getImageUrl();
             }
         });
     }
@@ -217,10 +219,10 @@ public class UserController implements Initializable {
             else if (contactNo.length() != 10 || contactNo.charAt(0) != '0'){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter valid phone No");
             }
-            else if(userBo.search(contactNo) == null){
+            else if(!userBo.search(contactNo).isEmpty()){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Contact number is already use");
             }
-            else if(userBo.search(email) == null){
+            else if(!userBo.search(email).isEmpty()){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Email is already use");
             }
             else{
@@ -243,26 +245,38 @@ public class UserController implements Initializable {
         try{
             String name = txtName.getText();
             String email = txtEmail.getText();
+            String password = txtPassword.getText();
             String address = txtAddress.getText();
             String contactNo = txtContactNo.getText();
             String gender = cmbGender.getValue();
             String userType = cmbUserType.getValue();
-            String imageUrl = url == null ? selectUser.getImageUrl() : url;
-            String password = Base64.getEncoder().encodeToString(txtPassword.getText().getBytes());
+            String imageUrl = url;
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()){
+
+            if (selectUser.getImageUrl().equals(imageUrl) && selectUser.getName().equals(name) && selectUser.getEmail().equals(email) && selectUser.getPassword().equals(password) && selectUser.getAddress().equals(address) && selectUser.getContactNo().equals(contactNo) && selectUser.getGender().equals(gender) && selectUser.getUserType().equals(userType)){
+                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "No any changes");
+            }
+            else if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please select user form table and change eny details");
             }
             else if (contactNo.length() != 10 || contactNo.charAt(0) != '0'){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter valid phone No");
             }
-            else if(!selectUser.getContactNo().equals(contactNo) && userBo.search(contactNo) != null){
+            else if(!selectUser.getContactNo().equals(contactNo) && !userBo.search(contactNo).isEmpty()){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Contact number is already use");
             }
-            else if(!selectUser.getEmail().equals(email) && userBo.search(email) != null){
+            else if(!selectUser.getEmail().equals(email) && !userBo.search(email).isEmpty()){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Email is already use");
             }
             else{
+                if (gender.equals("Female") && selectUser.getImageUrl().equals("images/profile/Male.png")){
+                    imageUrl = "images/profile/Female.png";
+                }
+                else if (gender.equals("Male") && selectUser.getImageUrl().equals("images/profile/Female.png")){
+                    imageUrl = "images/profile/Male.png";
+                }
+                password = Base64.getEncoder().encodeToString(password.getBytes());
+
                 User user = new User (selectUser.getId(), name, email, password, address, contactNo, gender, userType, imageUrl, "Active");
                 boolean res = userBo.updateUser(user);
                 if (res) {
