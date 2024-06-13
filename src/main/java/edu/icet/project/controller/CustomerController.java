@@ -226,10 +226,10 @@ public class CustomerController implements Initializable {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email is already use");
             }
             else{
-                if (!selectCustomer.getGender().equals(gender) && imageUrl.equals("images/profile/Male.png") ){
+                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png") ){
                     imageUrl = "images/profile/Female.png";
                 }
-                else if(!selectCustomer.getGender().equals(gender) && imageUrl.equals("images/profile/Female.png")){
+                else if(gender.equals("Male") && imageUrl.equals("images/profile/Female.png")){
                     imageUrl = "images/profile/Male.png";
                 }
 
