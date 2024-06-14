@@ -47,4 +47,14 @@ public class SupplierBoImpl implements SupplierBo {
         }
         return list;
     }
+
+    @Override
+    public Supplier searchById(int id) {
+        for (SupplierEntity entity : supplierDao.getAll()) {
+            if (entity.getId() == id && !entity.getStatus().equals("deleted")){
+                return new ModelMapper().map(entity, Supplier.class);
+            }
+        }
+        return null;
+    }
 }

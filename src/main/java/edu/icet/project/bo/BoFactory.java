@@ -1,6 +1,7 @@
 package edu.icet.project.bo;
 
 import edu.icet.project.bo.custom.impl.CustomerBoImpl;
+import edu.icet.project.bo.custom.impl.ProductBoImpl;
 import edu.icet.project.bo.custom.impl.SupplierBoImpl;
 import edu.icet.project.bo.custom.impl.UserBoImpl;
 import edu.icet.project.util.BoType;
@@ -18,6 +19,7 @@ public class BoFactory {
             case USER: return (T) new UserBoImpl();
             case CUSTOMER: return (T) new CustomerBoImpl();
             case SUPPLIER: return (T) new SupplierBoImpl();
+            case PRODUCT: return (T) new ProductBoImpl();
         }
         return null;
     }
