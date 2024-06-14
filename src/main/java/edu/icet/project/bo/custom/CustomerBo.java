@@ -10,4 +10,5 @@ public interface CustomerBo extends SuperBo {
     boolean deleteCustomer(Customer customer);
     ObservableList<Customer> getAll();
     ObservableList<Customer> search(String data);
+    Customer searchById(Integer id);
 }

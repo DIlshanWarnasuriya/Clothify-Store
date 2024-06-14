@@ -111,8 +111,7 @@ public class CustomerController implements Initializable {
     private void selectRowInTable(){
         customerTable.getSelectionModel().selectedItemProperty().addListener((observableValue, customerTable1, select ) -> {
             if (select!=null){
-                ObservableList<Customer> search = customerBo.search(select.getId().toString());
-                selectCustomer = search.get(0);
+                selectCustomer = customerBo.searchById(select.getId());
 
                 txtName.setText(selectCustomer.getName());
                 txtEmail.setText(selectCustomer.getEmail());
@@ -187,10 +186,10 @@ public class CustomerController implements Initializable {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid contact number");
             }
             else if (!customerBo.search(contactNo).isEmpty()){
-                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This Contact number is already use");
+                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This Contact number is already use. Maybe this customer is there. check now");
             }
             else if (!customerBo.search(email).isEmpty()){
-                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email is already use");
+                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email is already use. Maybe this customer is there. check now");
             }
             else{
                 if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png") ){

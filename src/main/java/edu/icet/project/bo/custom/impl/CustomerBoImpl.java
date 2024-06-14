@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.modelmapper.ModelMapper;
 
+import java.util.Objects;
+
 public class CustomerBoImpl implements CustomerBo {
 
     CustomerDao customerDao = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
@@ -47,5 +49,15 @@ public class CustomerBoImpl implements CustomerBo {
             }
         }
         return list;
+    }
+
+    @Override
+    public Customer searchById(Integer id) {
+        for (CustomerEntity entity : customerDao.getAll()){
+            if (Objects.equals(entity.getId(), id)){
+                return new ModelMapper().map(entity, Customer.class);
+            }
+        }
+        return null;
     }
 }
