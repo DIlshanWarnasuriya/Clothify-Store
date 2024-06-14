@@ -12,7 +12,6 @@ import edu.icet.project.util.AlertType;
 import edu.icet.project.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -22,7 +21,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -36,7 +34,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Base64;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UserController implements Initializable {
@@ -135,8 +132,7 @@ public class UserController implements Initializable {
     private void selectRowInTable(){
         userTable.getSelectionModel().selectedItemProperty().addListener((observableValue, userTable1, select) -> {
             if (select != null){
-                ObservableList<User> search = userBo.search(select.getId().toString());
-                selectUser = search.get(0);
+                selectUser = userBo.searchById(select.getId());
 
                 imageCircle.setFill(new ImagePattern(new Image(selectUser.getImageUrl())));
                 txtName.setText(selectUser.getName());
@@ -157,7 +153,7 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    void searchUserOnAction(MouseEvent event) {
+    void searchUserOnAction() {
         String data = txtSearch.getText();
 
         if (data.isEmpty()){
@@ -185,7 +181,7 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    void selectImageOnAction(MouseEvent event) {
+    void selectImageOnAction() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
         File file = fileChooser.showOpenDialog(imageCircle.getScene().getWindow());
@@ -207,7 +203,7 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    void addUserOnAction(ActionEvent event) {
+    void addUserOnAction() {
         try{
             String name = txtName.getText();
             String email = txtEmail.getText();
@@ -253,7 +249,7 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    void updateUserOnAction(ActionEvent event) {
+    void updateUserOnAction() {
         try{
             String name = txtName.getText();
             String email = txtEmail.getText();
@@ -303,7 +299,7 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    void deleteUserOnAction(ActionEvent event) {
+    void deleteUserOnAction() {
         if (selectUser==null){
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please select user form table");
         }
@@ -348,7 +344,7 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    void closeOnAction(MouseEvent event) {
+    void closeOnAction() {
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setTitle("Confirmation Dialog");
         alert.setContentText("Are you close the program");
@@ -364,7 +360,7 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    void minimizeOnAction(MouseEvent event) {
+    void minimizeOnAction() {
         Stage stage = (Stage) txtAddress.getScene().getWindow();
         stage.setIconified(true);
     }

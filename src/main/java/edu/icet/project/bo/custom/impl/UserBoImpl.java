@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.modelmapper.ModelMapper;
 
+import java.util.Objects;
+
 
 public class UserBoImpl implements UserBo {
 
@@ -33,7 +35,6 @@ public class UserBoImpl implements UserBo {
     @Override
     public ObservableList<User> getAll() {
         ObservableList<User> list = FXCollections.observableArrayList();
-
         for (UserEntity entity : userDao.getAll()){
             list.add(new ModelMapper().map(entity, User.class));
         }
@@ -43,13 +44,22 @@ public class UserBoImpl implements UserBo {
     @Override
     public ObservableList<User> search(String data) {
         ObservableList<User> tableData = FXCollections.observableArrayList();
-
-        for (User user : getAll()){
-            if (user.getId().toString().equals(data) || user.getName().equals(data) || user.getEmail().equals(data) || user.getAddress().equals(data) || user.getContactNo().equals(data) || user.getGender().equals(data) || user.getUserType().equals(data)){
-                tableData.add(user);
+        for (UserEntity entity : userDao.getAll()){
+            if (entity.getId().toString().equals(data) || entity.getName().equals(data) || entity.getEmail().equals(data) || entity.getAddress().equals(data) || entity.getContactNo().equals(data) || entity.getGender().equals(data) || entity.getUserType().equals(data)){
+                tableData.add(new ModelMapper().map(entity, User.class));
             }
         }
         return tableData;
+    }
+
+    @Override
+    public User searchById(Integer id) {
+        for (UserEntity entity : userDao.getAll()){
+            if (Objects.equals(entity.getId(), id)){
+                return new ModelMapper().map(entity, User.class);
+            }
+        }
+        return null;
     }
 
 

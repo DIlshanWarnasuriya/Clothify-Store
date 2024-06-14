@@ -10,5 +10,5 @@ public interface UserBo extends SuperBo {
     boolean deleteUser(User dto);
     ObservableList<User> getAll();
     ObservableList<User> search(String data);
-
+    User searchById(Integer id);
 }
