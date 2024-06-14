@@ -6,10 +6,16 @@ import javafx.collections.ObservableList;
 
 public interface ProductBo extends SuperBo {
     boolean saveProduct(Product dto);
+
     boolean updateProduct(Product dto);
+
     boolean deleteProduct(Product dto);
+
     ObservableList<Product> getAllProduct();
+
     ObservableList<Product> searchProduct(String data);
+
     Product searchById(Integer id);
+
     boolean equalsProduct(Product product);
 }

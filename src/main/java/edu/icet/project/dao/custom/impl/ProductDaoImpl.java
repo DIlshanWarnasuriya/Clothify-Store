@@ -5,6 +5,7 @@ import edu.icet.project.entity.ProductEntity;
 import edu.icet.project.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
@@ -13,14 +14,14 @@ public class ProductDaoImpl implements ProductDao {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
-        try{
+        try {
             session.persist(entity);
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }
@@ -30,14 +31,14 @@ public class ProductDaoImpl implements ProductDao {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
-        try{
+        try {
             session.update(entity);
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }

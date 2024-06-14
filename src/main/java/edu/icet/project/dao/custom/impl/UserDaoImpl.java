@@ -5,6 +5,7 @@ import edu.icet.project.entity.UserEntity;
 import edu.icet.project.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
@@ -13,14 +14,14 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
-        try{
+        try {
             session.persist(entity);
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }
@@ -34,10 +35,10 @@ public class UserDaoImpl implements UserDao {
             session.update(entity);
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }

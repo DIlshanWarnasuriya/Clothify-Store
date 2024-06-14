@@ -41,7 +41,7 @@ public class SupplierBoImpl implements SupplierBo {
     public ObservableList<Supplier> search(String data) {
         ObservableList<Supplier> list = FXCollections.observableArrayList();
         for (SupplierEntity entity : supplierDao.getAll()) {
-            if (entity.getId().toString().equals(data) || entity.getName().equals(data) || entity.getEmail().equals(data) || entity.getContactNo().equals(data) || entity.getGender().equals(data) || entity.getCompany().equals(data)){
+            if (entity.getId().toString().equals(data) || entity.getName().equals(data) || entity.getEmail().equals(data) || entity.getContactNo().equals(data) || entity.getGender().equals(data) || entity.getCompany().equals(data)) {
                 list.add(new ModelMapper().map(entity, Supplier.class));
             }
         }
@@ -51,7 +51,7 @@ public class SupplierBoImpl implements SupplierBo {
     @Override
     public Supplier searchById(int id) {
         for (SupplierEntity entity : supplierDao.getAll()) {
-            if (entity.getId() == id && !entity.getStatus().equals("deleted")){
+            if (entity.getId() == id && !entity.getStatus().equals("deleted")) {
                 return new ModelMapper().map(entity, Supplier.class);
             }
         }

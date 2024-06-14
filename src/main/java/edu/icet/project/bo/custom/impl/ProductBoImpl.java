@@ -46,7 +46,7 @@ public class ProductBoImpl implements ProductBo {
         ObservableList<Product> list = FXCollections.observableArrayList();
         for (ProductEntity entity : productDao.getAll()) {
             String date = new SimpleDateFormat("yyyy-MM-dd").format(entity.getDate());
-            if (entity.getId().toString().equals(data) || entity.getName().equals(data) || entity.getCategory().equals(data) || entity.getPrice().toString().equals(data) || entity.getSize().equals(data) || date.equals(data)){
+            if (entity.getId().toString().equals(data) || entity.getName().equals(data) || entity.getCategory().equals(data) || entity.getPrice().toString().equals(data) || entity.getSize().equals(data) || date.equals(data)) {
                 list.add(new ModelMapper().map(entity, Product.class));
             }
         }
@@ -56,7 +56,7 @@ public class ProductBoImpl implements ProductBo {
     @Override
     public Product searchById(Integer id) {
         for (ProductEntity entity : productDao.getAll()) {
-            if (Objects.equals(entity.getId(), id)){
+            if (Objects.equals(entity.getId(), id)) {
                 return new ModelMapper().map(entity, Product.class);
             }
         }
@@ -66,7 +66,7 @@ public class ProductBoImpl implements ProductBo {
     @Override
     public boolean equalsProduct(Product product) {
         for (ProductEntity entity : productDao.getAll()) {
-            if (entity.getName().equals(product.getName()) && entity.getCategory().equals(product.getCategory()) && entity.getSize().equals(product.getSize()) && Objects.equals(entity.getSupplierId(), product.getSupplierId()) && !entity.getStatus().equals("deleted")){
+            if (entity.getName().equals(product.getName()) && entity.getCategory().equals(product.getCategory()) && entity.getSize().equals(product.getSize()) && Objects.equals(entity.getSupplierId(), product.getSupplierId()) && !entity.getStatus().equals("deleted")) {
                 return true;
             }
         }

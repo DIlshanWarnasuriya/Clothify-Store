@@ -110,28 +110,27 @@ public class UserController implements Initializable {
         cmbGender.setItems(type);
     }
 
-    private void loadTable(){
+    private void loadTable() {
         ObservableList<UserTable> tableData = FXCollections.observableArrayList();
-        for (User user : userBo.getAll()){
-            if (!user.getStatus().equals("deleted")){
+        for (User user : userBo.getAll()) {
+            if (!user.getStatus().equals("deleted")) {
                 Circle circle = new Circle(25, 25, 25);
                 circle.setFill(new ImagePattern(new Image(user.getImageUrl())));
 
                 tableData.add(new UserTable(circle, user.getId(), user.getName(), user.getContactNo(), user.getEmail(), user.getAddress(), user.getUserType()));
             }
         }
-        if (tableData.isEmpty()){
+        if (tableData.isEmpty()) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Search User not found");
-        }
-        else{
+        } else {
             FXCollections.reverse(tableData);
             userTable.setItems(tableData);
         }
     }
 
-    private void selectRowInTable(){
+    private void selectRowInTable() {
         userTable.getSelectionModel().selectedItemProperty().addListener((observableValue, userTable1, select) -> {
-            if (select != null){
+            if (select != null) {
                 selectUser = userBo.searchById(select.getId());
 
                 imageCircle.setFill(new ImagePattern(new Image(selectUser.getImageUrl())));
@@ -156,24 +155,22 @@ public class UserController implements Initializable {
     void searchUserOnAction() {
         String data = txtSearch.getText();
 
-        if (data.isEmpty()){
+        if (data.isEmpty()) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter searching data");
-        }
-        else {
+        } else {
             ObservableList<UserTable> tableData = FXCollections.observableArrayList();
-            for (User user : userBo.search(data)){
-                if (!user.getStatus().equals("deleted")){
+            for (User user : userBo.search(data)) {
+                if (!user.getStatus().equals("deleted")) {
                     Circle circle = new Circle(25, 25, 25);
                     circle.setFill(new ImagePattern(new Image(user.getImageUrl())));
                     tableData.add(new UserTable(circle, user.getId(), user.getName(), user.getContactNo(), user.getEmail(), user.getAddress(), user.getUserType()));
                 }
             }
 
-            if (tableData.isEmpty()){
+            if (tableData.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "No user found");
                 refreshOnAction();
-            }
-            else{
+            } else {
                 FXCollections.reverse(tableData);
                 userTable.setItems(tableData);
             }
@@ -187,7 +184,7 @@ public class UserController implements Initializable {
         File file = fileChooser.showOpenDialog(imageCircle.getScene().getWindow());
 
         try {
-            if (file != null){
+            if (file != null) {
                 Path path = new File("src/main/resources/images/profile/" + file.getName()).toPath();
                 Files.copy(file.toPath(), path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -204,7 +201,7 @@ public class UserController implements Initializable {
 
     @FXML
     void addUserOnAction() {
-        try{
+        try {
             String name = txtName.getText();
             String email = txtEmail.getText();
             String address = txtAddress.getText();
@@ -214,43 +211,37 @@ public class UserController implements Initializable {
             String imageUrl = url;
             String password = Base64.getEncoder().encodeToString(txtPassword.getText().getBytes());
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()){
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter all data");
-            }
-            else if (contactNo.length() != 10 || contactNo.charAt(0) != '0'){
+            } else if (contactNo.length() != 10 || contactNo.charAt(0) != '0') {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter valid phone No");
-            }
-            else if(!userBo.search(contactNo).isEmpty()){
+            } else if (!userBo.search(contactNo).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Contact number is already use");
-            }
-            else if(!userBo.search(email).isEmpty()){
+            } else if (!userBo.search(email).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Email is already use");
-            }
-            else{
-                if (gender.equals("Female") && selectUser.getImageUrl().equals("images/profile/Male.png")){
+            } else {
+                if (gender.equals("Female") && selectUser.getImageUrl().equals("images/profile/Male.png")) {
                     imageUrl = "images/profile/Female.png";
-                }
-                else if (gender.equals("Male") && selectUser.getImageUrl().equals("images/profile/Female.png")){
+                } else if (gender.equals("Male") && selectUser.getImageUrl().equals("images/profile/Female.png")) {
                     imageUrl = "images/profile/Male.png";
                 }
 
-                User user = new User (name, email, password, address, contactNo, gender, userType, imageUrl, "Active");
+                User user = new User(name, email, password, address, contactNo, gender, userType, imageUrl, "Active");
                 boolean res = userBo.saveUser(user);
 
                 if (res) {
                     AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "User added Success");
                     refreshOnAction();
-                }
-                else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "User added Fail");
+                } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "User added Fail");
             }
-        }catch (RuntimeException ex){
+        } catch (RuntimeException ex) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter all data");
         }
     }
 
     @FXML
     void updateUserOnAction() {
-        try{
+        try {
             String name = txtName.getText();
             String email = txtEmail.getText();
             String password = txtPassword.getText();
@@ -261,49 +252,41 @@ public class UserController implements Initializable {
             String imageUrl = url;
 
 
-            if (selectUser.getImageUrl().equals(imageUrl) && selectUser.getName().equals(name) && selectUser.getEmail().equals(email) && selectUser.getPassword().equals(password) && selectUser.getAddress().equals(address) && selectUser.getContactNo().equals(contactNo) && selectUser.getGender().equals(gender) && selectUser.getUserType().equals(userType)){
+            if (selectUser.getImageUrl().equals(imageUrl) && selectUser.getName().equals(name) && selectUser.getEmail().equals(email) && selectUser.getPassword().equals(password) && selectUser.getAddress().equals(address) && selectUser.getContactNo().equals(contactNo) && selectUser.getGender().equals(gender) && selectUser.getUserType().equals(userType)) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "No any changes");
-            }
-            else if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()){
+            } else if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please select user form table and change eny details");
-            }
-            else if (contactNo.length() != 10 || contactNo.charAt(0) != '0'){
+            } else if (contactNo.length() != 10 || contactNo.charAt(0) != '0') {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter valid phone No");
-            }
-            else if(!selectUser.getContactNo().equals(contactNo) && !userBo.search(contactNo).isEmpty()){
+            } else if (!selectUser.getContactNo().equals(contactNo) && !userBo.search(contactNo).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Contact number is already use");
-            }
-            else if(!selectUser.getEmail().equals(email) && !userBo.search(email).isEmpty()){
+            } else if (!selectUser.getEmail().equals(email) && !userBo.search(email).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Email is already use");
-            }
-            else{
-                if (gender.equals("Female") && selectUser.getImageUrl().equals("images/profile/Male.png")){
+            } else {
+                if (gender.equals("Female") && selectUser.getImageUrl().equals("images/profile/Male.png")) {
                     imageUrl = "images/profile/Female.png";
-                }
-                else if (gender.equals("Male") && selectUser.getImageUrl().equals("images/profile/Female.png")){
+                } else if (gender.equals("Male") && selectUser.getImageUrl().equals("images/profile/Female.png")) {
                     imageUrl = "images/profile/Male.png";
                 }
                 password = Base64.getEncoder().encodeToString(password.getBytes());
 
-                User user = new User (selectUser.getId(), name, email, password, address, contactNo, gender, userType, imageUrl, "Active");
+                User user = new User(selectUser.getId(), name, email, password, address, contactNo, gender, userType, imageUrl, "Active");
                 boolean res = userBo.updateUser(user);
                 if (res) {
                     AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "User Update Success");
                     refreshOnAction();
-                }
-                else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "User Update Fail");
+                } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "User Update Fail");
             }
-        }catch (RuntimeException ex){
+        } catch (RuntimeException ex) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter all data");
         }
     }
 
     @FXML
     void deleteUserOnAction() {
-        if (selectUser==null){
+        if (selectUser == null) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please select user form table");
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setTitle("Confirmation Dialog");
             alert.setContentText("Are you sure to delete this user?");
@@ -316,11 +299,10 @@ public class UserController implements Initializable {
                     selectUser.setStatus("deleted");
                     boolean res = userBo.deleteUser(selectUser);
 
-                    if (res){
+                    if (res) {
                         AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "User Delete success");
                         refreshOnAction();
-                    }
-                    else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "User Delete fail");
+                    } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "User Delete fail");
                 }
             });
         }
@@ -339,7 +321,7 @@ public class UserController implements Initializable {
         cmbGender.setValue(null);
         cmbGender.setPromptText("Select Gender");
         imageCircle.setFill(Color.valueOf("#d9d9d9"));
-        selectUser=null;
+        selectUser = null;
         loadTable();
     }
 

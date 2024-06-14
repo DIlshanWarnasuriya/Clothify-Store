@@ -98,7 +98,7 @@ public class ProductController implements Initializable {
         selectRowInTable();
     }
 
-    private void setSizeType(){
+    private void setSizeType() {
         ObservableList<String> type = FXCollections.observableArrayList();
         type.add("XS");
         type.add("S");
@@ -108,7 +108,7 @@ public class ProductController implements Initializable {
         cmbSize.setItems(type);
     }
 
-    private void setCategoryType(){
+    private void setCategoryType() {
         ObservableList<String> type = FXCollections.observableArrayList();
         type.add("Men");
         type.add("Women");
@@ -116,10 +116,10 @@ public class ProductController implements Initializable {
         cmbCategory.setItems(type);
     }
 
-    private void loadTable(){
+    private void loadTable() {
         ObservableList<ProductTable> list = FXCollections.observableArrayList();
         for (Product product : productBo.getAllProduct()) {
-            if (!product.getStatus().equals("deleted")){
+            if (!product.getStatus().equals("deleted")) {
                 ImageView imageView = new ImageView(new Image(product.getImageUrl()));
                 imageView.setFitHeight(50);
                 imageView.setFitWidth(50);
@@ -131,9 +131,9 @@ public class ProductController implements Initializable {
         productTable.setItems(list);
     }
 
-    private void selectRowInTable(){
+    private void selectRowInTable() {
         productTable.getSelectionModel().selectedItemProperty().addListener((observableValue, productTable1, select) -> {
-            if (select!=null){
+            if (select != null) {
                 selectProduct = productBo.searchById(select.getId());
                 url = selectProduct.getImageUrl();
 
@@ -151,13 +151,12 @@ public class ProductController implements Initializable {
     @FXML
     void searchOnAction() {
         String data = txtSearch.getText();
-        if (data.isEmpty()){
+        if (data.isEmpty()) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter search data to search box");
-        }
-        else {
+        } else {
             ObservableList<ProductTable> list = FXCollections.observableArrayList();
             for (Product product : productBo.searchProduct(data)) {
-                if (!product.getStatus().equals("deleted")){
+                if (!product.getStatus().equals("deleted")) {
                     ImageView imageView = new ImageView(new Image(product.getImageUrl()));
                     imageView.setFitHeight(50);
                     imageView.setFitWidth(50);
@@ -165,10 +164,9 @@ public class ProductController implements Initializable {
                     list.add(new ProductTable(imageView, product.getId(), product.getName(), product.getQty(), product.getSize(), product.getPrice(), product.getCategory(), date, product.getSupplierId()));
                 }
             }
-            if (list.isEmpty()){
+            if (list.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Products not found");
-            }
-            else{
+            } else {
                 FXCollections.reverse(list);
                 productTable.setItems(list);
             }
@@ -181,8 +179,8 @@ public class ProductController implements Initializable {
         fileChooser.setTitle("Select Image");
         File file = fileChooser.showOpenDialog(imageBox.getScene().getWindow());
 
-        try{
-            if (file!=null){
+        try {
+            if (file != null) {
                 Path path = new File("src/main/resources/images/product/" + file.getName()).toPath();
                 Files.copy(file.toPath(), path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -196,85 +194,77 @@ public class ProductController implements Initializable {
 
     @FXML
     void addOnAction() {
-        try{
+        try {
             String name = txtName.getText();
             double price = Double.parseDouble(txtPrice.getText());
             int qty = Integer.parseInt(txtQty.getText());
             int supplierId = Integer.parseInt(txtSupplierId.getText());
             String size = cmbSize.getValue();
             String category = cmbCategory.getValue();
-            String imageUrl = url==null ? "" : url;
+            String imageUrl = url == null ? "" : url;
             Date date = new Date();
 
-            if (name.isEmpty() || price<=0 || qty<=0 || supplierId<=0 || size.isEmpty() || category.isEmpty()){
+            if (name.isEmpty() || price <= 0 || qty <= 0 || supplierId <= 0 || size.isEmpty() || category.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
-            }
-            else if(imageUrl.isEmpty()){
+            } else if (imageUrl.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Select image");
-            }
-            else if(supplierBo.searchById(supplierId) == null){
+            } else if (supplierBo.searchById(supplierId) == null) {
                 AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Supplier id is Wrong. please enter correct supplier id");
-            }
-            else{
+            } else {
                 Product product = new Product(name, size, price, qty, imageUrl, category, supplierId, 7, date, "Active");
 
-                if (productBo.equalsProduct(product)){
+                if (productBo.equalsProduct(product)) {
                     AlertMessage.getInstance().informerAlert(AlertType.WARNING, "this product is already have in stock");
-                }
-                else{
+                } else {
                     boolean res = productBo.saveProduct(product);
-                    if (res){
+                    if (res) {
                         AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Product Add Successful");
                         refreshOnAction();
                     } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Product Add Fail");
                 }
             }
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid data for all textBoxes and select Image");
         }
     }
 
     @FXML
     void updateOnAction() {
-        try{
+        try {
             String name = txtName.getText();
             double price = Double.parseDouble(txtPrice.getText());
             int qty = Integer.parseInt(txtQty.getText());
             int supplierId = Integer.parseInt(txtSupplierId.getText());
             String size = cmbSize.getValue();
             String category = cmbCategory.getValue();
-            String imageUrl = url==null ? "" : url;
+            String imageUrl = url == null ? "" : url;
             Date date = new Date();
 
-            if (name.isEmpty() || price<=0 || qty<=0 || supplierId<=0 || size.isEmpty() || category.isEmpty()){
+            if (name.isEmpty() || price <= 0 || qty <= 0 || supplierId <= 0 || size.isEmpty() || category.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
-            }
-            else if(imageUrl.isEmpty()){
+            } else if (imageUrl.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Select image");
-            }
-            else if(supplierBo.searchById(supplierId) == null){
+            } else if (supplierBo.searchById(supplierId) == null) {
                 AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Supplier id is Wrong. please enter correct supplier id");
-            }
-            else{
-                Product product = new Product(selectProduct.getId() ,name, size, price, qty, imageUrl, category, supplierId, 7, date, "Active");
+            } else {
+                Product product = new Product(selectProduct.getId(), name, size, price, qty, imageUrl, category, supplierId, 7, date, "Active");
 
                 boolean res = productBo.updateProduct(product);
-                if (res){
+                if (res) {
                     AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Product Update Successful");
                     refreshOnAction();
                 } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Product Update Fail");
             }
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid data for all textBoxes and select Image");
         }
     }
 
     @FXML
     void deleteOnAction() {
-        if (selectProduct==null){
+        if (selectProduct == null) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Select Customer form table");
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setTitle("Confirmation Dialog");
             alert.setContentText("Are you sure to delete this Product?");
@@ -287,11 +277,10 @@ public class ProductController implements Initializable {
                     selectProduct.setStatus("deleted");
                     boolean res = productBo.deleteProduct(selectProduct);
 
-                    if (res){
+                    if (res) {
                         AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Product Delete success");
                         refreshOnAction();
-                    }
-                    else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Product Delete fail");
+                    } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Product Delete fail");
                 }
             });
         }
@@ -311,8 +300,8 @@ public class ProductController implements Initializable {
         cmbSize.setPromptText("Select Size");
         imageBox.setImage(null);
         loadTable();
-        url=null;
-        selectProduct=null;
+        url = null;
+        selectProduct = null;
     }
 
     @FXML

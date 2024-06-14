@@ -35,7 +35,7 @@ public class UserBoImpl implements UserBo {
     @Override
     public ObservableList<User> getAll() {
         ObservableList<User> list = FXCollections.observableArrayList();
-        for (UserEntity entity : userDao.getAll()){
+        for (UserEntity entity : userDao.getAll()) {
             list.add(new ModelMapper().map(entity, User.class));
         }
         return list;
@@ -44,8 +44,8 @@ public class UserBoImpl implements UserBo {
     @Override
     public ObservableList<User> search(String data) {
         ObservableList<User> tableData = FXCollections.observableArrayList();
-        for (UserEntity entity : userDao.getAll()){
-            if (entity.getId().toString().equals(data) || entity.getName().equals(data) || entity.getEmail().equals(data) || entity.getAddress().equals(data) || entity.getContactNo().equals(data) || entity.getGender().equals(data) || entity.getUserType().equals(data)){
+        for (UserEntity entity : userDao.getAll()) {
+            if (entity.getId().toString().equals(data) || entity.getName().equals(data) || entity.getEmail().equals(data) || entity.getAddress().equals(data) || entity.getContactNo().equals(data) || entity.getGender().equals(data) || entity.getUserType().equals(data)) {
                 tableData.add(new ModelMapper().map(entity, User.class));
             }
         }
@@ -54,8 +54,8 @@ public class UserBoImpl implements UserBo {
 
     @Override
     public User searchById(Integer id) {
-        for (UserEntity entity : userDao.getAll()){
-            if (Objects.equals(entity.getId(), id)){
+        for (UserEntity entity : userDao.getAll()) {
+            if (Objects.equals(entity.getId(), id)) {
                 return new ModelMapper().map(entity, User.class);
             }
         }

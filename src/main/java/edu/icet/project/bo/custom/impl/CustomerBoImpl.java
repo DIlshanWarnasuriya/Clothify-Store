@@ -34,7 +34,7 @@ public class CustomerBoImpl implements CustomerBo {
     @Override
     public ObservableList<Customer> getAll() {
         ObservableList<Customer> list = FXCollections.observableArrayList();
-        for (CustomerEntity entity: customerDao.getAll()){
+        for (CustomerEntity entity : customerDao.getAll()) {
             list.add(new ModelMapper().map(entity, Customer.class));
         }
         return list;
@@ -43,8 +43,8 @@ public class CustomerBoImpl implements CustomerBo {
     @Override
     public ObservableList<Customer> search(String data) {
         ObservableList<Customer> list = FXCollections.observableArrayList();
-        for (CustomerEntity entity : customerDao.getAll()){
-            if (entity.getId().toString().equals(data) || entity.getName().equals(data) || entity.getEmail().equals(data) || entity.getAddress().equals(data) || entity.getContactNo().equals(data) || entity.getGender().equals(data)){
+        for (CustomerEntity entity : customerDao.getAll()) {
+            if (entity.getId().toString().equals(data) || entity.getName().equals(data) || entity.getEmail().equals(data) || entity.getAddress().equals(data) || entity.getContactNo().equals(data) || entity.getGender().equals(data)) {
                 list.add(new ModelMapper().map(entity, Customer.class));
             }
         }
@@ -53,8 +53,8 @@ public class CustomerBoImpl implements CustomerBo {
 
     @Override
     public Customer searchById(Integer id) {
-        for (CustomerEntity entity : customerDao.getAll()){
-            if (Objects.equals(entity.getId(), id)){
+        for (CustomerEntity entity : customerDao.getAll()) {
+            if (Objects.equals(entity.getId(), id)) {
                 return new ModelMapper().map(entity, Customer.class);
             }
         }

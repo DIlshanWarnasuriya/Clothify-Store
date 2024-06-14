@@ -14,14 +14,14 @@ public class SupplierDaoImpl implements SupplierDao {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
-        try{
+        try {
             session.persist(entity);
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }
@@ -31,14 +31,14 @@ public class SupplierDaoImpl implements SupplierDao {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
-        try{
+        try {
             session.update(entity);
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
             session.close();
         }
     }

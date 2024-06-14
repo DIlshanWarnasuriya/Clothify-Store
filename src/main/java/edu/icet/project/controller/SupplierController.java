@@ -82,17 +82,17 @@ public class SupplierController implements Initializable {
         selectRowInTable();
     }
 
-    private void setGenderTypes(){
+    private void setGenderTypes() {
         ObservableList<String> type = FXCollections.observableArrayList();
         type.add("Male");
         type.add("Female");
         cmbGender.setItems(type);
     }
 
-    private void loadTable(){
+    private void loadTable() {
         ObservableList<SupplierTable> list = FXCollections.observableArrayList();
         for (Supplier supplier : supplierBo.getAll()) {
-            if (!supplier.getStatus().equals("deleted")){
+            if (!supplier.getStatus().equals("deleted")) {
                 Circle circle = new Circle(25, 25, 25);
                 circle.setFill(new ImagePattern(new Image(supplier.getImageUrl())));
                 list.add(new SupplierTable(circle, supplier.getId(), supplier.getName(), supplier.getContactNo(), supplier.getEmail(), supplier.getCompany()));
@@ -102,9 +102,9 @@ public class SupplierController implements Initializable {
         supplierTable.setItems(list);
     }
 
-    private void selectRowInTable(){
+    private void selectRowInTable() {
         supplierTable.getSelectionModel().selectedItemProperty().addListener((observableValue, supplierTable1, select) -> {
-            if (select!=null){
+            if (select != null) {
                 ObservableList<Supplier> search = supplierBo.search(select.getId().toString());
                 selectSupplier = search.get(0);
                 url = selectSupplier.getImageUrl();
@@ -122,22 +122,20 @@ public class SupplierController implements Initializable {
     @FXML
     void searchOnAction() {
         String data = txtSearch.getText();
-        if (data.isEmpty()){
+        if (data.isEmpty()) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter searching data");
-        }
-        else{
+        } else {
             ObservableList<SupplierTable> list = FXCollections.observableArrayList();
             for (Supplier supplier : supplierBo.search(data)) {
-                if (!supplier.getStatus().equals("deleted")){
+                if (!supplier.getStatus().equals("deleted")) {
                     Circle circle = new Circle(25, 25, 25);
                     circle.setFill(new ImagePattern(new Image(supplier.getImageUrl())));
                     list.add(new SupplierTable(circle, supplier.getId(), supplier.getName(), supplier.getContactNo(), supplier.getEmail(), supplier.getCompany()));
                 }
             }
-            if (list.isEmpty()){
+            if (list.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Search Suppliers not found");
-            }
-            else{
+            } else {
                 FXCollections.reverse(list);
                 supplierTable.setItems(list);
             }
@@ -150,8 +148,8 @@ public class SupplierController implements Initializable {
         fileChooser.setTitle("Select Image");
         File file = fileChooser.showOpenDialog(imageCircle.getScene().getWindow());
 
-        try{
-            if (file!=null){
+        try {
+            if (file != null) {
                 Path path = new File("src/main/resources/images/profile/" + file.getName()).toPath();
                 Files.copy(file.toPath(), path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -165,7 +163,7 @@ public class SupplierController implements Initializable {
 
     @FXML
     void addOnAction() {
-        try{
+        try {
             String name = txtName.getText();
             String email = txtEmail.getText();
             String company = txtCompany.getText();
@@ -173,41 +171,36 @@ public class SupplierController implements Initializable {
             String gender = cmbGender.getValue();
             String imageUrl = url;
 
-            if (name.isEmpty() || email.isEmpty() || company.isEmpty() || contactNo.isEmpty() || gender.isEmpty()){
+            if (name.isEmpty() || email.isEmpty() || company.isEmpty() || contactNo.isEmpty() || gender.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
-            }
-            else if(contactNo.length() != 10 || contactNo.charAt(0) != '0'){
+            } else if (contactNo.length() != 10 || contactNo.charAt(0) != '0') {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid contact number");
-            }
-            else if (!supplierBo.search(contactNo).isEmpty()){
+            } else if (!supplierBo.search(contactNo).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This Contact number is already use");
-            }
-            else if (!supplierBo.search(email).isEmpty()){
+            } else if (!supplierBo.search(email).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email is already use");
-            }
-            else{
-                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png") ){
+            } else {
+                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png")) {
                     imageUrl = "images/profile/Female.png";
-                }
-                else if(gender.equals("Male") && imageUrl.equals("images/profile/Female.png")){
+                } else if (gender.equals("Male") && imageUrl.equals("images/profile/Female.png")) {
                     imageUrl = "images/profile/Male.png";
                 }
 
                 Supplier supplier = new Supplier(name, email, company, contactNo, gender, imageUrl, "Active");
                 boolean res = supplierBo.saveSupplier(supplier);
-                if (res){
+                if (res) {
                     AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Supplier Add Successful");
                     refreshOnAction();
                 } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Supplier Add Fail");
             }
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
         }
     }
 
     @FXML
     void updateOnAction() {
-        try{
+        try {
             String name = txtName.getText();
             String email = txtEmail.getText();
             String company = txtCompany.getText();
@@ -215,47 +208,40 @@ public class SupplierController implements Initializable {
             String gender = cmbGender.getValue();
             String imageUrl = url;
 
-            if (selectSupplier.getImageUrl().equals(imageUrl) && selectSupplier.getName().equals(name) && selectSupplier.getEmail().equals(email) && selectSupplier.getCompany().equals(company) && selectSupplier.getContactNo().equals(contactNo) && selectSupplier.getGender().equals(gender)){
+            if (selectSupplier.getImageUrl().equals(imageUrl) && selectSupplier.getName().equals(name) && selectSupplier.getEmail().equals(email) && selectSupplier.getCompany().equals(company) && selectSupplier.getContactNo().equals(contactNo) && selectSupplier.getGender().equals(gender)) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "No any changes");
-            }
-            else if (name.isEmpty() || email.isEmpty() || company.isEmpty() || contactNo.isEmpty()){
+            } else if (name.isEmpty() || email.isEmpty() || company.isEmpty() || contactNo.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
-            }
-            else if(contactNo.length() != 10 || contactNo.charAt(0) != '0'){
+            } else if (contactNo.length() != 10 || contactNo.charAt(0) != '0') {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid contact number");
-            }
-            else if (!selectSupplier.getContactNo().equals(contactNo)  && !supplierBo.search(contactNo).isEmpty()){
+            } else if (!selectSupplier.getContactNo().equals(contactNo) && !supplierBo.search(contactNo).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This Contact number is already use");
-            }
-            else if (!selectSupplier.getEmail().equals(email) && !supplierBo.search(email).isEmpty()){
+            } else if (!selectSupplier.getEmail().equals(email) && !supplierBo.search(email).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email is already use");
-            }
-            else{
-                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png") ){
+            } else {
+                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png")) {
                     imageUrl = "images/profile/Female.png";
-                }
-                else if(gender.equals("Male") && imageUrl.equals("images/profile/Female.png")){
+                } else if (gender.equals("Male") && imageUrl.equals("images/profile/Female.png")) {
                     imageUrl = "images/profile/Male.png";
                 }
 
                 Supplier supplier = new Supplier(selectSupplier.getId(), name, email, company, contactNo, gender, imageUrl, "Active");
                 boolean res = supplierBo.updateSupplier(supplier);
-                if (res){
+                if (res) {
                     AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Supplier Update Successful");
                     refreshOnAction();
                 } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Supplier Update Fail");
             }
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
         }
     }
 
     @FXML
     void deleteOnAction() {
-        if (selectSupplier==null){
+        if (selectSupplier == null) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Select Supplier form table");
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setTitle("Confirmation Dialog");
             alert.setContentText("Are you sure to delete this Supplier?");
@@ -268,11 +254,10 @@ public class SupplierController implements Initializable {
                     selectSupplier.setStatus("deleted");
                     boolean res = supplierBo.deleteSupplier(selectSupplier);
 
-                    if (res){
+                    if (res) {
                         AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Supplier Delete success");
                         refreshOnAction();
-                    }
-                    else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Supplier Delete fail");
+                    } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Supplier Delete fail");
                 }
             });
         }
@@ -288,8 +273,8 @@ public class SupplierController implements Initializable {
         cmbGender.setValue(null);
         cmbGender.setPromptText("Select Gender");
         imageCircle.setFill(Color.valueOf("#d9d9d9"));
-        selectSupplier=null;
-        url=null;
+        selectSupplier = null;
+        url = null;
         loadTable();
     }
 

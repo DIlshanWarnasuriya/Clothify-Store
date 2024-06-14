@@ -11,7 +11,6 @@ import edu.icet.project.util.AlertType;
 import edu.icet.project.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -21,7 +20,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -88,18 +86,18 @@ public class CustomerController implements Initializable {
         selectRowInTable();
     }
 
-    private void setGenderTypes(){
+    private void setGenderTypes() {
         ObservableList<String> gender = FXCollections.observableArrayList();
         gender.add("Male");
         gender.add("Female");
         cmbGender.setItems(gender);
     }
 
-    private void loadTable(){
+    private void loadTable() {
         ObservableList<CustomerTable> list = FXCollections.observableArrayList();
-        for (Customer customer: customerBo.getAll()){
-            if (!customer.getStatus().equals("deleted")){
-                Circle circle = new Circle(25,25,25);
+        for (Customer customer : customerBo.getAll()) {
+            if (!customer.getStatus().equals("deleted")) {
+                Circle circle = new Circle(25, 25, 25);
                 circle.setFill(new ImagePattern(new Image(customer.getImageUrl())));
                 list.add(new CustomerTable(circle, customer.getId(), customer.getName(), customer.getContactNo(), customer.getEmail(), customer.getAddress()));
             }
@@ -108,9 +106,9 @@ public class CustomerController implements Initializable {
         customerTable.setItems(list);
     }
 
-    private void selectRowInTable(){
-        customerTable.getSelectionModel().selectedItemProperty().addListener((observableValue, customerTable1, select ) -> {
-            if (select!=null){
+    private void selectRowInTable() {
+        customerTable.getSelectionModel().selectedItemProperty().addListener((observableValue, customerTable1, select) -> {
+            if (select != null) {
                 selectCustomer = customerBo.searchById(select.getId());
 
                 txtName.setText(selectCustomer.getName());
@@ -125,24 +123,22 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    void searchOnAction(MouseEvent event) {
+    void searchOnAction() {
         String data = txtSearch.getText();
-        if (data.isEmpty()){
+        if (data.isEmpty()) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter Search data to Search box");
-        }
-        else{
+        } else {
             ObservableList<CustomerTable> list = FXCollections.observableArrayList();
-            for (Customer customer: customerBo.search(data)){
-                if (!customer.getStatus().equals("deleted")){
-                    Circle circle = new Circle(25,25,25);
+            for (Customer customer : customerBo.search(data)) {
+                if (!customer.getStatus().equals("deleted")) {
+                    Circle circle = new Circle(25, 25, 25);
                     circle.setFill(new ImagePattern(new Image(customer.getImageUrl())));
                     list.add(new CustomerTable(circle, customer.getId(), customer.getName(), customer.getContactNo(), customer.getEmail(), customer.getAddress()));
                 }
             }
-            if (list.isEmpty()){
+            if (list.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Search Customer not found");
-            }
-            else{
+            } else {
                 FXCollections.reverse(list);
                 customerTable.setItems(list);
             }
@@ -151,13 +147,13 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    void selectImageOnAction(MouseEvent event) {
+    void selectImageOnAction() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image");
         File file = fileChooser.showOpenDialog(circleImage.getScene().getWindow());
 
-        try{
-            if (file!=null){
+        try {
+            if (file != null) {
                 Path path = new File("src/main/resources/images/profile/" + file.getName()).toPath();
                 Files.copy(file.toPath(), path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -170,8 +166,8 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    void addOnAction(ActionEvent event) {
-        try{
+    void addOnAction() {
+        try {
             String name = txtName.getText();
             String email = txtEmail.getText();
             String address = txtAddress.getText();
@@ -179,42 +175,37 @@ public class CustomerController implements Initializable {
             String gender = cmbGender.getValue();
             String imageUrl = url;
 
-            if (name.isEmpty() || email.isEmpty() || address.isEmpty() || contactNo.isEmpty()){
+            if (name.isEmpty() || email.isEmpty() || address.isEmpty() || contactNo.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
-            }
-            else if(contactNo.length() != 10 || contactNo.charAt(0) != '0'){
+            } else if (contactNo.length() != 10 || contactNo.charAt(0) != '0') {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid contact number");
-            }
-            else if (!customerBo.search(contactNo).isEmpty()){
+            } else if (!customerBo.search(contactNo).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This Contact number is already use. Maybe this customer is there. check now");
-            }
-            else if (!customerBo.search(email).isEmpty()){
+            } else if (!customerBo.search(email).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email is already use. Maybe this customer is there. check now");
-            }
-            else{
-                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png") ){
+            } else {
+                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png")) {
                     imageUrl = "images/profile/Female.png";
-                }
-                else if(gender.equals("Male") && imageUrl.equals("images/profile/Female.png")){
+                } else if (gender.equals("Male") && imageUrl.equals("images/profile/Female.png")) {
                     imageUrl = "images/profile/Male.png";
                 }
 
                 Customer customer = new Customer(name, email, address, contactNo, gender, imageUrl, "Active");
                 boolean res = customerBo.saveCustomer(customer);
-                if (res){
+                if (res) {
                     AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Customer Add Successful");
                     refreshOnAction();
                 } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Customer Add Fail");
             }
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
         }
 
     }
 
     @FXML
-    void updateOnAction(ActionEvent event) {
-        try{
+    void updateOnAction() {
+        try {
             String name = txtName.getText();
             String email = txtEmail.getText();
             String address = txtAddress.getText();
@@ -222,47 +213,40 @@ public class CustomerController implements Initializable {
             String gender = cmbGender.getValue();
             String imageUrl = url;
 
-            if (selectCustomer.getImageUrl().equals(imageUrl) && selectCustomer.getName().equals(name) && selectCustomer.getEmail().equals(email) && selectCustomer.getAddress().equals(address) && selectCustomer.getContactNo().equals(contactNo) && selectCustomer.getGender().equals(gender)){
+            if (selectCustomer.getImageUrl().equals(imageUrl) && selectCustomer.getName().equals(name) && selectCustomer.getEmail().equals(email) && selectCustomer.getAddress().equals(address) && selectCustomer.getContactNo().equals(contactNo) && selectCustomer.getGender().equals(gender)) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "No any changes");
-            }
-            else if (name.isEmpty() || email.isEmpty() || address.isEmpty() || contactNo.isEmpty()){
+            } else if (name.isEmpty() || email.isEmpty() || address.isEmpty() || contactNo.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
-            }
-            else if(contactNo.length() != 10 || contactNo.charAt(0) != '0'){
+            } else if (contactNo.length() != 10 || contactNo.charAt(0) != '0') {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid contact number");
-            }
-            else if (!selectCustomer.getContactNo().equals(contactNo)  && !customerBo.search(contactNo).isEmpty()){
+            } else if (!selectCustomer.getContactNo().equals(contactNo) && !customerBo.search(contactNo).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This Contact number is already use");
-            }
-            else if (!selectCustomer.getEmail().equals(email) && !customerBo.search(email).isEmpty()){
+            } else if (!selectCustomer.getEmail().equals(email) && !customerBo.search(email).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email is already use");
-            }
-            else{
-                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png") ){
+            } else {
+                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png")) {
                     imageUrl = "images/profile/Female.png";
-                }
-                else if(gender.equals("Male") && imageUrl.equals("images/profile/Female.png")){
+                } else if (gender.equals("Male") && imageUrl.equals("images/profile/Female.png")) {
                     imageUrl = "images/profile/Male.png";
                 }
 
                 Customer customer = new Customer(selectCustomer.getId(), name, email, address, contactNo, gender, imageUrl, "Active");
                 boolean res = customerBo.updateCustomer(customer);
-                if (res){
+                if (res) {
                     AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Customer Update Successful");
                     refreshOnAction();
                 } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Customer Update Fail");
             }
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
         }
     }
 
     @FXML
-    void deleteOnAction(ActionEvent event) {
-        if (selectCustomer==null){
+    void deleteOnAction() {
+        if (selectCustomer == null) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Select Customer form table");
-        }
-        else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setTitle("Confirmation Dialog");
             alert.setContentText("Are you sure to delete this Customer?");
@@ -275,11 +259,10 @@ public class CustomerController implements Initializable {
                     selectCustomer.setStatus("deleted");
                     boolean res = customerBo.deleteCustomer(selectCustomer);
 
-                    if (res){
+                    if (res) {
                         AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Customer Delete success");
                         refreshOnAction();
-                    }
-                    else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Customer Delete fail");
+                    } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Customer Delete fail");
                 }
             });
         }
@@ -300,7 +283,7 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    void closeOnAction(MouseEvent event) {
+    void closeOnAction() {
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setTitle("Confirmation Dialog");
         alert.setContentText("Are you close the program");
@@ -316,7 +299,7 @@ public class CustomerController implements Initializable {
     }
 
     @FXML
-    void minimizeOnAction(MouseEvent event) {
+    void minimizeOnAction() {
         Stage stage = (Stage) txtAddress.getScene().getWindow();
         stage.setIconified(true);
     }

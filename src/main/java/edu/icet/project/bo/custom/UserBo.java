@@ -6,9 +6,14 @@ import javafx.collections.ObservableList;
 
 public interface UserBo extends SuperBo {
     boolean saveUser(User dto);
+
     boolean updateUser(User dto);
+
     boolean deleteUser(User dto);
+
     ObservableList<User> getAll();
+
     ObservableList<User> search(String data);
+
     User searchById(Integer id);
 }
