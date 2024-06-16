@@ -4,7 +4,10 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import edu.icet.project.bo.BoFactory;
 import edu.icet.project.bo.custom.CustomerBo;
+import edu.icet.project.bo.custom.OrdersBo;
 import edu.icet.project.bo.custom.ProductBo;
+import edu.icet.project.dto.Orders;
+import edu.icet.project.dto.OrdersDetails;
 import edu.icet.project.dto.Product;
 import edu.icet.project.dto.table.CartTable;
 import edu.icet.project.util.AlertMessage;
@@ -12,17 +15,17 @@ import edu.icet.project.util.AlertType;
 import edu.icet.project.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class PlaceOrderController implements Initializable {
@@ -68,8 +71,9 @@ public class PlaceOrderController implements Initializable {
 
     private final ProductBo productBo = BoFactory.getInstance().getBo(BoType.PRODUCT);
     private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
+    private final OrdersBo ordersBo = BoFactory.getInstance().getBo(BoType.ORDERS);
 
-    private ObservableList<CartTable> cartList = FXCollections.observableArrayList();
+    private final ObservableList<CartTable> cartList = FXCollections.observableArrayList();
     private CartTable selectedProduct = null;
 
     @Override
@@ -113,7 +117,7 @@ public class PlaceOrderController implements Initializable {
     }
 
     @FXML
-    void searchOnAction(MouseEvent event) {
+    void searchOnAction() {
         try {
             int id = Integer.parseInt(txtSearch.getText());
             if (id <= 0) {
@@ -123,7 +127,6 @@ public class PlaceOrderController implements Initializable {
                 if (product == null) {
                     AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Product not found. Please check Product id");
                 } else {
-                    AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Product Found");
                     lblName.setText(product.getName());
                     lblPrice.setText(product.getPrice().toString());
                     lblSize.setText(product.getSize());
@@ -157,7 +160,7 @@ public class PlaceOrderController implements Initializable {
     }
 
     @FXML
-    void addToCartOnAction(ActionEvent event) {
+    void addToCartOnAction() {
         try {
             int productId = Integer.parseInt(txtSearch.getText());
             int qty = Integer.parseInt(txtQty.getText());
@@ -198,7 +201,7 @@ public class PlaceOrderController implements Initializable {
     }
 
     @FXML
-    void deleteFromCartOnAction(ActionEvent event) {
+    void removeFromCartOnAction() {
         if (selectedProduct == null) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please select product from cart");
         } else {
@@ -208,8 +211,39 @@ public class PlaceOrderController implements Initializable {
     }
 
     @FXML
-    void placeOrderOnAction(ActionEvent event) {
+    void placeOrderOnAction() {
 
+        try{
+            Integer orderId = ordersBo.getAllOrders().size() + 1;
+            Integer customerId = Integer.parseInt(txtCustomerId.getText());
+            String paymentMethod = cmbPaymentMethod.getValue();
+            Date date = new Date();
+
+            if (cartList.isEmpty()){
+                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Add product to cart");
+            }
+            else if(customerBo.searchById(customerId) == null){
+                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Customer Id is wrong. Please enter valid customer Id");
+            }
+            else{
+                Orders orders = new Orders(customerId, date, paymentMethod);
+                ArrayList<OrdersDetails> list = new ArrayList<>();
+                for (CartTable item : cartList){
+                    list.add(new OrdersDetails(orderId, item.getId(), item.getQty(), item.getTotal(), item.getImageUrl().getImage().getUrl(), "pay"));
+                }
+
+                boolean res = ordersBo.save(orders, list);
+                if (res){
+                    AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Placed order");
+                    cartList.clear();
+                    refreshOnAction();
+                    txtCustomerId.setText("");
+                }
+                else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Fail");
+            }
+        }catch (RuntimeException e){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid customer id and select payment method");
+        }
     }
 
     @FXML
@@ -227,7 +261,7 @@ public class PlaceOrderController implements Initializable {
     }
 
     @FXML
-    void closeOnAction(MouseEvent event) {
+    void closeOnAction() {
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setTitle("Confirmation Dialog");
         alert.setContentText("Are you close the program");
@@ -243,7 +277,7 @@ public class PlaceOrderController implements Initializable {
     }
 
     @FXML
-    void minimizeOnAction(MouseEvent event) {
+    void minimizeOnAction() {
         Stage stage = (Stage) txtQty.getScene().getWindow();
         stage.setIconified(true);
     }
