@@ -5,6 +5,7 @@ import edu.icet.project.dao.DaoFactory;
 import edu.icet.project.dao.custom.OrdersDao;
 import edu.icet.project.dto.Orders;
 import edu.icet.project.dto.OrdersDetails;
+import edu.icet.project.dto.Product;
 import edu.icet.project.entity.OrdersDetailsEntity;
 import edu.icet.project.entity.OrdersEntity;
 import edu.icet.project.util.DaoType;
@@ -12,6 +13,7 @@ import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OrdersBoImpl implements OrdersBo {
 
@@ -28,6 +30,7 @@ public class OrdersBoImpl implements OrdersBo {
         return ordersDao.save(entity, newList);
     }
 
+    // order table
     @Override
     public List<Orders> getAllOrders() {
         List<Orders> list = new ArrayList<>();
@@ -36,4 +39,67 @@ public class OrdersBoImpl implements OrdersBo {
         }
         return list;
     }
+
+    @Override
+    public List<Orders> searchOrder(String data) {
+        List<Orders> list = new ArrayList<>();
+        for (OrdersEntity orders : ordersDao.getAllOrders()) {
+            if(orders.getId().toString().equals(data) ||  orders.getDate().equals(data) || orders.getPaymentMethod().equals(data) || orders.getStatus().equals(data)){
+                list.add(new ModelMapper().map(orders, Orders.class));
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public Orders searchOrderById(Integer id) {
+        for (OrdersEntity orders : ordersDao.getAllOrders()) {
+            if (Objects.equals(orders.getId(), id)){
+                return new ModelMapper().map(orders, Orders.class);
+            }
+        }
+        return null;
+    }
+
+
+    // order details table
+    @Override
+    public List<OrdersDetails> searchAllOrderProductByOrderId(Integer id) {
+        List<OrdersDetails> list = new ArrayList<>();
+
+        for (OrdersDetailsEntity items : ordersDao.getAllOrdersDetails()) {
+            if (Objects.equals(items.getOrderId(), id)){
+                list.add(new ModelMapper().map(items, OrdersDetails.class));
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public OrdersDetails searchOrderProductById(Integer id) {
+        for (OrdersDetailsEntity items : ordersDao.getAllOrdersDetails()) {
+            if (Objects.equals(items.getId(), id)){
+                return new ModelMapper().map(items, OrdersDetails.class);
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteOrderProduct(OrdersDetails oProduct, Product product){
+        return ordersDao.updateOrderProduct(new ModelMapper().map(oProduct, OrdersDetailsEntity.class), product);
+    }
+
+    @Override
+    public boolean deleteOrder(Orders order, List<OrdersDetails> ordersDetailsList, List<Product> productsList) {
+        OrdersEntity entity = new ModelMapper().map(order, OrdersEntity.class);
+
+        List<OrdersDetailsEntity> detailEntity = new ArrayList<>();
+        for (OrdersDetails product : ordersDetailsList){
+            detailEntity.add(new ModelMapper().map(product, OrdersDetailsEntity.class));
+        }
+
+        return ordersDao.updateOrder(entity, detailEntity, productsList);
+    }
+
+
 }

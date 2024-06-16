@@ -1,17 +1,17 @@
-package edu.icet.project.entity;
+package edu.icet.project.dto.table;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Data
-@Entity
-@Table(name = "orders")
-public class OrdersEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class OrderTable {
     private Integer id;
     private Integer customerId;
     private Integer userId;

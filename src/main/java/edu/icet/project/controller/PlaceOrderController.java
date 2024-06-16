@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -217,7 +218,7 @@ public class PlaceOrderController implements Initializable {
             Integer orderId = ordersBo.getAllOrders().size() + 1;
             Integer customerId = Integer.parseInt(txtCustomerId.getText());
             String paymentMethod = cmbPaymentMethod.getValue();
-            Date date = new Date();
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
             if (cartList.isEmpty()){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Add product to cart");
@@ -226,7 +227,7 @@ public class PlaceOrderController implements Initializable {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Customer Id is wrong. Please enter valid customer Id");
             }
             else{
-                Orders orders = new Orders(customerId, date, paymentMethod);
+                Orders orders = new Orders(customerId,2, date, paymentMethod, "pay");
                 ArrayList<OrdersDetails> list = new ArrayList<>();
                 for (CartTable item : cartList){
                     list.add(new OrdersDetails(orderId, item.getId(), item.getQty(), item.getTotal(), item.getImageUrl().getImage().getUrl(), "pay"));

@@ -115,3 +115,13 @@ g
 7src/main/java/edu/icet/project/entity/OrdersEntity.java,7\d\7d8186157479ff4c2a74ed86bbff6d4a4d5f0fdd
 n
 >src/main/java/edu/icet/project/entity/OrdersDetailsEntity.java,5\3\534b5d1c212d558e67ab17f35d4c1c5b2509a54e
+h
+8src/main/java/edu/icet/project/dto/table/OrderTable.java,8\4\841067e3e6e0aa839bb3470c477fcbf7019921bc
+n
+>src/main/java/edu/icet/project/dto/table/PrderDetailTable.java,a\5\a5e5cc8ff6453418e77d753b875af22c78489767
+p
+@src/main/java/edu/icet/project/dto/table/ProductDetailTable.java,4\3\43c9be9eae64c71c4e60e2e830df8c581648ad4a
+o
+?src/main/java/edu/icet/project/controller/OrdersController.java,0\b\0bb5793d9fd5db861259150a4bf6f9d0985deaa3
+n
+>src/main/java/edu/icet/project/dto/table/OrderDetailTable.java,7\1\71475311f6d1c1ef92707eb9591f2e51d0d999ce
