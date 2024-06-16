@@ -75,10 +75,6 @@ s
 Csrc/main/java/edu/icet/project/dao/custom/impl/SupplierDaoImpl.java,8\6\861270dfa89827c6234ea28858252fd74d8fa718
 k
 ;src/main/java/edu/icet/project/dto/table/SupplierTable.java,1\e\1ee1ac24a797feee52acebde4798bca0bcd5afe5
-n
->src/main/java/edu/icet/project/controller/StockController.java,1\b\1bd0f5245a99c29d462d7364b236a1b80131bee5
-\
-,src/main/java/edu/icet/project/dto/Item.java,4\d\4d479177785f056dc04bf83b47cd7dd3f00b7264
 _
 /src/main/java/edu/icet/project/dto/Product.java,c\5\c5fa2d7859511e25e42021ef8e276a526b0cd53f
 h

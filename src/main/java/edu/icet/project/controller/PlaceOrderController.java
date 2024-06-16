@@ -138,7 +138,6 @@ public class PlaceOrderController implements Initializable {
                         int available = product.getQty();
                         lblAvailable.setText(Integer.toString(available - cartQty));
                     }
-
                 }
             }
         } catch (RuntimeException e) {
@@ -168,17 +167,30 @@ public class PlaceOrderController implements Initializable {
             } else if (productBo.searchById(productId) == null) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid Product id");
             } else if (Integer.parseInt(lblAvailable.getText()) < qty) {
-                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "You have exceeded the available items. check available items");
+                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "You have exceeded the available items. check available products");
             } else {
                 double total = Double.parseDouble(lblPrice.getText()) * qty;
-                ImageView imageView = new ImageView(new Image(imageBox.getImage().getUrl()));
-                imageView.setFitHeight(50);
-                imageView.setFitWidth(50);
 
-                CartTable item = new CartTable(imageView, productId, lblName.getText(), lblSize.getText(), qty, total);
-                cartList.add(item);
-                loadTable();
-                refreshOnAction();
+                CartTable product = getProductFromCart(productId);
+                if (product == null){
+                    ImageView imageView = new ImageView(new Image(imageBox.getImage().getUrl()));
+                    imageView.setFitHeight(50);
+                    imageView.setFitWidth(50);
+
+                    CartTable item = new CartTable(imageView, productId, lblName.getText(), lblSize.getText(), qty, total);
+                    cartList.add(item);
+                    refreshOnAction();
+                }
+                else{
+                    qty += product.getQty();
+                    total += product.getTotal();
+                    cartList.remove(product);
+
+                    product.setQty(qty);
+                    product.setTotal(total);
+                    cartList.add(product);
+                    refreshOnAction();
+                }
             }
         } catch (RuntimeException e) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid Product id and qty");
@@ -191,7 +203,7 @@ public class PlaceOrderController implements Initializable {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please select product from cart");
         } else {
             cartList.remove(selectedProduct);
-            loadTable();
+            refreshOnAction();
         }
     }
 
