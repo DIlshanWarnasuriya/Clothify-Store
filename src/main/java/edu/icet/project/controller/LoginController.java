@@ -10,6 +10,9 @@ import edu.icet.project.util.AlertType;
 import edu.icet.project.util.BoType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
@@ -17,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Base64;
 
 public class LoginController {
@@ -30,7 +34,7 @@ public class LoginController {
     private final UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
 
     @FXML
-    void loginOnAction(ActionEvent event) {
+    void loginOnAction(ActionEvent event) throws IOException {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
 
@@ -43,11 +47,20 @@ public class LoginController {
                 AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Email or password is wrong");
             }
             else{
-                AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Login");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Home.fxml"));
+                Parent root = loader.load();
+                HomeController controller = loader.getController();
+                controller.setUser(user);
+
+                Stage stage = (Stage) txtEmail.getScene().getWindow();
+                stage.close();
+
+                Stage newStage = new Stage();
+                newStage.setScene(new Scene(root));
+                newStage.show();
+
             }
-
         }
-
     }
 
     private User searchUser(String email, String password){
