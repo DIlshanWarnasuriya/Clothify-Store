@@ -119,3 +119,5 @@ o
 ?src/main/java/edu/icet/project/controller/OrdersController.java,0\b\0bb5793d9fd5db861259150a4bf6f9d0985deaa3
 n
 >src/main/java/edu/icet/project/dto/table/OrderDetailTable.java,7\1\71475311f6d1c1ef92707eb9591f2e51d0d999ce
+n
+>src/main/java/edu/icet/project/controller/LoginController.java,f\a\faeca019ebac25a997dfcc72001900aed520c435

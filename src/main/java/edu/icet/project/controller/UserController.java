@@ -219,6 +219,8 @@ public class UserController implements Initializable {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Contact number is already use");
             } else if (!userBo.search(email).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Email is already use");
+            } else if (password.length() < 8) {
+                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter more than 8 characters to password");
             } else {
                 if (gender.equals("Female") && selectUser.getImageUrl().equals("images/profile/Male.png")) {
                     imageUrl = "images/profile/Female.png";
@@ -262,7 +264,9 @@ public class UserController implements Initializable {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Contact number is already use");
             } else if (!selectUser.getEmail().equals(email) && !userBo.search(email).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "The Email is already use");
-            } else {
+            } else if (password.length() < 8) {
+                AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter more than 8 characters to password");
+            }else {
                 if (gender.equals("Female") && selectUser.getImageUrl().equals("images/profile/Male.png")) {
                     imageUrl = "images/profile/Female.png";
                 } else if (gender.equals("Male") && selectUser.getImageUrl().equals("images/profile/Female.png")) {

@@ -14,7 +14,7 @@ public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/Orders.fxml"))));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view/Login.fxml"))));
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         //stage.initStyle(StageStyle.TRANSPARENT);
