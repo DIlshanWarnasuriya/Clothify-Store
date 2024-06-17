@@ -1,15 +1,7 @@
 
 v
-java:S1874R".Remove this use of "update"; it is deprecated.(¥·òÂøÿÿÿÿ8¯™®š‚2J$ed72db43-87c2-42b7-bbd9-c9ffe0f84e36
+java:S1874R".Remove this use of "update"; it is deprecated.(¥·òÂøÿÿÿÿ8¯™®š‚2J$224d1a4f-867d-438e-bc7b-9c7448dd2eff
 v
-java:S1874d".Remove this use of "update"; it is deprecated.(¥·òÂøÿÿÿÿ8¯™®š‚2J$0ce1367f-bced-4db8-aad8-fb13294468a4
+java:S1874i".Remove this use of "update"; it is deprecated.(¥·òÂøÿÿÿÿ8¯™®š‚2J$8ac6c3ae-4155-4802-94fe-1bd8f9f29771
 q
-java:S1874g".Remove this use of "update"; it is deprecated.(…Í˜¯8¯™®š‚2J$46bd5735-ae10-4fb1-86de-8761772947f9
-€
-java:S1128"8Remove this unused import 'edu.icet.project.dto.Orders'.(ÔÑÚ¿ûÿÿÿÿ8¢ä¦š‚2J$901a50d4-1531-4fd4-8fa1-9b5258d3f6b0
-„
-java:S1128"CRemove this unused import 'edu.icet.project.entity.CustomerEntity'.(ÚðR8£ä¦š‚2J$b148688a-22e6-4a20-b6d4-a2344d2d30c0
-‡
-java:S1128"?Remove this unused import 'edu.icet.project.util.AlertMessage'.(›Áûäúÿÿÿÿ8£ä¦š‚2J$96fb4598-e996-4f54-8784-356540a1a16f
-„
-java:S1128"<Remove this unused import 'edu.icet.project.util.AlertType'.(²™õÿÿÿÿÿÿ8£ä¦š‚2J$5c6dd800-bd12-4aca-afd2-4a02684b2b4b
+java:S1874l".Remove this use of "update"; it is deprecated.(…Í˜¯8¯™®š‚2J$f4e9ff4f-2894-42a9-8380-c269a3280400

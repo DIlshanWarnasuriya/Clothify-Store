@@ -73,14 +73,19 @@ public class OrdersDaoImpl implements OrdersDao {
     }
 
     @Override
-    public boolean updateOrderProduct(OrdersDetailsEntity entity, Product product) {
+    public boolean updateOrderProduct(OrdersDetailsEntity entity) {
 
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
         try {
             session.update(entity);
+
+            Product product = productBo.searchById(entity.getProductId());
+            int qty = product.getQty() + entity.getQty();
+            product.setQty(qty);
             productBo.updateProduct(product);
+
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -92,18 +97,23 @@ public class OrdersDaoImpl implements OrdersDao {
     }
 
     @Override
-    public boolean updateOrder(OrdersEntity entity, List<OrdersDetailsEntity> detailEntity, List<Product> productsList) {
+    public boolean updateOrder(OrdersEntity entity, List<OrdersDetailsEntity> list) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
         try {
             session.update(entity);
 
-            for (OrdersDetailsEntity items : detailEntity){
+            for (OrdersDetailsEntity items : list){
                 session.update(items);
             }
 
-            for (Product product : productsList){
+            // update qty of product
+            for (OrdersDetailsEntity items : list){
+                Product product = productBo.searchById(items.getProductId());
+                int qty = product.getQty() + items.getQty();
+                product.setQty(qty);
+
                 productBo.updateProduct(product);
             }
 

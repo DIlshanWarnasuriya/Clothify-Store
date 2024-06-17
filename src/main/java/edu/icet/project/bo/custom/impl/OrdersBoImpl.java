@@ -61,6 +61,18 @@ public class OrdersBoImpl implements OrdersBo {
         return null;
     }
 
+    @Override
+    public boolean deleteOrder(Orders order, List<OrdersDetails> ordersDetailsList) {
+        OrdersEntity entity = new ModelMapper().map(order, OrdersEntity.class);
+
+        List<OrdersDetailsEntity> detailEntity = new ArrayList<>();
+        for (OrdersDetails product : ordersDetailsList){
+            detailEntity.add(new ModelMapper().map(product, OrdersDetailsEntity.class));
+        }
+
+        return ordersDao.updateOrder(entity, detailEntity);
+    }
+
 
     // order details table
     @Override
@@ -85,21 +97,8 @@ public class OrdersBoImpl implements OrdersBo {
         return null;
     }
 
-    public boolean deleteOrderProduct(OrdersDetails oProduct, Product product){
-        return ordersDao.updateOrderProduct(new ModelMapper().map(oProduct, OrdersDetailsEntity.class), product);
+    public boolean deleteOrderProduct(OrdersDetails dto){
+        return ordersDao.updateOrderProduct(new ModelMapper().map(dto, OrdersDetailsEntity.class));
     }
-
-    @Override
-    public boolean deleteOrder(Orders order, List<OrdersDetails> ordersDetailsList, List<Product> productsList) {
-        OrdersEntity entity = new ModelMapper().map(order, OrdersEntity.class);
-
-        List<OrdersDetailsEntity> detailEntity = new ArrayList<>();
-        for (OrdersDetails product : ordersDetailsList){
-            detailEntity.add(new ModelMapper().map(product, OrdersDetailsEntity.class));
-        }
-
-        return ordersDao.updateOrder(entity, detailEntity, productsList);
-    }
-
 
 }

@@ -172,20 +172,13 @@ public class OrdersController implements Initializable {
                     order.setStatus("return");
 
                     List<OrdersDetails> ordersDetailsList = new ArrayList<>();
-                    List<Product> productsList = new ArrayList<>();
 
                     for (OrdersDetails item : ordersBo.searchAllOrderProductByOrderId(selectOrder.getId())){
                         item.setStatus("return");
                         ordersDetailsList.add(item);
-
-                        Product product = productBo.searchById(item.getProductId());
-                        int qtu = item.getQty() + product.getQty();
-                        product.setQty(qtu);
-
-                        productsList.add(product);
                     }
 
-                    boolean res = ordersBo.deleteOrder(order, ordersDetailsList, productsList);
+                    boolean res = ordersBo.deleteOrder(order, ordersDetailsList);
                     if (res){
                         AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Order delete Success");
                         refreshOnAction();
@@ -214,11 +207,7 @@ public class OrdersController implements Initializable {
                     OrdersDetails orderProduct = ordersBo.searchOrderProductById(selectOrderProduct.getId());
                     orderProduct.setStatus("return");
 
-                    Product product = productBo.searchById(orderProduct.getProductId());
-                    int qty = product.getQty() + orderProduct.getQty();
-                    product.setQty(qty);
-
-                    boolean res = ordersBo.deleteOrderProduct(orderProduct, product);
+                    boolean res = ordersBo.deleteOrderProduct(orderProduct);
                     if (res){
                         AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Ordered product delete Success");
                         refreshOnAction();
