@@ -5,7 +5,6 @@ import edu.icet.project.dao.DaoFactory;
 import edu.icet.project.dao.custom.OrdersDao;
 import edu.icet.project.dto.Orders;
 import edu.icet.project.dto.OrdersDetails;
-import edu.icet.project.dto.Product;
 import edu.icet.project.entity.OrdersDetailsEntity;
 import edu.icet.project.entity.OrdersEntity;
 import edu.icet.project.util.DaoType;
@@ -20,7 +19,7 @@ public class OrdersBoImpl implements OrdersBo {
     private final OrdersDao ordersDao = DaoFactory.getInstance().getDao(DaoType.ORDERS);
 
     @Override
-    public boolean save(Orders dto, ArrayList<OrdersDetails> list) {
+    public boolean saveOrder(Orders dto, ArrayList<OrdersDetails> list) {
         OrdersEntity entity = new ModelMapper().map(dto, OrdersEntity.class);
         ArrayList<OrdersDetailsEntity> newList = new ArrayList<>();
 
@@ -100,5 +99,4 @@ public class OrdersBoImpl implements OrdersBo {
     public boolean deleteOrderProduct(OrdersDetails dto){
         return ordersDao.updateOrderProduct(new ModelMapper().map(dto, OrdersDetailsEntity.class));
     }
-
 }

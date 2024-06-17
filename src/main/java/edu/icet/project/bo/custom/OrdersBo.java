@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface OrdersBo extends SuperBo {
-    boolean save(Orders dto, ArrayList<OrdersDetails> list);
+    boolean saveOrder(Orders dto, ArrayList<OrdersDetails> list);
     List<Orders> getAllOrders();
     Orders searchOrderById(Integer id);
     List<Orders> searchOrder(String date);

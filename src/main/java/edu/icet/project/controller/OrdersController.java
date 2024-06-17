@@ -3,10 +3,8 @@ package edu.icet.project.controller;
 import com.jfoenix.controls.JFXTextField;
 import edu.icet.project.bo.BoFactory;
 import edu.icet.project.bo.custom.OrdersBo;
-import edu.icet.project.bo.custom.ProductBo;
 import edu.icet.project.dto.Orders;
 import edu.icet.project.dto.OrdersDetails;
-import edu.icet.project.dto.Product;
 import edu.icet.project.dto.table.OrderDetailTable;
 import edu.icet.project.dto.table.OrderTable;
 import edu.icet.project.util.AlertMessage;
@@ -74,7 +72,6 @@ public class OrdersController implements Initializable {
     private JFXTextField txtSearch;
 
     private final OrdersBo ordersBo = BoFactory.getInstance().getBo(BoType.ORDERS);
-    private final ProductBo productBo = BoFactory.getInstance().getBo(BoType.PRODUCT);
 
     private Orders selectOrder = null;
     private OrdersDetails selectOrderProduct = null;
@@ -168,11 +165,12 @@ public class OrdersController implements Initializable {
 
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.YES) {
+                    // selected order
                     Orders order = ordersBo.searchOrderById(selectOrder.getId());
                     order.setStatus("return");
 
+                    // order products list by order id
                     List<OrdersDetails> ordersDetailsList = new ArrayList<>();
-
                     for (OrdersDetails item : ordersBo.searchAllOrderProductByOrderId(selectOrder.getId())){
                         item.setStatus("return");
                         ordersDetailsList.add(item);
@@ -204,6 +202,7 @@ public class OrdersController implements Initializable {
 
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.YES) {
+                    // selected order products
                     OrdersDetails orderProduct = ordersBo.searchOrderProductById(selectOrderProduct.getId());
                     orderProduct.setStatus("return");
 

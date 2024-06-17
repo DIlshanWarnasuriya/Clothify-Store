@@ -101,12 +101,10 @@ public class PlaceOrderController implements Initializable {
         cartTable.setItems(cartList);
         double netTotal = 0;
 
-        if (cartList != null) {
-            for (CartTable product : cartList) {
-                netTotal += product.getTotal();
-            }
-            lblTotal.setText(Double.toString(netTotal));
+        for (CartTable product : cartList) {
+            netTotal += product.getTotal();
         }
+        lblTotal.setText(Double.toString(netTotal));
     }
 
     private void selectProductInCart() {
@@ -150,11 +148,9 @@ public class PlaceOrderController implements Initializable {
     }
 
     private CartTable getProductFromCart(int id) {
-        if (cartList != null) {
-            for (CartTable product : cartList) {
-                if (product.getId() == id) {
-                    return product;
-                }
+        for (CartTable product : cartList) {
+            if (product.getId() == id) {
+                return product;
             }
         }
         return null;
@@ -233,7 +229,7 @@ public class PlaceOrderController implements Initializable {
                     list.add(new OrdersDetails(orderId, item.getId(), item.getQty(), item.getTotal(), item.getImageUrl().getImage().getUrl(), "pay"));
                 }
 
-                boolean res = ordersBo.save(orders, list);
+                boolean res = ordersBo.saveOrder(orders, list);
                 if (res){
                     AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Placed order");
                     cartList.clear();
