@@ -123,3 +123,5 @@ n
 >src/main/java/edu/icet/project/controller/LoginController.java,f\a\faeca019ebac25a997dfcc72001900aed520c435
 m
 =src/main/java/edu/icet/project/controller/HomeController.java,d\7\d7201d076a35abbf4fd2e3275c94b1baafd9ca91
+p
+@src/main/java/edu/icet/project/controller/ProfileController.java,8\3\83a94c3c9ced76132c7b4ff0692195a4a8f59bff
