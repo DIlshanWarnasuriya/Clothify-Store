@@ -23,31 +23,57 @@ public class OrdersDaoImpl implements OrdersDao {
 
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();
-        try{
-
+        try {
             // save Order
             session.persist(entity);
-
             // save order product to order details
-            for (OrdersDetailsEntity en : list){
+            for (OrdersDetailsEntity en : list) {
                 session.persist(en);
             }
-
             // update qty of product
-            for (OrdersDetailsEntity en : list){
+            for (OrdersDetailsEntity en : list) {
                 Product product = productBo.searchById(en.getProductId());
                 int qty = product.getQty() - en.getQty();
                 product.setQty(qty);
 
                 productBo.updateProduct(product);
             }
-
             transaction.commit();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             return false;
-        }finally {
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public boolean update(OrdersEntity entity, List<OrdersDetailsEntity> list) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            // update Order
+            session.update(entity);
+            // update order product to order details
+            for (OrdersDetailsEntity items : list) {
+                session.update(items);
+            }
+            // update qty of product
+            for (OrdersDetailsEntity items : list) {
+                Product product = productBo.searchById(items.getProductId());
+                int qty = product.getQty() + items.getQty();
+                product.setQty(qty);
+
+                productBo.updateProduct(product);
+            }
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            return false;
+        } finally {
             session.close();
         }
     }
@@ -66,60 +92,5 @@ public class OrdersDaoImpl implements OrdersDao {
         List<OrdersDetailsEntity> list = session.createQuery("FROM OrdersDetailsEntity", OrdersDetailsEntity.class).list();
         session.close();
         return list;
-    }
-
-    @Override
-    public boolean updateOrderProduct(OrdersDetailsEntity entity) {
-
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-
-        try {
-            session.update(entity);
-
-            Product product = productBo.searchById(entity.getProductId());
-            int qty = product.getQty() + entity.getQty();
-            product.setQty(qty);
-            productBo.updateProduct(product);
-
-            transaction.commit();
-            return true;
-        } catch (Exception e) {
-            transaction.rollback();
-            return false;
-        } finally {
-            session.close();
-        }
-    }
-
-    @Override
-    public boolean updateOrder(OrdersEntity entity, List<OrdersDetailsEntity> list) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
-
-        try {
-            session.update(entity);
-
-            for (OrdersDetailsEntity items : list){
-                session.update(items);
-            }
-
-            // update qty of product
-            for (OrdersDetailsEntity items : list){
-                Product product = productBo.searchById(items.getProductId());
-                int qty = product.getQty() + items.getQty();
-                product.setQty(qty);
-
-                productBo.updateProduct(product);
-            }
-
-            transaction.commit();
-            return true;
-        } catch (Exception e) {
-            transaction.rollback();
-            return false;
-        } finally {
-            session.close();
-        }
     }
 }

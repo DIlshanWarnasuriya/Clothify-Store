@@ -25,54 +25,41 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class OrdersController implements Initializable {
     @FXML
     private TableView<OrderDetailTable> orderDetailTable;
-
     @FXML
     private TableView<OrderTable> orderTable;
-
     @FXML
     private TableColumn<?, ?> colCustomerId;
-
     @FXML
     private TableColumn<?, ?> colDate;
-
     @FXML
     private TableColumn<?, ?> colImage;
-
     @FXML
     private TableColumn<?, ?> colOrderDetailStatus;
-
     @FXML
     private TableColumn<?, ?> colOrderId;
-
     @FXML
     private TableColumn<?, ?> colOrderStatus;
-
     @FXML
     private TableColumn<?, ?> colPaymentMethod;
-
     @FXML
     private TableColumn<?, ?> colProductId;
-
     @FXML
     private TableColumn<?, ?> colQty;
-
     @FXML
     private TableColumn<?, ?> colTotal;
-
     @FXML
     private TableColumn<?, ?> colUserId;
-
     @FXML
     private JFXTextField txtSearch;
 
     private final OrdersBo ordersBo = BoFactory.getInstance().getBo(BoType.ORDERS);
-
     private Orders selectOrder = null;
     private OrdersDetails selectOrderProduct = null;
 
@@ -106,6 +93,7 @@ public class OrdersController implements Initializable {
         orderTable.setItems(list);
     }
 
+    // select order form order table
     private void selectOrderOnAction(){
         orderTable.getSelectionModel().selectedItemProperty().addListener((observableValue, orderTable1, select) -> {
             if (select!=null){
@@ -124,6 +112,7 @@ public class OrdersController implements Initializable {
         });
     }
 
+    // select order product form order product table
     private void selectOrderProductOnAction(){
         orderDetailTable.getSelectionModel().selectedItemProperty().addListener((observableValue, orderDetailTable1, select) -> {
             if (select!=null){
@@ -154,6 +143,9 @@ public class OrdersController implements Initializable {
     void deleteOrderOnAction() {
         if(selectOrder == null){
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "please select Order");
+        }
+        else if(selectOrder.getStatus().equals("return")){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "this order is already deleted");
         }
         else{
             Alert alert = new Alert(Alert.AlertType.NONE);
@@ -192,6 +184,12 @@ public class OrdersController implements Initializable {
         if(selectOrderProduct == null){
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "please select Order product");
         }
+        else if(selectOrderProduct.getStatus().equals("return")){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "this order product is already deleted");
+        }
+        else if(ordersBo.searchAllOrderProductByOrderId(selectOrder.getId()).size() == 1){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "you cant delete this product. please delete this orders");
+        }
         else{
             Alert alert = new Alert(Alert.AlertType.NONE);
             alert.setTitle("Confirmation Dialog");
@@ -202,11 +200,16 @@ public class OrdersController implements Initializable {
 
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.YES) {
+                    // selected order
+                    Orders order = ordersBo.searchOrderById(selectOrder.getId());
+                    order.setStatus("changed");
+
                     // selected order products
                     OrdersDetails orderProduct = ordersBo.searchOrderProductById(selectOrderProduct.getId());
                     orderProduct.setStatus("return");
+                    List<OrdersDetails> list = Collections.singletonList(orderProduct);
 
-                    boolean res = ordersBo.deleteOrderProduct(orderProduct);
+                    boolean res = ordersBo.deleteOrder(order, list);
                     if (res){
                         AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Ordered product delete Success");
                         refreshOnAction();

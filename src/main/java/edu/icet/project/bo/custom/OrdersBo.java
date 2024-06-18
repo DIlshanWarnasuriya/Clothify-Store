@@ -3,8 +3,6 @@ package edu.icet.project.bo.custom;
 import edu.icet.project.bo.SuperBo;
 import edu.icet.project.dto.Orders;
 import edu.icet.project.dto.OrdersDetails;
-import edu.icet.project.dto.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,6 @@ public interface OrdersBo extends SuperBo {
 
     List<OrdersDetails> searchAllOrderProductByOrderId(Integer id);
     OrdersDetails searchOrderProductById(Integer id);
-    boolean deleteOrderProduct(OrdersDetails oProduct);
 
 
 }

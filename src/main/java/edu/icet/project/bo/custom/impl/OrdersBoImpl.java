@@ -23,13 +23,24 @@ public class OrdersBoImpl implements OrdersBo {
         OrdersEntity entity = new ModelMapper().map(dto, OrdersEntity.class);
         ArrayList<OrdersDetailsEntity> newList = new ArrayList<>();
 
-        for (OrdersDetails orders : list){
+        for (OrdersDetails orders : list) {
             newList.add(new ModelMapper().map(orders, OrdersDetailsEntity.class));
         }
         return ordersDao.save(entity, newList);
     }
 
-    // order table
+    @Override
+    public boolean deleteOrder(Orders order, List<OrdersDetails> ordersDetailsList) {
+        OrdersEntity entity = new ModelMapper().map(order, OrdersEntity.class);
+
+        List<OrdersDetailsEntity> detailEntity = new ArrayList<>();
+        for (OrdersDetails product : ordersDetailsList) {
+            detailEntity.add(new ModelMapper().map(product, OrdersDetailsEntity.class));
+        }
+        return ordersDao.update(entity, detailEntity);
+    }
+
+
     @Override
     public List<Orders> getAllOrders() {
         List<Orders> list = new ArrayList<>();
@@ -43,7 +54,7 @@ public class OrdersBoImpl implements OrdersBo {
     public List<Orders> searchOrder(String data) {
         List<Orders> list = new ArrayList<>();
         for (OrdersEntity orders : ordersDao.getAllOrders()) {
-            if(orders.getId().toString().equals(data) ||  orders.getDate().equals(data) || orders.getPaymentMethod().equals(data) || orders.getStatus().equals(data)){
+            if (orders.getId().toString().equals(data) || orders.getDate().equals(data) || orders.getPaymentMethod().equals(data) || orders.getStatus().equals(data)) {
                 list.add(new ModelMapper().map(orders, Orders.class));
             }
         }
@@ -53,7 +64,7 @@ public class OrdersBoImpl implements OrdersBo {
     @Override
     public Orders searchOrderById(Integer id) {
         for (OrdersEntity orders : ordersDao.getAllOrders()) {
-            if (Objects.equals(orders.getId(), id)){
+            if (Objects.equals(orders.getId(), id)) {
                 return new ModelMapper().map(orders, Orders.class);
             }
         }
@@ -61,25 +72,11 @@ public class OrdersBoImpl implements OrdersBo {
     }
 
     @Override
-    public boolean deleteOrder(Orders order, List<OrdersDetails> ordersDetailsList) {
-        OrdersEntity entity = new ModelMapper().map(order, OrdersEntity.class);
-
-        List<OrdersDetailsEntity> detailEntity = new ArrayList<>();
-        for (OrdersDetails product : ordersDetailsList){
-            detailEntity.add(new ModelMapper().map(product, OrdersDetailsEntity.class));
-        }
-
-        return ordersDao.updateOrder(entity, detailEntity);
-    }
-
-
-    // order details table
-    @Override
     public List<OrdersDetails> searchAllOrderProductByOrderId(Integer id) {
         List<OrdersDetails> list = new ArrayList<>();
 
         for (OrdersDetailsEntity items : ordersDao.getAllOrdersDetails()) {
-            if (Objects.equals(items.getOrderId(), id)){
+            if (Objects.equals(items.getOrderId(), id)) {
                 list.add(new ModelMapper().map(items, OrdersDetails.class));
             }
         }
@@ -89,14 +86,10 @@ public class OrdersBoImpl implements OrdersBo {
     @Override
     public OrdersDetails searchOrderProductById(Integer id) {
         for (OrdersDetailsEntity items : ordersDao.getAllOrdersDetails()) {
-            if (Objects.equals(items.getId(), id)){
+            if (Objects.equals(items.getId(), id)) {
                 return new ModelMapper().map(items, OrdersDetails.class);
             }
         }
         return null;
-    }
-
-    public boolean deleteOrderProduct(OrdersDetails dto){
-        return ordersDao.updateOrderProduct(new ModelMapper().map(dto, OrdersDetailsEntity.class));
     }
 }

@@ -223,10 +223,10 @@ public class PlaceOrderController implements Initializable {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Customer Id is wrong. Please enter valid customer Id");
             }
             else{
-                Orders orders = new Orders(customerId,2, date, paymentMethod, "pay");
+                Orders orders = new Orders(customerId,2, date, paymentMethod, "placed");
                 ArrayList<OrdersDetails> list = new ArrayList<>();
                 for (CartTable item : cartList){
-                    list.add(new OrdersDetails(orderId, item.getId(), item.getQty(), item.getTotal(), item.getImageUrl().getImage().getUrl(), "pay"));
+                    list.add(new OrdersDetails(orderId, item.getId(), item.getQty(), item.getTotal(), item.getImageUrl().getImage().getUrl(), "placed"));
                 }
 
                 boolean res = ordersBo.saveOrder(orders, list);
