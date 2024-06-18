@@ -1,6 +1,9 @@
 package edu.icet.project.controller;
 
+import edu.icet.project.bo.BoFactory;
+import edu.icet.project.bo.custom.HomeBo;
 import edu.icet.project.dto.User;
+import edu.icet.project.util.BoType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,8 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -23,25 +29,21 @@ public class HomeController implements Initializable {
 
     @FXML
     private Pane adminPane;
-
     @FXML
     private Pane userPane;
-
     @FXML
     private BarChart<?, ?> chart;
-
     @FXML
     private Label lblUserName;
-
     @FXML
     private Label lblUserType;
-
     @FXML
     private PieChart pychart;
-
     @FXML
     private Circle userImage;
 
+
+    private HomeBo homeBo = BoFactory.getInstance().getBo(BoType.HOME);
     private User loggedUser;
 
     public void setUser(User user){
@@ -66,8 +68,35 @@ public class HomeController implements Initializable {
         //
     }
 
+    // Refresh Button Action Event
+    @FXML
+    void refreshOnAction() {
+        // refresh
+    }
 
+    // Close Button Action Event
+    @FXML
+    void closeOnAction() {
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setTitle("Confirmation Dialog");
+        alert.setContentText("Are you close the program");
+        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+        ImageView icon = new ImageView(new Image("images/icons/WARNING.png"));
+        alert.setGraphic(icon);
 
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                System.exit(0);
+            }
+        });
+    }
+
+    // Minimize Button Action Event
+    @FXML
+    void minimizeOnAction() {
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.setIconified(true);
+    }
 
 
     // ------------------------------- navigation buttons ---------------------------------------

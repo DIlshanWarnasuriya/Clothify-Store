@@ -192,7 +192,7 @@
                   </Pane>
                   <Pane layoutX="32.0" layoutY="313.0" onMouseClicked="#placeOrderPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
-                        <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Olace Order" textAlignment="CENTER" textFill="#153448">
+                        <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Place Order" textAlignment="CENTER" textFill="#153448">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>

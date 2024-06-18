@@ -17,16 +17,16 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-radius: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.project.controller.HomeController">
     <children>
-        <AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4;">
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4;" stylesheets="@../css/TableStyle.css">
          <children>
             <Pane layoutX="236.0" prefHeight="30.0" prefWidth="964.0" style="-fx-background-radius: 6; -fx-background-color: #153448;">
                <children>
-                  <Label layoutX="427.0" layoutY="8.0" text="Clothify Store - Home" textFill="#d9dff5">
+                  <Label layoutX="424.0" layoutY="8.0" text="Clothify Store - Home" textFill="#d9dff5">
                      <font>
                         <Font name="System Bold" size="11.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="938.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="938.0" layoutY="5.0" onMouseClicked="#closeOnAction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons/ERROR.png" />
                      </image>
@@ -34,9 +34,17 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="919.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="919.0" layoutY="6.0" onMouseClicked="#minimizeOnAction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons/minimize.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="898.0" layoutY="5.0" onMouseClicked="#refreshOnAction" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/refresh.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -46,14 +54,14 @@
             </Pane>
             <Pane prefHeight="700.0" prefWidth="245.0" style="-fx-background-color: #153448; -fx-background-radius: 7;">
                <children>
-                  <Circle fx:id="userImage" fill="#d9d9d9" layoutX="123.0" layoutY="118.0" radius="48.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                  <Circle fill="#2ecc71" layoutX="157.0" layoutY="82.0" radius="8.0" stroke="#691e1e00" strokeType="INSIDE" />
-                  <Label fx:id="lblUserName" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="177.0" prefHeight="17.0" prefWidth="160.0" text="Aaruna sandun" textAlignment="CENTER" textFill="#d9dff5">
+                  <Circle fx:id="userImage" fill="#d9d9d9" layoutX="123.0" layoutY="111.0" radius="48.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <Circle fill="#2ecc71" layoutX="157.0" layoutY="77.0" radius="8.0" stroke="#691e1e00" strokeType="INSIDE" />
+                  <Label fx:id="lblUserName" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="170.0" prefHeight="17.0" prefWidth="160.0" text="Aaruna sandun" textAlignment="CENTER" textFill="#d9dff5">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblUserType" alignment="CENTER" contentDisplay="CENTER" layoutX="83.0" layoutY="191.0" prefHeight="17.0" prefWidth="80.0" text="Admin" textAlignment="CENTER" textFill="#a3a8bb">
+                  <Label fx:id="lblUserType" alignment="CENTER" contentDisplay="CENTER" layoutX="83.0" layoutY="184.0" prefHeight="17.0" prefWidth="80.0" text="Admin" textAlignment="CENTER" textFill="#a3a8bb">
                      <font>
                         <Font name="System Bold" size="10.0" />
                      </font>
@@ -92,7 +100,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="32.0" layoutY="361.0" onMouseClicked="#productPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="33.0" layoutY="362.0" onMouseClicked="#productPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Product" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -109,7 +117,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="32.0" layoutY="410.0" onMouseClicked="#orderPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="33.0" layoutY="412.0" onMouseClicked="#orderPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Orders" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -126,7 +134,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="32.0" layoutY="459.0" onMouseClicked="#customerPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="32.0" layoutY="461.0" onMouseClicked="#customerPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Customers" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -143,7 +151,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="33.0" layoutY="508.0" onMouseClicked="#supplierPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="33.0" layoutY="510.0" onMouseClicked="#supplierPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Suppliers" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -160,7 +168,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="32.0" layoutY="557.0" onMouseClicked="#profilePageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="33.0" layoutY="559.0" onMouseClicked="#profilePageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Profile" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -179,7 +187,191 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="adminPane" layoutX="254.0" layoutY="41.0" prefHeight="648.0" prefWidth="934.0" stylesheets="@../css/ChartStyle.css" visible="false">
+            <Pane fx:id="userPane" layoutX="254.0" layoutY="39.0" prefHeight="648.0" prefWidth="934.0" visible="false" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="40.0">
+               <children>
+                  <Pane layoutX="58.0" layoutY="39.0" prefHeight="168.0" prefWidth="818.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+                     <children>
+                        <Pane layoutX="14.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
+                           <children>
+                              <Label layoutX="24.0" layoutY="26.0" text="Selling" textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="24.0" layoutY="67.0" text="24 items sold tody" textFill="#b6b6b6">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                        <Pane layoutX="214.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
+                           <children>
+                              <Label layoutX="24.0" layoutY="26.0" text="Stock" textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="24.0" layoutY="67.0" text="120 items in stock" textFill="#b6b6b6">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                        <Pane layoutX="414.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
+                           <children>
+                              <Label layoutX="24.0" layoutY="26.0" text="Customers" textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="24.0" layoutY="67.0" text="5 new customers" textFill="#b6b6b6">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                        <Pane layoutX="614.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
+                           <children>
+                              <Label layoutX="24.0" layoutY="26.0" text="Profile" textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="24.0" layoutY="67.0" text="online" textFill="#b6b6b6">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Circle fill="#2ecc71" layoutX="73.0" layoutY="79.0" radius="4.0" stroke="#691e1e00" strokeType="INSIDE" />
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                        <Label layoutX="15.0" layoutY="6.0" text="DashBoard" textFill="#153448">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="98.0" layoutY="6.0" text="Hello.. Welcome back" textFill="#6d7597">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Line endX="-100.0" endY="15.5999755859375" layoutX="188.0" layoutY="5.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
+                        <Label layoutX="691.0" layoutY="6.0" text="3.10" textFill="#6d7597">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="729.0" layoutY="6.0" text="10 June 2024" textFill="#6d7597">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Line endX="-100.0" endY="15.5999755859375" layoutX="823.0" layoutY="5.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="302.0" layoutY="262.0" prefHeight="34.0" prefWidth="331.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 26;">
+                     <children>
+                        <Label layoutX="91.0" layoutY="6.0" text="Best Selling Products" textFill="#153448">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="58.0" layoutY="313.0" prefHeight="293.0" prefWidth="818.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 26;">
+                     <children>
+                        <Pane layoutX="284.0" layoutY="50.0" prefHeight="229.0" prefWidth="251.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
+                           <children>
+                              <ImageView fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/items/Tshirt.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="62.0" layoutY="182.0" text="Red cotton frock" textFill="#7d7d7d">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="106.0" layoutY="204.0" text="24 sold" textFill="#b7b7b7">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Label layoutX="382.0" layoutY="16.0" text="Women" textFill="#153448">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Pane layoutX="551.0" layoutY="48.0" prefHeight="229.0" prefWidth="251.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
+                           <children>
+                              <ImageView fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/items/Tshirt.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="62.0" layoutY="182.0" text="Red cotton frock" textFill="#7d7d7d">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="106.0" layoutY="204.0" text="24 sold" textFill="#b7b7b7">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Label layoutX="660.0" layoutY="16.0" text="Lids" textFill="#153448">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Pane layoutX="16.0" layoutY="48.0" prefHeight="229.0" prefWidth="251.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
+                           <children>
+                              <ImageView fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/items/Tshirt.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="62.0" layoutY="182.0" text="Red cotton frock" textFill="#7d7d7d">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="106.0" layoutY="204.0" text="24 sold" textFill="#b7b7b7">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Label layoutX="125.0" layoutY="16.0" text="Men" textFill="#153448">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Pane fx:id="adminPane" layoutX="255.0" layoutY="40.0" prefHeight="648.0" prefWidth="934.0" stylesheets="@../css/ChartStyle.css" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="40.0">
                <children>
                   <Pane layoutX="55.0" layoutY="362.0" prefHeight="255.0" prefWidth="480.0" style="-fx-background-color: #d9d9d9; -fx-background-radius: 18;">
                      <children>
@@ -376,190 +568,7 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane fx:id="userPane" layoutX="254.0" layoutY="41.0" prefHeight="648.0" prefWidth="934.0">
-               <children>
-                  <Pane layoutX="58.0" layoutY="39.0" prefHeight="168.0" prefWidth="818.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
-                     <children>
-                        <Pane layoutX="14.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
-                           <children>
-                              <Label layoutX="24.0" layoutY="26.0" text="Selling" textFill="WHITE">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="24 items sold tody" textFill="#b6b6b6">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Pane layoutX="214.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
-                           <children>
-                              <Label layoutX="24.0" layoutY="26.0" text="Stock" textFill="WHITE">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="120 items in stock" textFill="#b6b6b6">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Pane layoutX="414.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
-                           <children>
-                              <Label layoutX="24.0" layoutY="26.0" text="Customers" textFill="WHITE">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="5 new customers" textFill="#b6b6b6">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Pane layoutX="614.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
-                           <children>
-                              <Label layoutX="24.0" layoutY="26.0" text="Profile" textFill="WHITE">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="online" textFill="#b6b6b6">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                              <Circle fill="#2ecc71" layoutX="73.0" layoutY="79.0" radius="4.0" stroke="#691e1e00" strokeType="INSIDE" />
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Pane>
-                        <Label layoutX="15.0" layoutY="6.0" text="DashBoard" textFill="#153448">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="98.0" layoutY="6.0" text="Hello.. Welcome back" textFill="#6d7597">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Line endX="-100.0" endY="15.5999755859375" layoutX="188.0" layoutY="5.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
-                        <Label layoutX="691.0" layoutY="6.0" text="3.10" textFill="#6d7597">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="729.0" layoutY="6.0" text="10 June 2024" textFill="#6d7597">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Line endX="-100.0" endY="15.5999755859375" layoutX="823.0" layoutY="5.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="302.0" layoutY="262.0" prefHeight="34.0" prefWidth="331.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 26;">
-                     <children>
-                        <Label layoutX="91.0" layoutY="6.0" text="Best Selling Products" textFill="#153448">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="58.0" layoutY="313.0" prefHeight="293.0" prefWidth="818.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 26;">
-                     <children>
-                        <Pane layoutX="284.0" layoutY="50.0" prefHeight="229.0" prefWidth="251.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
-                           <children>
-                              <ImageView fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/items/Tshirt.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="62.0" layoutY="182.0" text="Red cotton frock" textFill="#7d7d7d">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="106.0" layoutY="204.0" text="24 sold" textFill="#b7b7b7">
-                                 <font>
-                                    <Font name="System Bold" size="11.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Label layoutX="382.0" layoutY="16.0" text="Women" textFill="#153448">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Pane layoutX="551.0" layoutY="48.0" prefHeight="229.0" prefWidth="251.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
-                           <children>
-                              <ImageView fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/items/Tshirt.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="62.0" layoutY="182.0" text="Red cotton frock" textFill="#7d7d7d">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="106.0" layoutY="204.0" text="24 sold" textFill="#b7b7b7">
-                                 <font>
-                                    <Font name="System Bold" size="11.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Label layoutX="660.0" layoutY="16.0" text="Lids" textFill="#153448">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                        <Pane layoutX="16.0" layoutY="48.0" prefHeight="229.0" prefWidth="251.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
-                           <children>
-                              <ImageView fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/items/Tshirt.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="62.0" layoutY="182.0" text="Red cotton frock" textFill="#7d7d7d">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="106.0" layoutY="204.0" text="24 sold" textFill="#b7b7b7">
-                                 <font>
-                                    <Font name="System Bold" size="11.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <Label layoutX="125.0" layoutY="16.0" text="Men" textFill="#153448">
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-               </children>
-            </Pane>
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
     </children>
 </StackPane>

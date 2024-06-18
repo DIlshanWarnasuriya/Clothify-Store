@@ -53,6 +53,7 @@ public class LoginController {
                 stage.close();
 
                 Stage newStage = new Stage();
+                newStage.getIcons().add(new Image("images/icons/Logo.png"));
                 newStage.setScene(new Scene(root));
                 newStage.show();
 
