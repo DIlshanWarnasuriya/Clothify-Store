@@ -8,7 +8,6 @@ import edu.icet.project.dto.User;
 import edu.icet.project.util.AlertMessage;
 import edu.icet.project.util.AlertType;
 import edu.icet.project.util.BoType;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,9 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Base64;
 
@@ -27,14 +24,14 @@ public class LoginController {
 
     @FXML
     private JFXTextField txtEmail;
-
     @FXML
     private JFXPasswordField txtPassword;
 
     private final UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
 
+    // Login Button Action Event
     @FXML
-    void loginOnAction(ActionEvent event) throws IOException {
+    void loginOnAction() throws IOException {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
 
@@ -42,7 +39,7 @@ public class LoginController {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Enter Email or password");
         }
         else{
-            User user = searchUser(email, password);
+            User user = searchUser(email, password); // search user using email and password
             if (user==null){
                 AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Email or password is wrong");
             }
@@ -63,6 +60,7 @@ public class LoginController {
         }
     }
 
+    // search user
     private User searchUser(String email, String password){
         for (User user : userBo.getAll()){
             String userPassword = new String(Base64.getDecoder().decode(user.getPassword()));
@@ -73,14 +71,15 @@ public class LoginController {
         return null;
     }
 
-
+    // Forgot password Button Action Event
     @FXML
-    void forgotPasswordOnAction(MouseEvent event) {
-
+    void forgotPasswordOnAction() {
+        // Forgot password Button Action Event
     }
 
+    // Close Button Action Event
     @FXML
-    void closeOnAction(MouseEvent event) {
+    void closeOnAction() {
         Alert alert = new Alert(Alert.AlertType.NONE);
         alert.setTitle("Confirmation Dialog");
         alert.setContentText("Are you close the program");
@@ -94,8 +93,10 @@ public class LoginController {
             }
         });
     }
+
+    // Minimize Button Action Event
     @FXML
-    void minimizeOnAction(MouseEvent event) {
+    void minimizeOnAction() {
         Stage stage = (Stage) txtEmail.getScene().getWindow();
         stage.setIconified(true);
     }

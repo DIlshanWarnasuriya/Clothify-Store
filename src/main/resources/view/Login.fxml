@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,11 +22,17 @@
                      <image>
                         <Image url="@../images/icons/ERROR.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="806.0" layoutY="6.0" onMouseClicked="#minimizeOnAction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/icons/minimize.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                   <Label layoutX="370.0" layoutY="9.0" text="Clothify Store - Login" textFill="#d9dff5">
                      <font>
@@ -58,11 +65,17 @@
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label layoutX="380.0" layoutY="403.0" onMouseClicked="#forgotPasswordOnAction" text="Forgot password ?...." textFill="#434343">
                <font>
                   <Font size="10.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <ImageView fitHeight="150.0" fitWidth="143.0" layoutX="353.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
                <image>

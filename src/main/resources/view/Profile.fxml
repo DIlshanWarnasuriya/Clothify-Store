@@ -17,6 +17,16 @@
     <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4;" stylesheets="@../css/TableStyle.css">
          <children>
+            <Pane layoutX="603.0" layoutY="487.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+               <children>
+                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/password.png" />
+                     </image>
+                  </ImageView>
+                  <JFXPasswordField fx:id="txtPassword" focusColor="#405aa800" layoutX="41.0" layoutY="6.0" promptText="Enter your password" unFocusColor="#4d4d4d00" />
+               </children>
+            </Pane>
             <Pane layoutX="236.0" prefHeight="30.0" prefWidth="964.0" style="-fx-background-radius: 6; -fx-background-color: #153448;">
                <children>
                   <Label layoutX="424.0" layoutY="8.0" text="Clothify Store - Profile" textFill="#d9dff5">
@@ -64,7 +74,7 @@
                         <Font name="System Bold" size="10.0" />
                      </font>
                   </Label>
-                  <Pane layoutX="32.0" layoutY="264.0" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="32.0" layoutY="264.0" onMouseClicked="#homePageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Home" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -81,7 +91,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="32.0" layoutY="313.0" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="32.0" layoutY="313.0" onMouseClicked="#placeOrderPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Olace Order" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -98,9 +108,9 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="33.0" layoutY="362.0" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="33.0" layoutY="362.0" onMouseClicked="#productPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
-                        <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Stock" textAlignment="CENTER" textFill="#153448">
+                        <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Product" textAlignment="CENTER" textFill="#153448">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -115,7 +125,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="33.0" layoutY="412.0" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="33.0" layoutY="412.0" onMouseClicked="#orderPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Orders" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -132,7 +142,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="32.0" layoutY="461.0" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="32.0" layoutY="461.0" onMouseClicked="#customerPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Customers" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -149,7 +159,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="33.0" layoutY="510.0" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="33.0" layoutY="510.0" onMouseClicked="#supplierPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Suppliers" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -208,7 +218,7 @@
                         <Image url="@../images/icons/email.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField fx:id="txtEmail" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Email" unFocusColor="#4d4d4d00" />
+                  <JFXTextField fx:id="txtEmail" focusColor="#405aa800" focusTraversable="false" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Email" unFocusColor="#4d4d4d00" />
                </children>
             </Pane>
             <Pane layoutX="603.0" layoutY="391.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
@@ -218,7 +228,7 @@
                         <Image url="@../images/icons/address.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField fx:id="txtAddress" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Address" unFocusColor="#4d4d4d00" />
+                  <JFXTextField fx:id="txtAddress" focusColor="#405aa800" focusTraversable="false" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Address" unFocusColor="#4d4d4d00" />
                </children>
             </Pane>
             <Pane layoutX="603.0" layoutY="439.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
@@ -228,7 +238,7 @@
                         <Image url="@../images/icons/call.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField fx:id="txtContactNo" focusColor="#405aa800" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Contact No." unFocusColor="#4d4d4d00" />
+                  <JFXTextField fx:id="txtContactNo" focusColor="#405aa800" focusTraversable="false" layoutX="40.0" layoutY="6.0" prefHeight="25.0" prefWidth="176.0" promptText="Enter Contact No." unFocusColor="#4d4d4d00" />
                </children>
             </Pane>
             <Pane layoutX="754.0" layoutY="223.0" onMouseClicked="#selectImageOnAction" prefHeight="23.0" prefWidth="27.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18; -fx-border-color: #000000; -fx-border-radius: 18;">
@@ -251,16 +261,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Pane layoutX="603.0" layoutY="487.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
-               <children>
-                  <ImageView fitHeight="14.0" fitWidth="14.0" layoutX="19.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/icons/password.png" />
-                     </image>
-                  </ImageView>
-                  <JFXPasswordField fx:id="txtPassword" focusColor="#405aa800" layoutX="41.0" layoutY="6.0" promptText="Enter your password" unFocusColor="#4d4d4d00" />
-               </children>
-            </Pane>
             <Label layoutX="660.0" layoutY="586.0" onMouseClicked="#forgotPasswordOnAction" text="Forgot password ?...." textFill="#153448">
                <font>
                   <Font name="System Bold" size="12.0" />

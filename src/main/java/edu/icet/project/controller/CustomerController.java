@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import edu.icet.project.bo.BoFactory;
 import edu.icet.project.bo.custom.CustomerBo;
 import edu.icet.project.dto.Customer;
+import edu.icet.project.dto.User;
 import edu.icet.project.dto.table.CustomerTable;
 import edu.icet.project.util.AlertMessage;
 import edu.icet.project.util.AlertType;
@@ -12,11 +13,11 @@ import edu.icet.project.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,6 +37,12 @@ import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
 
+    @FXML
+    private Circle userImage;
+    @FXML
+    private Label lblUserName;
+    @FXML
+    private Label lblUserType;
     @FXML
     private JFXTextField txtSearch;
     @FXML
@@ -71,6 +78,15 @@ public class CustomerController implements Initializable {
 
     private String url = null;
     private Customer selectCustomer = null;
+    private User loggedUser;
+
+    public void setUser(User user){
+        loggedUser = user;
+
+        userImage.setFill(new ImagePattern(new Image(user.getImageUrl())));
+        lblUserName.setText(user.getName());
+        lblUserType.setText(user.getUserType());
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,6 +102,7 @@ public class CustomerController implements Initializable {
         selectRowInTable();
     }
 
+    // set gender type to gender Combo Box
     private void setGenderTypes() {
         ObservableList<String> gender = FXCollections.observableArrayList();
         gender.add("Male");
@@ -93,6 +110,7 @@ public class CustomerController implements Initializable {
         cmbGender.setItems(gender);
     }
 
+    // Load table
     private void loadTable() {
         ObservableList<CustomerTable> list = FXCollections.observableArrayList();
         for (Customer customer : customerBo.getAll()) {
@@ -106,6 +124,7 @@ public class CustomerController implements Initializable {
         customerTable.setItems(list);
     }
 
+    // Select Customer from customer table
     private void selectRowInTable() {
         customerTable.getSelectionModel().selectedItemProperty().addListener((observableValue, customerTable1, select) -> {
             if (select != null) {
@@ -122,6 +141,7 @@ public class CustomerController implements Initializable {
         });
     }
 
+    // Search Button Action Event
     @FXML
     void searchOnAction() {
         String data = txtSearch.getText();
@@ -146,6 +166,7 @@ public class CustomerController implements Initializable {
         }
     }
 
+    // Select image Button Action Event
     @FXML
     void selectImageOnAction() {
         FileChooser fileChooser = new FileChooser();
@@ -165,6 +186,7 @@ public class CustomerController implements Initializable {
         }
     }
 
+    // Add Button Action Event
     @FXML
     void addOnAction() {
         try {
@@ -203,6 +225,7 @@ public class CustomerController implements Initializable {
 
     }
 
+    // Update Button Action Event
     @FXML
     void updateOnAction() {
         try {
@@ -242,6 +265,7 @@ public class CustomerController implements Initializable {
         }
     }
 
+    // Delete Button Action Event
     @FXML
     void deleteOnAction() {
         if (selectCustomer == null) {
@@ -268,6 +292,7 @@ public class CustomerController implements Initializable {
         }
     }
 
+    // Refresh Button Action Event
     @FXML
     void refreshOnAction() {
         txtSearch.setText("");
@@ -282,6 +307,7 @@ public class CustomerController implements Initializable {
         selectCustomer = null;
     }
 
+    // Close Button Action Event
     @FXML
     void closeOnAction() {
         Alert alert = new Alert(Alert.AlertType.NONE);
@@ -298,9 +324,86 @@ public class CustomerController implements Initializable {
         });
     }
 
+    // Minimize Button Action Event
     @FXML
     void minimizeOnAction() {
         Stage stage = (Stage) txtAddress.getScene().getWindow();
         stage.setIconified(true);
+    }
+
+
+    // ------------------------------- navigation buttons ---------------------------------------
+
+    @FXML
+    void homePageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Home.fxml"));
+        Parent root = loader.load();
+        HomeController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void placeOrderPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PlaceOrder.fxml"));
+        Parent root = loader.load();
+        PlaceOrderController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void productPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Product.fxml"));
+        Parent root = loader.load();
+        ProductController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void orderPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Orders.fxml"));
+        Parent root = loader.load();
+        OrdersController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void supplierPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Supplier.fxml"));
+        Parent root = loader.load();
+        SupplierController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void profilePageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Profile.fxml"));
+        Parent root = loader.load();
+        ProfileController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

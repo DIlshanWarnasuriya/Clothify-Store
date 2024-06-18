@@ -5,6 +5,7 @@ import edu.icet.project.bo.BoFactory;
 import edu.icet.project.bo.custom.OrdersBo;
 import edu.icet.project.dto.Orders;
 import edu.icet.project.dto.OrdersDetails;
+import edu.icet.project.dto.User;
 import edu.icet.project.dto.table.OrderDetailTable;
 import edu.icet.project.dto.table.OrderTable;
 import edu.icet.project.util.AlertMessage;
@@ -13,16 +14,19 @@ import edu.icet.project.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,10 +62,26 @@ public class OrdersController implements Initializable {
     private TableColumn<?, ?> colUserId;
     @FXML
     private JFXTextField txtSearch;
+    @FXML
+    private Circle userImage;
+    @FXML
+    private Label lblUserName;
+    @FXML
+    private Label lblUserType;
 
     private final OrdersBo ordersBo = BoFactory.getInstance().getBo(BoType.ORDERS);
     private Orders selectOrder = null;
     private OrdersDetails selectOrderProduct = null;
+
+    private User loggedUser;
+
+    public void setUser(User user){
+        loggedUser = user;
+
+        userImage.setFill(new ImagePattern(new Image(user.getImageUrl())));
+        lblUserName.setText(user.getName());
+        lblUserType.setText(user.getUserType());
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -83,6 +103,7 @@ public class OrdersController implements Initializable {
         selectOrderProductOnAction();
     }
 
+    // Load all orders to table
     private void loadOrderTable(){
         ObservableList<OrderTable> list = FXCollections.observableArrayList();
 
@@ -121,7 +142,7 @@ public class OrdersController implements Initializable {
         });
     }
 
-
+    // Search Button Action Event
     @FXML
     void searchOnAction() {
         String data = txtSearch.getText();
@@ -139,6 +160,7 @@ public class OrdersController implements Initializable {
         }
     }
 
+    // Delete order Button Action Event
     @FXML
     void deleteOrderOnAction() {
         if(selectOrder == null){
@@ -179,6 +201,7 @@ public class OrdersController implements Initializable {
         }
     }
 
+    // Delete ordered product Button Action Event
     @FXML
     void deleteProductOnAction() {
         if(selectOrderProduct == null){
@@ -220,6 +243,7 @@ public class OrdersController implements Initializable {
         }
     }
 
+    // Refresh Button Action Event
     @FXML
     void refreshOnAction() {
         orderDetailTable.setItems(null);
@@ -227,6 +251,8 @@ public class OrdersController implements Initializable {
         selectOrderProduct = null;
         loadOrderTable();
     }
+
+    // Close Button Action Event
     @FXML
     void closeOnAction() {
         Alert alert = new Alert(Alert.AlertType.NONE);
@@ -242,9 +268,86 @@ public class OrdersController implements Initializable {
             }
         });
     }
+
+    // Minimize Button Action Event
     @FXML
     void minimizeOnAction() {
         Stage stage = (Stage) txtSearch.getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    // ------------------------------- navigation buttons ---------------------------------------
+
+    @FXML
+    void homePageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Home.fxml"));
+        Parent root = loader.load();
+        HomeController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void placeOrderPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PlaceOrder.fxml"));
+        Parent root = loader.load();
+        PlaceOrderController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void productPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Product.fxml"));
+        Parent root = loader.load();
+        ProductController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void customerPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Customer.fxml"));
+        Parent root = loader.load();
+        CustomerController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void supplierPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Supplier.fxml"));
+        Parent root = loader.load();
+        SupplierController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void profilePageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Profile.fxml"));
+        Parent root = loader.load();
+        ProfileController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

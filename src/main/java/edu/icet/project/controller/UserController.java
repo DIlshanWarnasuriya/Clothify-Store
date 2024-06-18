@@ -13,11 +13,11 @@ import edu.icet.project.util.BoType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,6 +38,12 @@ import java.util.ResourceBundle;
 
 public class UserController implements Initializable {
 
+    @FXML
+    private Circle userImage;
+    @FXML
+    private Label lblUserName;
+    @FXML
+    private Label lblUserType;
     @FXML
     private JFXTextField txtSearch;
     @FXML
@@ -80,6 +86,16 @@ public class UserController implements Initializable {
     private User selectUser = null;
     private String url = null;
 
+    private User loggedUser;
+
+    public void setUser(User user){
+        loggedUser = user;
+
+        userImage.setFill(new ImagePattern(new Image(user.getImageUrl())));
+        lblUserName.setText(user.getName());
+        lblUserType.setText(user.getUserType());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
@@ -96,6 +112,7 @@ public class UserController implements Initializable {
         selectRowInTable();
     }
 
+    // set User type to user type Combo Box
     private void setTypeOfUsers() {
         ObservableList<String> type = FXCollections.observableArrayList();
         type.add("Admin");
@@ -103,6 +120,7 @@ public class UserController implements Initializable {
         cmbUserType.setItems(type);
     }
 
+    // set gender type to gender Combo Box
     private void setGenders() {
         ObservableList<String> type = FXCollections.observableArrayList();
         type.add("Male");
@@ -110,6 +128,7 @@ public class UserController implements Initializable {
         cmbGender.setItems(type);
     }
 
+    // load all users to tables
     private void loadTable() {
         ObservableList<UserTable> tableData = FXCollections.observableArrayList();
         for (User user : userBo.getAll()) {
@@ -128,6 +147,7 @@ public class UserController implements Initializable {
         }
     }
 
+    // select User form user table
     private void selectRowInTable() {
         userTable.getSelectionModel().selectedItemProperty().addListener((observableValue, userTable1, select) -> {
             if (select != null) {
@@ -151,6 +171,7 @@ public class UserController implements Initializable {
         });
     }
 
+    // Search Button Action Event
     @FXML
     void searchUserOnAction() {
         String data = txtSearch.getText();
@@ -177,6 +198,7 @@ public class UserController implements Initializable {
         }
     }
 
+    // Select image Button Action Event
     @FXML
     void selectImageOnAction() {
         FileChooser fileChooser = new FileChooser();
@@ -195,10 +217,9 @@ public class UserController implements Initializable {
         } catch (IOException e) {
             AlertMessage.getInstance().informerAlert(AlertType.ERROR, e.getMessage());
         }
-
-
     }
 
+    // Add Button Action Event
     @FXML
     void addUserOnAction() {
         try {
@@ -241,6 +262,7 @@ public class UserController implements Initializable {
         }
     }
 
+    // Update Button Action Event
     @FXML
     void updateUserOnAction() {
         try {
@@ -286,6 +308,7 @@ public class UserController implements Initializable {
         }
     }
 
+    // Delete Button Action Event
     @FXML
     void deleteUserOnAction() {
         if (selectUser == null) {
@@ -312,6 +335,7 @@ public class UserController implements Initializable {
         }
     }
 
+    // Refresh Button Action Event
     @FXML
     void refreshOnAction() {
         txtSearch.setText("");
@@ -329,6 +353,7 @@ public class UserController implements Initializable {
         loadTable();
     }
 
+    // Close Button Action Event
     @FXML
     void closeOnAction() {
         Alert alert = new Alert(Alert.AlertType.NONE);
@@ -345,9 +370,98 @@ public class UserController implements Initializable {
         });
     }
 
+    // Minimize Button Action Event
     @FXML
     void minimizeOnAction() {
         Stage stage = (Stage) txtAddress.getScene().getWindow();
         stage.setIconified(true);
+    }
+
+
+    // ------------------------------- navigation buttons ---------------------------------------
+
+    @FXML
+    void homePageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Home.fxml"));
+        Parent root = loader.load();
+        HomeController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void placeOrderPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PlaceOrder.fxml"));
+        Parent root = loader.load();
+        PlaceOrderController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void productPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Product.fxml"));
+        Parent root = loader.load();
+        ProductController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void customerPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Customer.fxml"));
+        Parent root = loader.load();
+        CustomerController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void orderPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Orders.fxml"));
+        Parent root = loader.load();
+        OrdersController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void supplierPageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Supplier.fxml"));
+        Parent root = loader.load();
+        SupplierController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    @FXML
+    void profilePageNavigation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Profile.fxml"));
+        Parent root = loader.load();
+        ProfileController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
