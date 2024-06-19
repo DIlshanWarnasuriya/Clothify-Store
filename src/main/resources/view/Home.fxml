@@ -530,7 +530,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="688.0" layoutY="248.0" prefHeight="81.0" prefWidth="188.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+                  <Pane layoutX="688.0" layoutY="248.0" onMouseClicked="#reportOnAction" prefHeight="81.0" prefWidth="188.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
                      <children>
                         <Label layoutX="72.0" layoutY="17.0" text="Reports" textFill="#153448">
                            <font>
@@ -542,7 +542,7 @@
                               <Image url="@../images/icons/reports.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="73.0" layoutY="40.0" text="3 reports" textFill="#545454">
+                        <Label layoutX="73.0" layoutY="40.0" text="1 report" textFill="#545454">
                            <font>
                               <Font size="15.0" />
                            </font>

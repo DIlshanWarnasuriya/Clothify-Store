@@ -21,12 +21,14 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Base64;
+import java.util.Objects;
 
 public class ProfileController {
 
@@ -49,23 +51,31 @@ public class ProfileController {
     @FXML
     private Label loggedUserType;
 
+    @FXML
+    private JFXPasswordField txtConfirmPassword;
+    @FXML
+    private JFXPasswordField txtCurrentPassword;
+    @FXML
+    private JFXPasswordField txtNewPassword;
+
     private final UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
-    private User loggedUser;
+    private static User loggedUser;
     private String url;
 
-    public void setUser(User user){
+    public void setUser(User user) {
         loggedUser = user;
         loggedUserDetail();
         setUserDetails();
     }
-    private void loggedUserDetail(){
+
+    private void loggedUserDetail() {
         loggedUserName.setText(loggedUser.getName());
         loggedUserType.setText(loggedUser.getUserType());
         loggedUserImage.setFill(new ImagePattern(new Image(loggedUser.getImageUrl())));
     }
 
     // set user details to textBoxes
-    private void setUserDetails(){
+    private void setUserDetails() {
         imageCircle.setFill(new ImagePattern(new Image(loggedUser.getImageUrl())));
         lblUserName.setText(loggedUser.getName());
         txtEmail.setText(loggedUser.getEmail());
@@ -99,26 +109,21 @@ public class ProfileController {
         String email = txtEmail.getText();
         String address = txtAddress.getText();
         String contactNo = txtContactNo.getText();
-        String imageUrl = url==null ? loggedUser.getImageUrl() : url;
+        String imageUrl = url == null ? loggedUser.getImageUrl() : url;
         String password = txtPassword.getText();
         String userPassword = new String(Base64.getDecoder().decode(loggedUser.getPassword()));
 
-        if(email.isEmpty() || address.isEmpty() || contactNo.isEmpty() || password.isEmpty()){
+        if (email.isEmpty() || address.isEmpty() || contactNo.isEmpty() || password.isEmpty()) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please fill all data");
-        }
-        else if (loggedUser.getEmail().equals(email) && loggedUser.getAddress().equals(address) && loggedUser.getContactNo().equals(contactNo)){
+        } else if (loggedUser.getEmail().equals(email) && loggedUser.getAddress().equals(address) && loggedUser.getContactNo().equals(contactNo)) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "No any changes");
-        }
-        else if (contactNo.length() != 10 || contactNo.charAt(0) != '0') {
+        } else if (contactNo.length() != 10 || contactNo.charAt(0) != '0') {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid contact number");
-        }
-        else if (password.length() < 8) {
+        } else if (password.length() < 8) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter 8 or mor characters for password");
-        }
-        else if(!userPassword.equals(password)){
+        } else if (!userPassword.equals(password)) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Password is wrong. enter correct password");
-        }
-        else{
+        } else {
             loggedUser.setEmail(email);
             loggedUser.setAddress(address);
             loggedUser.setContactNo(contactNo);
@@ -129,12 +134,6 @@ public class ProfileController {
             else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "user detail update fail");
             refreshOnAction();
         }
-    }
-
-    // Forgot password Button Action Event
-    @FXML
-    void forgotPasswordOnAction() {
-        //
     }
 
     // Refresh Button Action Event
@@ -169,7 +168,77 @@ public class ProfileController {
     }
 
 
+    // ----------------------------------------- change password window -----------------------------------------------
+
+    // change password window Change password button
+    @FXML
+    void changePasswordOnAction() {
+        String currentPassword = txtCurrentPassword.getText();
+        String newPassword = txtNewPassword.getText();
+        String confirmPassword = txtConfirmPassword.getText();
+        String userPassword = new String(Base64.getDecoder().decode(loggedUser.getPassword()));
+
+        if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please fill all passwords");
+        } else if (!newPassword.equals(confirmPassword)) {
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Confirm password is wrong");
+        } else if (!currentPassword.equals(userPassword)) {
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Current password is wrong");
+        } else if (newPassword.length() < 8) {
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter more than 8 characters to password");
+        } else {
+            String password = Base64.getEncoder().encodeToString(newPassword.getBytes());
+            loggedUser.setPassword(password);
+            boolean res = userBo.updateUser(loggedUser);
+            if (res) {
+                AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Password Change Successful");
+                Stage stage = (Stage) txtConfirmPassword.getScene().getWindow();
+                stage.close();
+            } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Password Change Fail");
+
+        }
+    }
+
+    @FXML
+    void changePasswordRefreshOnAction() {
+        txtCurrentPassword.setText("");
+        txtNewPassword.setText("");
+        txtConfirmPassword.setText("");
+    }
+
+    @FXML
+    void changePasswordWindowCloseOnAction() {
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setTitle("Confirmation Dialog");
+        alert.setContentText("Are you close the program");
+        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
+        ImageView icon = new ImageView(new Image("images/icons/WARNING.png"));
+        alert.setGraphic(icon);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                Stage stage = (Stage) txtCurrentPassword.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
+
+    // Minimize Button Action Event
+    @FXML
+    void changePasswordWindowMinimizeOnAction() {
+        Stage stage = (Stage) txtCurrentPassword.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+
     // ------------------------------- navigation buttons ---------------------------------------
+
+    @FXML
+    void changePasswordNavigation() throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/ChangePassword.fxml")))));
+        stage.show();
+    }
 
     @FXML
     void homePageNavigation() throws IOException {
@@ -183,6 +252,7 @@ public class ProfileController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
     @FXML
     void placeOrderPageNavigation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/PlaceOrder.fxml"));
@@ -195,6 +265,7 @@ public class ProfileController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
     @FXML
     void productPageNavigation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Product.fxml"));
@@ -207,6 +278,7 @@ public class ProfileController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
     @FXML
     void orderPageNavigation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Orders.fxml"));
@@ -219,6 +291,7 @@ public class ProfileController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
     @FXML
     void customerPageNavigation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Customer.fxml"));
@@ -231,6 +304,7 @@ public class ProfileController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
     @FXML
     void supplierPageNavigation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Supplier.fxml"));

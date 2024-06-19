@@ -11,11 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ReportBoImpl implements ReportBo {
-    private final UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
     private final ProductBo productBo = BoFactory.getInstance().getBo(BoType.PRODUCT);
     private final OrdersBo ordersBo = BoFactory.getInstance().getBo(BoType.ORDERS);
-    private final CustomerBo customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
-    private final SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
 
     private Date date = new Date();
     String toDay = new SimpleDateFormat("yyyy-MM-dd").format(date);

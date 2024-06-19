@@ -187,9 +187,11 @@ public class HomeController implements Initializable {
     // show best Selling product
     private void bestSellingProduct(){
         List<OrdersDetails> ordersDetails = homeBo.bestSellingProduct();
-        OrdersDetails bestProduct = ordersDetails.get(ordersDetails.size()-1);
-        bestSellingProductImage.setImage(new Image(bestProduct.getImageUrl()));
-        lblBestSellingProductQty.setText(bestProduct.getQty() + " items");
+        if (!ordersDetails.isEmpty()){
+            OrdersDetails bestProduct = ordersDetails.get(ordersDetails.size()-1);
+            bestSellingProductImage.setImage(new Image(bestProduct.getImageUrl()));
+            lblBestSellingProductQty.setText(bestProduct.getQty() + " items");
+        }
     }
 
 
@@ -307,6 +309,19 @@ public class HomeController implements Initializable {
 
 
     // ------------------------------- navigation buttons ---------------------------------------
+
+    @FXML
+    void reportOnAction() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Reports.fxml"));
+        Parent root = loader.load();
+        ReportController controller = loader.getController();
+        controller.setUser(loggedUser);
+
+        Stage stage = (Stage) lblUserName.getScene().getWindow();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
     @FXML
     void userOnAction() throws IOException {
