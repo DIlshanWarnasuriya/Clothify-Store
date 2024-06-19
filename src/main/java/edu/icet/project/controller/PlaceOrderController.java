@@ -246,7 +246,7 @@ public class PlaceOrderController implements Initializable {
             Integer orderId = ordersBo.getAllOrders().size() + 1;
             Integer customerId = Integer.parseInt(txtCustomerId.getText());
             String paymentMethod = cmbPaymentMethod.getValue();
-            String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            Date date = new Date();
 
             if (cartList.isEmpty()){
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Add product to cart");

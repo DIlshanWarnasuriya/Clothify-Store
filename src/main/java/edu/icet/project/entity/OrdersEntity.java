@@ -3,6 +3,8 @@ package edu.icet.project.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -15,7 +17,7 @@ public class OrdersEntity {
     private Integer id;
     private Integer customerId;
     private Integer userId;
-    private String date;
+    private Date date;
     private String paymentMethod;
     private String status;
 }

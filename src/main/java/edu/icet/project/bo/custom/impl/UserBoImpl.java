@@ -36,7 +36,9 @@ public class UserBoImpl implements UserBo {
     public ObservableList<User> getAll() {
         ObservableList<User> list = FXCollections.observableArrayList();
         for (UserEntity entity : userDao.getAll()) {
-            list.add(new ModelMapper().map(entity, User.class));
+            if (!entity.getStatus().equals("deleted")){
+                list.add(new ModelMapper().map(entity, User.class));
+            }
         }
         return list;
     }

@@ -28,10 +28,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class OrdersController implements Initializable {
     @FXML
@@ -108,11 +106,13 @@ public class OrdersController implements Initializable {
         ObservableList<OrderTable> list = FXCollections.observableArrayList();
 
         for (Orders orders : ordersBo.getAllOrders()) {
-            list.add(new OrderTable(orders.getId(), orders.getCustomerId(), orders.getUserId(), orders.getDate(), orders.getPaymentMethod(), orders.getStatus()));
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(orders.getDate());
+            list.add(new OrderTable(orders.getId(), orders.getCustomerId(), orders.getUserId(), date, orders.getPaymentMethod(), orders.getStatus()));
         }
         FXCollections.reverse(list);
         orderTable.setItems(list);
     }
+
 
     // select order form order table
     private void selectOrderOnAction(){
@@ -153,7 +153,8 @@ public class OrdersController implements Initializable {
             ObservableList<OrderTable> list = FXCollections.observableArrayList();
 
             for (Orders orders : ordersBo.searchOrder(data)) {
-                list.add(new OrderTable(orders.getId(), orders.getCustomerId(), orders.getUserId(), orders.getDate(), orders.getPaymentMethod(), orders.getStatus()));
+                String date = new SimpleDateFormat("yyyy-MM-dd").format(orders.getDate());
+                list.add(new OrderTable(orders.getId(), orders.getCustomerId(), orders.getUserId(), date, orders.getPaymentMethod(), orders.getStatus()));
             }
             FXCollections.reverse(list);
             orderTable.setItems(list);

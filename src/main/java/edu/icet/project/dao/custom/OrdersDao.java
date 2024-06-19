@@ -1,6 +1,7 @@
 package edu.icet.project.dao.custom;
 
 import edu.icet.project.dao.SuperDao;
+import edu.icet.project.dto.Orders;
 import edu.icet.project.entity.OrdersDetailsEntity;
 import edu.icet.project.entity.OrdersEntity;
 import java.util.ArrayList;
@@ -12,6 +13,4 @@ public interface OrdersDao extends SuperDao {
     boolean update(OrdersEntity entity, List<OrdersDetailsEntity> detailEntity);
 
     List<OrdersDetailsEntity> getAllOrdersDetails();
-
-
 }

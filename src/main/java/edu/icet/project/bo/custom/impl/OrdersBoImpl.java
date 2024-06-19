@@ -10,6 +10,7 @@ import edu.icet.project.entity.OrdersEntity;
 import edu.icet.project.util.DaoType;
 import org.modelmapper.ModelMapper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -51,10 +52,21 @@ public class OrdersBoImpl implements OrdersBo {
     }
 
     @Override
+    public List<OrdersDetails> getAllOrderProduct() {
+        List<OrdersDetails> list = new ArrayList<>();
+        for (OrdersDetailsEntity allOrder : ordersDao.getAllOrdersDetails()) {
+            list.add(new ModelMapper().map(allOrder, OrdersDetails.class));
+        }
+        return list;
+    }
+
+
+    @Override
     public List<Orders> searchOrder(String data) {
         List<Orders> list = new ArrayList<>();
         for (OrdersEntity orders : ordersDao.getAllOrders()) {
-            if (orders.getId().toString().equals(data) || orders.getDate().equals(data) || orders.getPaymentMethod().equals(data) || orders.getStatus().equals(data)) {
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(orders.getDate());
+            if (orders.getId().toString().equals(data) || date.equals(data) || orders.getPaymentMethod().equals(data) || orders.getStatus().equals(data)) {
                 list.add(new ModelMapper().map(orders, Orders.class));
             }
         }

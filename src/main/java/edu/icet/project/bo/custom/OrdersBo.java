@@ -15,6 +15,5 @@ public interface OrdersBo extends SuperBo {
 
     List<OrdersDetails> searchAllOrderProductByOrderId(Integer id);
     OrdersDetails searchOrderProductById(Integer id);
-
-
+    List<OrdersDetails> getAllOrderProduct();
 }

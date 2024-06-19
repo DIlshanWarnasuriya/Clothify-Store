@@ -198,14 +198,14 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="24 items sold tody" textFill="#b6b6b6">
+                              <Label fx:id="soldItemUser" layoutX="24.0" layoutY="67.0" text="24 items sold tody" textFill="#b6b6b6">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
                            <cursor>
-                              <Cursor fx:constant="HAND" />
+                              <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Pane>
                         <Pane layoutX="214.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
@@ -215,14 +215,14 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="120 items in stock" textFill="#b6b6b6">
+                              <Label fx:id="productStokeUser" layoutX="24.0" layoutY="67.0" text="120 items in stock" textFill="#b6b6b6">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
                            <cursor>
-                              <Cursor fx:constant="HAND" />
+                              <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Pane>
                         <Pane layoutX="414.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
@@ -232,32 +232,31 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="5 new customers" textFill="#b6b6b6">
+                              <Label fx:id="customerCountUser" layoutX="24.0" layoutY="67.0" text="3 in customers list" textFill="#b6b6b6">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
                            <cursor>
-                              <Cursor fx:constant="HAND" />
+                              <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Pane>
                         <Pane layoutX="614.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
                            <children>
-                              <Label layoutX="24.0" layoutY="26.0" text="Profile" textFill="WHITE">
+                              <Label layoutX="24.0" layoutY="26.0" text="Suppliers" textFill="WHITE">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="online" textFill="#b6b6b6">
+                              <Label fx:id="supplierCount" layoutX="24.0" layoutY="67.0" prefHeight="21.0" prefWidth="134.0" text="3 suppliers in list" textFill="#b6b6b6">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Circle fill="#2ecc71" layoutX="73.0" layoutY="79.0" radius="4.0" stroke="#691e1e00" strokeType="INSIDE" />
                            </children>
                            <cursor>
-                              <Cursor fx:constant="HAND" />
+                              <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Pane>
                         <Label layoutX="15.0" layoutY="6.0" text="DashBoard" textFill="#153448">
@@ -271,17 +270,17 @@
                            </font>
                         </Label>
                         <Line endX="-100.0" endY="15.5999755859375" layoutX="188.0" layoutY="5.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
-                        <Label layoutX="691.0" layoutY="6.0" text="3.10" textFill="#6d7597">
+                        <Label fx:id="lblUserTime" layoutX="685.0" layoutY="6.0" text="03.10" textFill="#6d7597">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="729.0" layoutY="6.0" text="10 June 2024" textFill="#6d7597">
+                        <Label fx:id="lblUserDate" layoutX="735.0" layoutY="6.0" text="2024-06-19" textFill="#6d7597">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Line endX="-100.0" endY="15.5999755859375" layoutX="823.0" layoutY="5.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
+                        <Line endX="-100.0" endY="15.5999755859375" layoutX="825.0" layoutY="4.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
                      </children>
                   </Pane>
                   <Pane layoutX="302.0" layoutY="262.0" prefHeight="34.0" prefWidth="331.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 26;">
@@ -297,17 +296,13 @@
                      <children>
                         <Pane layoutX="284.0" layoutY="50.0" prefHeight="229.0" prefWidth="251.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
                            <children>
-                              <ImageView fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/items/Tshirt.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="62.0" layoutY="182.0" text="Red cotton frock" textFill="#7d7d7d">
+                              <ImageView fx:id="womenImage" fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="womenProductNAme" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="181.0" prefHeight="25.0" prefWidth="237.0" textFill="#7d7d7d">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="106.0" layoutY="204.0" text="24 sold" textFill="#b7b7b7">
+                              <Label fx:id="womenQty" alignment="CENTER" contentDisplay="CENTER" layoutX="65.0" layoutY="204.0" prefHeight="16.0" prefWidth="122.0" textFill="#b7b7b7">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
@@ -321,17 +316,13 @@
                         </Label>
                         <Pane layoutX="551.0" layoutY="48.0" prefHeight="229.0" prefWidth="251.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
                            <children>
-                              <ImageView fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/items/Tshirt.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="62.0" layoutY="182.0" text="Red cotton frock" textFill="#7d7d7d">
+                              <ImageView fx:id="kidImage" fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="kidProductName" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="181.0" prefHeight="25.0" prefWidth="237.0" textFill="#7d7d7d">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="106.0" layoutY="204.0" text="24 sold" textFill="#b7b7b7">
+                              <Label fx:id="kidQty" alignment="CENTER" contentDisplay="CENTER" layoutX="65.0" layoutY="203.0" prefHeight="16.0" prefWidth="122.0" textFill="#b7b7b7">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
@@ -345,17 +336,13 @@
                         </Label>
                         <Pane layoutX="16.0" layoutY="48.0" prefHeight="229.0" prefWidth="251.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
                            <children>
-                              <ImageView fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/items/Tshirt.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="62.0" layoutY="182.0" text="Red cotton frock" textFill="#7d7d7d">
+                              <ImageView fx:id="menImage" fitHeight="161.0" fitWidth="160.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="menProductName" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="183.0" prefHeight="25.0" prefWidth="237.0" textFill="#7d7d7d">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="106.0" layoutY="204.0" text="24 sold" textFill="#b7b7b7">
+                              <Label fx:id="menQty" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="205.0" prefHeight="16.0" prefWidth="126.0" textFill="#b7b7b7">
                                  <font>
                                     <Font name="System Bold" size="11.0" />
                                  </font>
@@ -377,7 +364,7 @@
                      <children>
                         <Pane layoutX="14.0" layoutY="13.0" prefHeight="229.0" prefWidth="453.0" style="-fx-background-color: white; -fx-background-radius: 18;">
                            <children>
-                              <BarChart fx:id="chart" layoutX="-7.0" layoutY="25.0" prefHeight="243.0" prefWidth="453.0" styleClass="chart-bar">
+                              <BarChart fx:id="barChart" layoutX="-7.0" layoutY="25.0" prefHeight="243.0" prefWidth="453.0" styleClass="chart-bar">
                                  <xAxis>
                                     <CategoryAxis side="BOTTOM" />
                                  </xAxis>
@@ -395,8 +382,8 @@
                      <children>
                         <Pane layoutX="14.0" layoutY="13.0" prefHeight="229.0" prefWidth="292.0" style="-fx-background-color: #F4F4F4; -fx-background-radius: 18;">
                            <children>
-                              <PieChart fx:id="pychart" layoutY="-41.0" prefHeight="338.0" prefWidth="292.0" />
-                              <Pane layoutX="-7.0" layoutY="242.0" prefHeight="38.0" prefWidth="307.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 18;" />
+                              <PieChart fx:id="pieChart" layoutY="-41.0" prefHeight="338.0" prefWidth="292.0" />
+                              <Pane layoutX="-7.0" layoutY="242.0" prefHeight="43.0" prefWidth="307.0" style="-fx-background-color: #f4f4f4;" />
                               <Pane layoutX="58.0" layoutY="-52.0" prefHeight="38.0" prefWidth="196.0" style="-fx-background-color: #f4f4f4; -fx-background-radius: 18;" />
                               <Circle fill="#f3f3f3" layoutX="146.0" layoutY="127.0" radius="54.0" stroke="#f2f2f200" strokeType="INSIDE" />
                               <Label layoutX="125.0" layoutY="117.0" prefHeight="20.0" prefWidth="42.0" text="years" textFill="#969696">
@@ -417,14 +404,14 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="Rs : 23400/= " textFill="#b6b6b6">
+                              <Label fx:id="lblIncome" layoutX="24.0" layoutY="67.0" text="Rs : 23400/= " textFill="#b6b6b6">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
                            <cursor>
-                              <Cursor fx:constant="HAND" />
+                              <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Pane>
                         <Pane layoutX="214.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
@@ -434,14 +421,14 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="24 items sold tody" textFill="#b6b6b6">
+                              <Label fx:id="soldItemAdmin" layoutX="24.0" layoutY="67.0" text="24 items sold tody" textFill="#b6b6b6">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
                            <cursor>
-                              <Cursor fx:constant="HAND" />
+                              <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Pane>
                         <Pane layoutX="414.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
@@ -451,32 +438,31 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="120 items in stock" textFill="#b6b6b6">
+                              <Label fx:id="lblProductCountAdmin" layoutX="24.0" layoutY="67.0" text="120 items in stock" textFill="#b6b6b6">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
                            </children>
                            <cursor>
-                              <Cursor fx:constant="HAND" />
+                              <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Pane>
                         <Pane layoutX="614.0" layoutY="44.0" prefHeight="110.0" prefWidth="188.0" style="-fx-background-color: #153448; -fx-background-radius: 13;">
                            <children>
-                              <Label layoutX="24.0" layoutY="26.0" text="Employees" textFill="WHITE">
+                              <Label layoutX="26.0" layoutY="26.0" text="Customers" textFill="WHITE">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="67.0" text="3 users online" textFill="#b6b6b6">
+                              <Label fx:id="lblCustomerCount" layoutX="27.0" layoutY="67.0" text="3 Customers" textFill="#b6b6b6">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Circle fill="#2ecc71" layoutX="125.0" layoutY="79.0" radius="4.0" stroke="#691e1e00" strokeType="INSIDE" />
                            </children>
                            <cursor>
-                              <Cursor fx:constant="HAND" />
+                              <Cursor fx:constant="DEFAULT" />
                            </cursor>
                         </Pane>
                         <Label layoutX="15.0" layoutY="6.0" text="DashBoard" textFill="#153448">
@@ -490,17 +476,17 @@
                            </font>
                         </Label>
                         <Line endX="-100.0" endY="15.5999755859375" layoutX="188.0" layoutY="5.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
-                        <Label layoutX="691.0" layoutY="6.0" text="3.10" textFill="#6d7597">
+                        <Label fx:id="lblAdminTime" layoutX="682.0" layoutY="6.0" text="03.10" textFill="#6d7597">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="729.0" layoutY="6.0" text="10 June 2024" textFill="#6d7597">
+                        <Label fx:id="lblAdminDate" layoutX="730.0" layoutY="6.0" text="2024-06-19" textFill="#6d7597">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Line endX="-100.0" endY="15.5999755859375" layoutX="823.0" layoutY="5.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
+                        <Line endX="-100.0" endY="15.5999755859375" layoutX="821.0" layoutY="5.0" startX="-100.0" startY="3.5999908447265625" stroke="#8e8b8b" />
                      </children>
                   </Pane>
                   <Pane layoutX="58.0" layoutY="248.0" prefHeight="81.0" prefWidth="391.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
@@ -510,31 +496,31 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="134.0" layoutY="43.0" text="16 items" textFill="#7d7d7d">
+                        <Label fx:id="lblBestSellingProductQty" layoutX="134.0" layoutY="43.0" text="16 items" textFill="#7d7d7d">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="63.0" fitWidth="70.0" layoutX="42.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="bestSellingProductImage" fitHeight="63.0" fitWidth="70.0" layoutX="42.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/items/Tshirt.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane layoutX="475.0" layoutY="248.0" prefHeight="81.0" prefWidth="193.89" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
+                  <Pane layoutX="475.0" layoutY="248.0" onMouseClicked="#userOnAction" prefHeight="81.0" prefWidth="193.89" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
                      <children>
-                        <Label layoutX="71.0" layoutY="17.0" text="Categories" textFill="#153448">
+                        <Label layoutX="71.0" layoutY="17.0" text="Users" textFill="#153448">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="26.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/icons/diversity.png" />
+                              <Image url="@../images/icons/user.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="71.0" layoutY="41.0" text="3 categories" textFill="#545454">
+                        <Label fx:id="lblUserCount" layoutX="71.0" layoutY="41.0" text="3 categories" textFill="#545454">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -556,7 +542,7 @@
                               <Image url="@../images/icons/reports.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="73.0" layoutY="40.0" text="6 reports" textFill="#545454">
+                        <Label layoutX="73.0" layoutY="40.0" text="3 reports" textFill="#545454">
                            <font>
                               <Font size="15.0" />
                            </font>

@@ -4,6 +4,7 @@ import edu.icet.project.bo.custom.ProductBo;
 import edu.icet.project.dao.DaoFactory;
 import edu.icet.project.dao.custom.ProductDao;
 import edu.icet.project.dto.Product;
+import edu.icet.project.dto.User;
 import edu.icet.project.entity.ProductEntity;
 import edu.icet.project.util.DaoType;
 import javafx.collections.FXCollections;
@@ -36,7 +37,9 @@ public class ProductBoImpl implements ProductBo {
     public ObservableList<Product> getAllProduct() {
         ObservableList<Product> list = FXCollections.observableArrayList();
         for (ProductEntity entity : productDao.getAll()) {
-            list.add(new ModelMapper().map(entity, Product.class));
+            if (!entity.getStatus().equals("deleted")){
+                list.add(new ModelMapper().map(entity, Product.class));
+            }
         }
         return list;
     }
