@@ -17,10 +17,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
@@ -208,19 +210,8 @@ public class ProfileController {
 
     @FXML
     void changePasswordWindowCloseOnAction() {
-        Alert alert = new Alert(Alert.AlertType.NONE);
-        alert.setTitle("Confirmation Dialog");
-        alert.setContentText("Are you close the program");
-        alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);
-        ImageView icon = new ImageView(new Image("images/icons/WARNING.png"));
-        alert.setGraphic(icon);
-
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.YES) {
-                Stage stage = (Stage) txtCurrentPassword.getScene().getWindow();
-                stage.close();
-            }
-        });
+        Stage stage = (Stage) txtCurrentPassword.getScene().getWindow();
+        stage.close();
     }
 
     // Minimize Button Action Event
@@ -236,7 +227,11 @@ public class ProfileController {
     @FXML
     void changePasswordNavigation() throws IOException {
         Stage stage = new Stage();
-        stage.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/ChangePassword.fxml")))));
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/ChangePassword.fxml"))));
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
+        stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
 
@@ -249,7 +244,9 @@ public class ProfileController {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 
@@ -262,7 +259,9 @@ public class ProfileController {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 
@@ -275,7 +274,9 @@ public class ProfileController {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 
@@ -288,7 +289,9 @@ public class ProfileController {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 
@@ -301,7 +304,9 @@ public class ProfileController {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 
@@ -314,7 +319,9 @@ public class ProfileController {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 }

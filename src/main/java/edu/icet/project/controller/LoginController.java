@@ -16,7 +16,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.util.Base64;
 
@@ -49,13 +52,16 @@ public class LoginController {
                 HomeController controller = loader.getController();
                 controller.setUser(user);
 
-                Stage stage = (Stage) txtEmail.getScene().getWindow();
-                stage.close();
+                Stage thisStage = (Stage) txtEmail.getScene().getWindow();
+                thisStage.close();
 
-                Stage newStage = new Stage();
-                newStage.getIcons().add(new Image("images/icons/Logo.png"));
-                newStage.setScene(new Scene(root));
-                newStage.show();
+                Stage stage = new Stage();
+                stage.getIcons().add(new Image("images/icons/Logo.png"));
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                scene.setFill(Color.TRANSPARENT);
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.show();
 
             }
         }
@@ -72,10 +78,10 @@ public class LoginController {
         return null;
     }
 
-    // Forgot password Button Action Event
     @FXML
-    void forgotPasswordOnAction() {
-        // Forgot password Button Action Event
+    void refreshOnAction() {
+        txtEmail.setText("");
+        txtPassword.setText("");
     }
 
     // Close Button Action Event

@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -319,7 +320,9 @@ public class HomeController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 
@@ -332,7 +335,9 @@ public class HomeController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -344,7 +349,9 @@ public class HomeController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -356,7 +363,9 @@ public class HomeController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -368,7 +377,9 @@ public class HomeController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -380,7 +391,9 @@ public class HomeController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -392,7 +405,9 @@ public class HomeController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -404,7 +419,9 @@ public class HomeController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 }

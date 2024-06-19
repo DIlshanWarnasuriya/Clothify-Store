@@ -26,7 +26,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -342,7 +341,9 @@ public class SupplierController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -354,7 +355,9 @@ public class SupplierController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -366,7 +369,9 @@ public class SupplierController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -378,7 +383,9 @@ public class SupplierController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -390,7 +397,9 @@ public class SupplierController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
     @FXML
@@ -402,7 +411,9 @@ public class SupplierController implements Initializable {
 
         Stage stage = (Stage) lblUserName.getScene().getWindow();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        stage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
 }

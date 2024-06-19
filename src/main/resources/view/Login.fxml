@@ -39,6 +39,14 @@
                         <Font name="System Bold" size="11.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="785.0" layoutY="5.0" onMouseClicked="#refreshOnAction" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/icons/refresh.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="310.0" layoutY="257.0" prefHeight="36.0" prefWidth="230.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
@@ -69,14 +77,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Label layoutX="380.0" layoutY="403.0" onMouseClicked="#forgotPasswordOnAction" text="Forgot password ?...." textFill="#434343">
-               <font>
-                  <Font size="10.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
             <ImageView fitHeight="150.0" fitWidth="143.0" layoutX="353.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/profile/login.png" />
