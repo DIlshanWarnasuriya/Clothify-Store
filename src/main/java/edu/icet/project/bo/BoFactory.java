@@ -27,6 +27,8 @@ public class BoFactory {
                 return (T) new OrdersBoImpl();
             case HOME:
                 return (T) new HomeBoImpl();
+            case REPORT:
+                return (T) new ReportBoImpl();
         }
         return null;
     }
