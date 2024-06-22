@@ -29,11 +29,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.ResourceBundle;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.*;
 
 public class PlaceOrderController implements Initializable {
 
@@ -262,15 +269,46 @@ public class PlaceOrderController implements Initializable {
 
                 boolean res = ordersBo.saveOrder(orders, list);
                 if (res){
-                    AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Placed order");
-                    cartList.clear();
-                    refreshOnAction();
-                    txtCustomerId.setText("");
-                }
-                else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Fail");
+                    Boolean res1 = generateBill(orderId, Double.parseDouble(lblTotal.getText()));
+                    if (res1){
+
+                    }else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "bill print fail");
+                }else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Fail");
             }
         }catch (RuntimeException e){
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid customer id and select payment method");
+        }
+    }
+
+    private Boolean generateBill(Integer orderId, Double netTotal){
+        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/clothify_store", "root", "yash");) {
+            JasperDesign design = JRXmlLoader.load("src/main/resources/reports/Bills.jrxml");
+            JRDesignQuery designQuery = new JRDesignQuery();
+
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("orderId", orderId);
+            parameters.put("netTotal", netTotal);
+
+            designQuery.setText("SELECT * FROM ordersdetails WHERE orderId = " + orderId);
+            design.setQuery(designQuery);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(design);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
+            JasperViewer.viewReport(jasperPrint, false);
+
+            String pdfName = "Order"+orderId;
+
+            String outputFile = "src/main/resources/reports/bill/"+pdfName+".pdf";  // Specify your file path here
+            JasperExportManager.exportReportToPdfFile(jasperPrint, outputFile);
+
+            cartList.clear();
+            refreshOnAction();
+            txtCustomerId.setText("");
+            return true;
+
+        } catch (JRException | SQLException e) {
+            AlertMessage.getInstance().informerAlert(AlertType.ERROR, e.getMessage());
+            return false;
         }
     }
 
