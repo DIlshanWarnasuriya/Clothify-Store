@@ -32,6 +32,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SupplierController implements Initializable {
@@ -193,7 +194,7 @@ public class SupplierController implements Initializable {
             String company = txtCompany.getText();
             String contactNo = txtContactNo.getText();
             String gender = cmbGender.getValue();
-            String imageUrl = url;
+            String imageUrl = url == null ? (Objects.equals(gender, "Male") ? "images/profile/Male.png" : "images/profile/Female.png") : url;
 
             if (name.isEmpty() || email.isEmpty() || company.isEmpty() || contactNo.isEmpty() || gender.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter all data");
@@ -204,12 +205,6 @@ public class SupplierController implements Initializable {
             } else if (!supplierBo.search(email).isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email is already use");
             } else {
-                if (gender.equals("Female") && imageUrl.equals("images/profile/Male.png")) {
-                    imageUrl = "images/profile/Female.png";
-                } else if (gender.equals("Male") && imageUrl.equals("images/profile/Female.png")) {
-                    imageUrl = "images/profile/Male.png";
-                }
-
                 Supplier supplier = new Supplier(name, email, company, contactNo, gender, imageUrl, "Active");
                 boolean res = supplierBo.saveSupplier(supplier);
                 if (res) {

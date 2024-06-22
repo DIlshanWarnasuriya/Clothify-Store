@@ -33,6 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Base64;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UserController implements Initializable {
@@ -228,7 +229,7 @@ public class UserController implements Initializable {
             String contactNo = txtContactNo.getText();
             String gender = cmbGender.getValue();
             String userType = cmbUserType.getValue();
-            String imageUrl = url;
+            String imageUrl = url == null ? (Objects.equals(gender, "Male") ? "images/profile/Male.png" : "images/profile/Female.png") : url;
             String password = Base64.getEncoder().encodeToString(txtPassword.getText().getBytes());
 
             if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty() || contactNo.isEmpty() || gender.isEmpty() || userType.isEmpty()) {
@@ -242,22 +243,15 @@ public class UserController implements Initializable {
             } else if (password.length() < 8) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter more than 8 characters to password");
             } else {
-                if (gender.equals("Female") && selectUser.getImageUrl().equals("images/profile/Male.png")) {
-                    imageUrl = "images/profile/Female.png";
-                } else if (gender.equals("Male") && selectUser.getImageUrl().equals("images/profile/Female.png")) {
-                    imageUrl = "images/profile/Male.png";
-                }
-
                 User user = new User(name, email, password, address, contactNo, gender, userType, imageUrl, "Active");
                 boolean res = userBo.saveUser(user);
-
                 if (res) {
                     AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "User added Success");
                     refreshOnAction();
                 } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "User added Fail");
             }
         } catch (RuntimeException ex) {
-            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter all data");
+            throw ex;
         }
     }
 
