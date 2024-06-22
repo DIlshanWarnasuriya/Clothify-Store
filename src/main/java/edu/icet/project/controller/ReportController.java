@@ -272,7 +272,7 @@ public class ReportController implements Initializable {
     @FXML
     void printReturnProductReportOnAction() {
         try {
-            JasperDesign design = JRXmlLoader.load("src/main/resources/reports/ReturnProduct.jrxml");
+            JasperDesign design = JRXmlLoader.load("src/main/resources/reports/Return.jrxml");
             JRDesignQuery designQuery = new JRDesignQuery();
             designQuery.setText("SELECT * FROM ordersdetails WHERE status = 'return'");
             design.setQuery(designQuery);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.21.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e17675219a9ac4692d5f0f13b06  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Customer" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventory " pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="clothify_store"/>
 	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="514"/>
@@ -79,6 +79,20 @@
 					</textElement>
 					<text><![CDATA[Inventory Report]]></text>
 				</staticText>
+				<textField pattern="yyyy MMM dd ">
+					<reportElement x="260" y="79" width="114" height="20" forecolor="#575757" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="226" y="79" width="40" height="20" forecolor="#575757" uuid="55cbdc8c-9ef5-49ec-b3ca-c8eed66e53b4"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Date :]]></text>
+				</staticText>
 			</frame>
 			<image>
 				<reportElement x="433" y="0" width="97" height="95" uuid="644ac6bb-4e64-4c04-8839-f760c5940403"/>
@@ -99,13 +113,6 @@
 		<band height="33" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="6" width="555" height="20" forecolor="#000000" backcolor="#153448" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
-				<textField pattern="yyyy MMM dd ">
-					<reportElement x="230" y="-48" width="144" height="20" forecolor="#575757" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
-					<textElement textAlignment="Right">
-						<font size="12"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
 				<staticText>
 					<reportElement style="Column header" x="300" y="3" width="42" height="18" forecolor="#E6E6E6" uuid="377442ba-1e47-4579-8fac-ef24b3fd11ee">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5f29e9f4-97b1-4c65-9a5b-5ec4888e8389"/>

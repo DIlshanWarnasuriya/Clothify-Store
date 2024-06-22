@@ -60,8 +60,22 @@
 					<textElement>
 						<font fontName="Arial Black" size="16" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Employee Report]]></text>
+					<text><![CDATA[Supplier Report]]></text>
 				</staticText>
+				<staticText>
+					<reportElement x="226" y="79" width="40" height="20" forecolor="#575757" uuid="6799771c-8c6b-47ee-8f85-b7951b0f44b5"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Date :]]></text>
+				</staticText>
+				<textField pattern="yyyy MMM dd ">
+					<reportElement x="260" y="79" width="114" height="20" forecolor="#575757" uuid="00a5e077-2d8c-44cc-bc0d-da05956d83d8"/>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
 			</frame>
 			<image>
 				<reportElement x="433" y="0" width="97" height="95" uuid="644ac6bb-4e64-4c04-8839-f760c5940403"/>
@@ -82,13 +96,6 @@
 		<band height="33" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="6" width="555" height="20" forecolor="#000000" backcolor="#153448" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
-				<textField pattern="yyyy MMM dd ">
-					<reportElement x="230" y="-48" width="144" height="20" forecolor="#575757" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
-					<textElement textAlignment="Right">
-						<font size="12"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
 				<staticText>
 					<reportElement style="Column header" x="255" y="3" width="134" height="18" forecolor="#E6E6E6" uuid="377442ba-1e47-4579-8fac-ef24b3fd11ee">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5f29e9f4-97b1-4c65-9a5b-5ec4888e8389"/>
