@@ -16,7 +16,7 @@
 		</conditionalStyle>
 	</style>
 	<queryString language="SQL">
-		<![CDATA[SELECT od.*, p.name FROM ordersdetails od INNER JOIN product p ON od.id = p.id]]>
+		<![CDATA[SELECT * FROM ordersdetails]]>
 	</queryString>
 	<field name="orderId" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="orderId"/>
@@ -28,10 +28,10 @@
 		<property name="com.jaspersoft.studio.field.label" value="productId"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="ordersdetails"/>
 	</field>
-	<field name="name" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="name"/>
-		<property name="com.jaspersoft.studio.field.label" value="name"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="product"/>
+	<field name="productName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="productName"/>
+		<property name="com.jaspersoft.studio.field.label" value="productName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ordersdetails"/>
 	</field>
 	<field name="qty" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="qty"/>
@@ -193,7 +193,7 @@
 					<textElement textAlignment="Center">
 						<font fontName="Bahnschrift" size="10"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

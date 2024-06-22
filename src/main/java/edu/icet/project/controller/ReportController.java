@@ -257,7 +257,7 @@ public class ReportController implements Initializable {
         try {
             JasperDesign design = JRXmlLoader.load("src/main/resources/reports/Sales.jrxml");
             JRDesignQuery designQuery = new JRDesignQuery();
-            designQuery.setText("SELECT od.*, p.name FROM ordersdetails od INNER JOIN product p ON od.id = p.id WHERE od.status = 'placed'");
+            designQuery.setText("SELECT * FROM ordersdetails WHERE status = 'placed'");
             design.setQuery(designQuery);
 
             JasperReport jasperReport = JasperCompileManager.compileReport(design);
@@ -274,7 +274,7 @@ public class ReportController implements Initializable {
         try {
             JasperDesign design = JRXmlLoader.load("src/main/resources/reports/ReturnProduct.jrxml");
             JRDesignQuery designQuery = new JRDesignQuery();
-            designQuery.setText("SELECT od.*, p.name FROM ordersdetails od INNER JOIN product p ON od.id = p.id WHERE od.status = 'return'");
+            designQuery.setText("SELECT * FROM ordersdetails WHERE status = 'return'");
             design.setQuery(designQuery);
 
             JasperReport jasperReport = JasperCompileManager.compileReport(design);

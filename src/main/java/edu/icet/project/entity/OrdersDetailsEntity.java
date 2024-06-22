@@ -15,6 +15,7 @@ public class OrdersDetailsEntity {
     private Integer id;
     private Integer orderId;
     private Integer productId;
+    private String productName;
     private Integer qty;
     private Double total;
     private String imageUrl;
