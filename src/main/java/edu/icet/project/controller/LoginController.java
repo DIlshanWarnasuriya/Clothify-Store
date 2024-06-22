@@ -22,6 +22,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Objects;
 
 public class LoginController {
 
@@ -77,6 +78,19 @@ public class LoginController {
         }
         return null;
     }
+
+
+    @FXML
+    void forgotPasswordOnAction() throws IOException {
+        Stage stage = new Stage();
+        stage.getIcons().add(new Image("images/icons/Logo.png"));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/VerifyEmail.fxml"))));
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.show();
+    }
+
 
     @FXML
     void refreshOnAction() {

@@ -23,7 +23,9 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,6 +33,8 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Base64;
 import java.util.Objects;
+import java.util.Properties;
+import java.util.Random;
 
 public class ProfileController {
 
@@ -54,15 +58,23 @@ public class ProfileController {
     private Label loggedUserType;
 
     @FXML
-    private JFXPasswordField txtConfirmPassword;
+    private JFXTextField txtVerifyEmail;
     @FXML
-    private JFXPasswordField txtCurrentPassword;
+    private JFXTextField txtOtp;
+
+    @FXML
+    private JFXPasswordField txtConfirmPassword;
     @FXML
     private JFXPasswordField txtNewPassword;
 
     private final UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
     private static User loggedUser;
+    private static String verifiedEmail = null;
+    private  String enterdEmail = null;
+    private String otp = null;
     private String url;
+    
+   
 
     public void setUser(User user) {
         loggedUser = user;
@@ -170,31 +182,122 @@ public class ProfileController {
     }
 
 
-    // ----------------------------------------- change password window -----------------------------------------------
+    // ----------------------------------------- Verify Email window -----------------------------------------------
+
+    @FXML
+    void sendOTPOnAction() {
+        enterdEmail = txtVerifyEmail.getText();
+        if (enterdEmail.isEmpty()){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter Email");
+        }
+        else if (userBo.searchByEmail(enterdEmail) == null){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "This email not Valid");
+        }
+        else{
+            Random random = new Random();
+            int randomNumber = random.nextInt(900000) + 100000;
+
+            Properties properties = new Properties();
+            properties.put("mail.smtp.auth", "true");
+            properties.put("mail.smtp.starttls.enable", "true");
+            properties.put("mail.smtp.host", "smtp.gmail.com");
+            properties.put("mail.smtp.port", "587");
+
+            String email = "yashodadilshan@gmail.com";
+            String password = "rbxt stdk vyqy esgp";
+
+            Session session = Session.getInstance(properties, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(email, password);
+                }
+            });
+
+            try {
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(email));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(enterdEmail));
+                message.setSubject("OTP Code");
+                message.setText(String.valueOf(randomNumber)); // Set OTP as text
+                Transport.send(message);
+
+                otp = randomNumber+"";
+                AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Send OTP to your Email. Please check inbox");
+            } catch (MessagingException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+        }
+    }
+
+    @FXML
+    void verifyEmailOnAction() throws IOException {
+        String enterOtp = txtOtp.getText();
+        if (enterOtp.isEmpty()){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter otp code");
+        }
+        else if (otp == null){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please verify your Email");
+        }
+        if (!enterOtp.equals(otp)){
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Enter Correct OTP");
+        }
+        else{
+            verifiedEmail = enterdEmail;
+            Stage thisstage = (Stage) txtVerifyEmail.getScene().getWindow();
+            thisstage.close();
+
+            Stage stage = new Stage();
+            stage.getIcons().add(new Image("images/icons/Logo.png"));
+            Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/ChangePassword.fxml"))));
+            stage.setScene(scene);
+            scene.setFill(Color.TRANSPARENT);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.show();
+        }
+    }
+    @FXML
+    void verifyEmailRefreshOnAction() {
+        txtVerifyEmail.setText("");
+        txtOtp.setText("");
+    }
+
+    @FXML
+    void verifyEmailWindowCloseOnAction() {
+        Stage stage = (Stage) txtVerifyEmail.getScene().getWindow();
+        stage.close();
+    }
+
+    // Minimize Button Action Event
+    @FXML
+    void verifyEmailWindowMinimizeOnAction() {
+        Stage stage = (Stage) txtVerifyEmail.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+
+    // ------------------------------------------- change password window -------------------------------------------------
 
     // change password window Change password button
     @FXML
     void changePasswordOnAction() {
-        String currentPassword = txtCurrentPassword.getText();
         String newPassword = txtNewPassword.getText();
         String confirmPassword = txtConfirmPassword.getText();
-        String userPassword = new String(Base64.getDecoder().decode(loggedUser.getPassword()));
 
-        if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+        if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please fill all passwords");
-        } else if (!newPassword.equals(confirmPassword)) {
-            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Confirm password is wrong");
-        } else if (!currentPassword.equals(userPassword)) {
-            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Current password is wrong");
         } else if (newPassword.length() < 8) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter more than 8 characters to password");
-        } else {
+        } else if (!newPassword.equals(confirmPassword)) {
+            AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Confirm password is wrong");
+        }  else {
+            User user = userBo.searchByEmail(verifiedEmail);
+
             String password = Base64.getEncoder().encodeToString(newPassword.getBytes());
-            loggedUser.setPassword(password);
-            boolean res = userBo.updateUser(loggedUser);
+            user.setPassword(password);
+            boolean res = userBo.updateUser(user);
             if (res) {
                 AlertMessage.getInstance().informerAlert(AlertType.SUCCESS, "Password Change Successful");
-                Stage stage = (Stage) txtConfirmPassword.getScene().getWindow();
+                Stage stage = (Stage) txtNewPassword.getScene().getWindow();
                 stage.close();
             } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Password Change Fail");
 
@@ -203,21 +306,20 @@ public class ProfileController {
 
     @FXML
     void changePasswordRefreshOnAction() {
-        txtCurrentPassword.setText("");
         txtNewPassword.setText("");
         txtConfirmPassword.setText("");
     }
 
     @FXML
     void changePasswordWindowCloseOnAction() {
-        Stage stage = (Stage) txtCurrentPassword.getScene().getWindow();
+        Stage stage = (Stage) txtNewPassword.getScene().getWindow();
         stage.close();
     }
 
     // Minimize Button Action Event
     @FXML
     void changePasswordWindowMinimizeOnAction() {
-        Stage stage = (Stage) txtCurrentPassword.getScene().getWindow();
+        Stage stage = (Stage) txtNewPassword.getScene().getWindow();
         stage.setIconified(true);
     }
 
@@ -225,10 +327,10 @@ public class ProfileController {
     // ------------------------------- navigation buttons ---------------------------------------
 
     @FXML
-    void changePasswordNavigation() throws IOException {
+    void forgotPasswordOnAction() throws IOException {
         Stage stage = new Stage();
         stage.getIcons().add(new Image("images/icons/Logo.png"));
-        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/ChangePassword.fxml"))));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/VerifyEmail.fxml"))));
         stage.setScene(scene);
         scene.setFill(Color.TRANSPARENT);
         stage.initStyle(StageStyle.TRANSPARENT);

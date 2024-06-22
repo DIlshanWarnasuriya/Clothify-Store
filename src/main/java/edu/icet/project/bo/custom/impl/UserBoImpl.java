@@ -64,5 +64,15 @@ public class UserBoImpl implements UserBo {
         return null;
     }
 
+    @Override
+    public User searchByEmail(String email) {
+        for (UserEntity entity : userDao.getAll()) {
+            if (entity.getEmail().equals(email)) {
+                return new ModelMapper().map(entity, User.class);
+            }
+        }
+        return null;
+    }
+
 
 }

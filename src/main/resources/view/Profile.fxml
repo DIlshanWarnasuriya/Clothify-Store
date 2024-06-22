@@ -258,13 +258,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="603.0" layoutY="587.0" mnemonicParsing="false" onAction="#changePasswordNavigation" prefHeight="32.0" prefWidth="230.0" style="-fx-background-color: #153448; -fx-background-radius: 19;" text="Change Password" textFill="#f3f0f0">
+      <Label layoutX="658.0" layoutY="585.0" onMouseClicked="#forgotPasswordOnAction" text="forgot password ?" textFill="#153448">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </Button>
+      </Label>
    </children>
 </AnchorPane>

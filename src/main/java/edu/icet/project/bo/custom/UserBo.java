@@ -16,4 +16,6 @@ public interface UserBo extends SuperBo {
     ObservableList<User> search(String data);
 
     User searchById(Integer id);
+
+    User searchByEmail(String email);
 }

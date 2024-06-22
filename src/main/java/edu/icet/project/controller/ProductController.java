@@ -238,7 +238,7 @@ public class ProductController implements Initializable {
             } else if (supplierBo.searchById(supplierId) == null) {
                 AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Supplier id is Wrong. please enter correct supplier id");
             } else {
-                Product product = new Product(name, size, price, qty, imageUrl, category, supplierId, 7, date, "Active");
+                Product product = new Product(name, size, price, qty, imageUrl, category, supplierId, loggedUser.getId(), date, "Active");
 
                 if (productBo.equalsProduct(product)) {
                     AlertMessage.getInstance().informerAlert(AlertType.WARNING, "this product is already have in stock");
@@ -275,7 +275,7 @@ public class ProductController implements Initializable {
             } else if (supplierBo.searchById(supplierId) == null) {
                 AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Supplier id is Wrong. please enter correct supplier id");
             } else {
-                Product product = new Product(selectProduct.getId(), name, size, price, qty, imageUrl, category, supplierId, 7, date, "Active");
+                Product product = new Product(selectProduct.getId(), name, size, price, qty, imageUrl, category, supplierId, loggedUser.getId(), date, "Active");
 
                 boolean res = productBo.updateProduct(product);
                 if (res) {
