@@ -3,6 +3,8 @@ package edu.icet.project.controller;
 import edu.icet.project.bo.BoFactory;
 import edu.icet.project.bo.custom.ReportBo;
 import edu.icet.project.dto.User;
+import edu.icet.project.util.AlertMessage;
+import edu.icet.project.util.AlertType;
 import edu.icet.project.util.BoType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,8 +20,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ReportController implements Initializable {
@@ -118,6 +129,7 @@ public class ReportController implements Initializable {
 
     private final ReportBo reportBo = BoFactory.getInstance().getBo(BoType.REPORT);
     private User loggedUser;
+    private Connection conn;
 
     public void setUser(User user){
         loggedUser = user;
@@ -130,6 +142,12 @@ public class ReportController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setDetails();
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/clothify_store", "root", "yash");
+        } catch ( SQLException e) {
+            AlertMessage.getInstance().informerAlert(AlertType.ERROR, e.getMessage());
+        }
     }
 
     private void setDetails(){
@@ -182,6 +200,91 @@ public class ReportController implements Initializable {
         purchasedProductAnnual.setText(reportBo.annualPurchasedProduct() + " Product");
     }
 
+
+    @FXML
+    void printInventoryReportOnAction() {
+        try {
+            JasperDesign design = JRXmlLoader.load("src/main/resources/reports/Inventory.jrxml");
+            JRDesignQuery designQuery = new JRDesignQuery();
+            designQuery.setText("SELECT * FROM product WHERE status = 'Active'");
+            design.setQuery(designQuery);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(design);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            AlertMessage.getInstance().informerAlert(AlertType.ERROR, e.getMessage());
+        }
+    }
+
+    @FXML
+    void printEmployeeReportOnAction(){
+        try {
+            JasperDesign design = JRXmlLoader.load("src/main/resources/reports/Employee.jrxml");
+            JRDesignQuery designQuery = new JRDesignQuery();
+            designQuery.setText("SELECT * FROM user WHERE status = 'Active' AND userType = 'User'");
+            design.setQuery(designQuery);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(design);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            AlertMessage.getInstance().informerAlert(AlertType.ERROR, e.getMessage());
+        }
+    }
+
+    @FXML
+    void printSupplierReportOnAction() {
+        try {
+            JasperDesign design = JRXmlLoader.load("src/main/resources/reports/Supplier.jrxml");
+            JRDesignQuery designQuery = new JRDesignQuery();
+            designQuery.setText("SELECT * FROM supplier WHERE status = 'Active'");
+            design.setQuery(designQuery);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(design);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            AlertMessage.getInstance().informerAlert(AlertType.ERROR, e.getMessage());
+        }
+    }
+
+    @FXML
+    void printSalesReportOnAction() {
+        try {
+            JasperDesign design = JRXmlLoader.load("src/main/resources/reports/Sales.jrxml");
+            JRDesignQuery designQuery = new JRDesignQuery();
+            designQuery.setText("SELECT od.*, p.name FROM ordersdetails od INNER JOIN product p ON od.id = p.id WHERE od.status = 'placed'");
+            design.setQuery(designQuery);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(design);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            AlertMessage.getInstance().informerAlert(AlertType.ERROR, e.getMessage());
+        }
+    }
+
+    @FXML
+    void printReturnProductReportOnAction() {
+        try {
+            JasperDesign design = JRXmlLoader.load("src/main/resources/reports/ReturnProduct.jrxml");
+            JRDesignQuery designQuery = new JRDesignQuery();
+            designQuery.setText("SELECT od.*, p.name FROM ordersdetails od INNER JOIN product p ON od.id = p.id WHERE od.status = 'return'");
+            design.setQuery(designQuery);
+
+            JasperReport jasperReport = JasperCompileManager.compileReport(design);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, conn);
+            JasperViewer.viewReport(jasperPrint, false);
+
+        } catch (JRException e) {
+            AlertMessage.getInstance().informerAlert(AlertType.ERROR, e.getMessage());
+        }
+    }
 
     // Refresh Button Action Event
     @FXML

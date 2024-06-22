@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -130,7 +132,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane layoutX="32.0" layoutY="461.0" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
+                  <Pane layoutX="32.0" layoutY="461.0" onMouseClicked="#customerPageNavigation" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #D9D9D9; -fx-background-radius: 19;">
                      <children>
                         <Label contentDisplay="CENTER" layoutX="54.0" layoutY="7.0" prefHeight="26.0" prefWidth="96.0" text="Customers" textAlignment="CENTER" textFill="#153448">
                            <font>
@@ -183,319 +185,379 @@
                   </Pane>
                </children>
             </Pane>
-            <Pane layoutX="322.0" layoutY="122.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="income" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="todayIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="192.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="monthIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="390.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="annualIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="594.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="325.0" layoutY="67.0" onMouseClicked="#homePageNavigation" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #153448; -fx-background-radius: 19;">
-               <children>
-                  <Label contentDisplay="CENTER" layoutX="260.0" layoutY="6.0" prefHeight="26.0" prefWidth="42.0" text="Today" textAlignment="CENTER" textFill="#cfcfcf">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label contentDisplay="CENTER" layoutX="462.0" layoutY="6.0" prefHeight="26.0" prefWidth="49.0" text="Month" textAlignment="CENTER" textFill="#cfcfcf">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label contentDisplay="CENTER" layoutX="659.0" layoutY="5.0" prefHeight="26.0" prefWidth="49.0" text="Annual" textAlignment="CENTER" textFill="#cfcfcf">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
+            <Button layoutX="463.0" layoutY="619.0" mnemonicParsing="false" onAction="#printEmployeeReportOnAction" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #153448; -fx-background-radius: 50;" text="Print Employee Report" textFill="#d1d1d1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="169.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+            </Button>
+            <Button layoutX="638.0" layoutY="619.0" mnemonicParsing="false" onAction="#printSupplierReportOnAction" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #153448; -fx-background-radius: 50;" text="Print Supplier Report" textFill="#d1d1d1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="813.0" layoutY="619.0" mnemonicParsing="false" onAction="#printSalesReportOnAction" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #153448; -fx-background-radius: 50;" text="Print Sales Report" textFill="#d1d1d1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="288.0" layoutY="619.0" mnemonicParsing="false" onAction="#printInventoryReportOnAction" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #153448; -fx-background-radius: 50;" text="Print inventory Report" textFill="#d1d1d1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Pane layoutX="293.0" layoutY="68.0" prefHeight="520.0" prefWidth="862.0" style="-fx-border-color: #a6a6a6;">
                <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Orders" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="todayOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="monthOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="393.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="annualOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
+                  <ScrollPane layoutY="2.0" prefHeight="516.0" prefWidth="862.0" style="-fx-background-color: none;">
+                     <content>
+                        <Pane prefHeight="660.0" prefWidth="847.0" style="-fx-background-color: #f4f4f4;">
+                           <children>
+                              <Pane layoutX="26.0" layoutY="18.0" onMouseClicked="#homePageNavigation" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #153448; -fx-background-radius: 19;">
+                                 <children>
+                                    <Label contentDisplay="CENTER" layoutX="291.0" layoutY="6.0" prefHeight="26.0" prefWidth="42.0" text="Today" textAlignment="CENTER" textFill="#cfcfcf">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label contentDisplay="CENTER" layoutX="487.0" layoutY="6.0" prefHeight="26.0" prefWidth="49.0" text="Month" textAlignment="CENTER" textFill="#cfcfcf">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label contentDisplay="CENTER" layoutX="676.0" layoutY="6.0" prefHeight="26.0" prefWidth="49.0" text="Annual" textAlignment="CENTER" textFill="#cfcfcf">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label contentDisplay="CENTER" layoutX="93.0" layoutY="7.0" prefHeight="26.0" prefWidth="31.0" text="Title" textAlignment="CENTER" textFill="#cfcfcf">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Line endX="99.99998474121094" endY="-211.0" layoutX="115.0" layoutY="247.0" startX="100.0" startY="-246.99998474121094" stroke="#d4d4d4" />
+                                    <Line endX="99.99998474121094" endY="-211.0" layoutX="308.0" layoutY="248.0" startX="100.0" startY="-246.99998474121094" stroke="#d4d4d4" />
+                                    <Line endX="99.99998474121094" endY="-211.0" layoutX="500.0" layoutY="247.0" startX="100.0" startY="-246.99998474121094" stroke="#d4d4d4" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="77.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="income" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="todayIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="214.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="monthIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="annualIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="598.0" layoutY="10.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="125.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Orders" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="todayOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="monthOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="408.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="annualOrder" alignment="CENTER" contentDisplay="CENTER" layoutX="600.0" layoutY="10.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="174.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Sold Products count" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="todaySoldProduct" alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="monthSoldProduct" alignment="CENTER" contentDisplay="CENTER" layoutX="408.0" layoutY="9.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="annualSoldProduct" alignment="CENTER" contentDisplay="CENTER" layoutX="600.0" layoutY="9.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="221.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Sold Product - Mens" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="todaySoldProductMen" alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="monthSoldProductMen" alignment="CENTER" contentDisplay="CENTER" layoutX="408.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="annualSoldProductMen" alignment="CENTER" contentDisplay="CENTER" layoutX="600.0" layoutY="10.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="269.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Sold Product - Women" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="todaySoldProductWomen" alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="monthSoldProductWomen" alignment="CENTER" contentDisplay="CENTER" layoutX="409.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="annualSoldProductWomen" alignment="CENTER" contentDisplay="CENTER" layoutX="600.0" layoutY="10.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="317.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Sold Product - Kid" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="todaySoldProductKid" alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="monthSoldProductKid" alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="annualSoldProductKid" alignment="CENTER" contentDisplay="CENTER" layoutX="599.0" layoutY="10.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="364.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Return Order Count" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnOrderToday" alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnOrderMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="409.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnOrderAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="601.0" layoutY="9.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="412.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="changed Ordr Count" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="changedOrderToday" alignment="CENTER" contentDisplay="CENTER" layoutX="214.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="changedOrderMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="406.0" layoutY="9.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="changedOrderAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="601.0" layoutY="9.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="460.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Return Item - Men" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnMenToday" alignment="CENTER" contentDisplay="CENTER" layoutX="213.0" layoutY="9.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnMenMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="405.0" layoutY="9.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnMenAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="599.0" layoutY="10.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="507.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Return Item - Women" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnWomenToday" alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="9.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnWomenMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnWomenAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="599.0" layoutY="10.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="556.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Return Item - Kid" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnKidToday" alignment="CENTER" contentDisplay="CENTER" layoutX="215.0" layoutY="9.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnKidMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="407.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnKidAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="599.0" layoutY="10.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="26.0" layoutY="604.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                                 <children>
+                                    <Label layoutX="24.0" layoutY="10.0" text="Purchased product" textFill="#4d4d4d">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="purchasedProductToday" alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="purchasedProductMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="408.0" layoutY="9.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="purchasedProductAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="600.0" layoutY="10.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Line endX="99.99998474121094" endY="314.39996337890625" layoutX="141.0" layoutY="325.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
+                              <Line endX="99.99998474121094" endY="314.39996337890625" layoutX="334.0" layoutY="324.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
+                              <Line endX="99.99998474121094" endY="314.39996337890625" layoutX="526.0" layoutY="324.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </ScrollPane>
                </children>
             </Pane>
-            <Pane layoutX="322.0" layoutY="216.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Sold Products count" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="todaySoldProduct" alignment="CENTER" contentDisplay="CENTER" layoutX="191.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="monthSoldProduct" alignment="CENTER" contentDisplay="CENTER" layoutX="393.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="annualSoldProduct" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="263.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Sold Product - Mens" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="todaySoldProductMen" alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="monthSoldProductMen" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="annualSoldProductMen" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="309.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Sold Product - Women" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="todaySoldProductWomen" alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="monthSoldProductWomen" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="annualSoldProductWomen" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="356.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Sold Product - Kid" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="todaySoldProductKid" alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="monthSoldProductKid" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="annualSoldProductKid" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="588.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Return Item - Kid" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnKidToday" alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnKidMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnKidAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="402.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Return Order Count" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnOrderToday" alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnOrderMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnOrderAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="494.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Return Item - Men" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnMenToday" alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnMenMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnMenAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="541.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Return Item - Women" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnWomenToday" alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnWomenMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="returnWomenAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="633.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="Purchased product" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="purchasedProductToday" alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="purchasedProductMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="purchasedProductAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="322.0" layoutY="448.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
-               <children>
-                  <Label layoutX="24.0" layoutY="10.0" text="changed Ordr Count" textFill="#4d4d4d">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="changedOrderToday" alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="10.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="changedOrderMonth" alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="11.0" prefHeight="17.0" prefWidth="192.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="changedOrderAnnual" alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="12.0" prefHeight="17.0" prefWidth="181.0" textFill="#7b7b7b">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Line endX="100.0" endY="300.0" layoutX="409.0" layoutY="369.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
-            <Line endX="100.0" endY="300.0" layoutX="610.0" layoutY="369.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
-            <Line endX="100.0" endY="300.0" layoutX="810.0" layoutY="369.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
+            <Button layoutX="988.0" layoutY="619.0" mnemonicParsing="false" onAction="#printReturnProductReportOnAction" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: #153448; -fx-background-radius: 50;" text="Print Return Product" textFill="#d1d1d1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children></AnchorPane>
     </children>
 </StackPane>
