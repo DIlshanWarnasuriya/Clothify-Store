@@ -35,8 +35,19 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-import java.io.IOException;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.net.URL;
+import java.util.Date;
+import java.util.Properties;
+import java.util.ResourceBundle;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -99,7 +110,7 @@ public class PlaceOrderController implements Initializable {
 
     private User loggedUser;
 
-    public void setUser(User user){
+    public void setUser(User user) {
         loggedUser = user;
 
         userImage.setFill(new ImagePattern(new Image(user.getImageUrl())));
@@ -208,7 +219,7 @@ public class PlaceOrderController implements Initializable {
                 double total = Double.parseDouble(lblPrice.getText()) * qty;
 
                 CartTable product = getProductFromCart(productId);
-                if (product == null){
+                if (product == null) {
                     ImageView imageView = new ImageView(new Image(imageBox.getImage().getUrl()));
                     imageView.setFitHeight(50);
                     imageView.setFitWidth(50);
@@ -216,8 +227,7 @@ public class PlaceOrderController implements Initializable {
                     CartTable item = new CartTable(imageView, productId, lblName.getText(), lblSize.getText(), qty, total);
                     cartList.add(item);
                     refreshOnAction();
-                }
-                else{
+                } else {
                     qty += product.getQty();
                     total += product.getTotal();
                     cartList.remove(product);
@@ -248,40 +258,47 @@ public class PlaceOrderController implements Initializable {
     @FXML
     void placeOrderOnAction() {
 
-        try{
+        try {
             Integer orderId = ordersBo.getAllOrders().size() + 1;
             Integer customerId = Integer.parseInt(txtCustomerId.getText());
             String paymentMethod = cmbPaymentMethod.getValue();
             Date date = new Date();
 
-            if (cartList.isEmpty()){
+            if (cartList.isEmpty()) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please Add product to cart");
-            }
-            else if(customerBo.searchById(customerId) == null){
+            } else if (customerBo.searchById(customerId) == null) {
                 AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Customer Id is wrong. Please enter valid customer Id");
-            }
-            else{
-                Orders orders = new Orders(customerId,2, date, paymentMethod, "placed");
+            } else {
+                Orders orders = new Orders(customerId, 2, date, paymentMethod, "placed");
                 ArrayList<OrdersDetails> list = new ArrayList<>();
-                for (CartTable item : cartList){
+                for (CartTable item : cartList) {
                     list.add(new OrdersDetails(orderId, item.getId(), item.getName(), item.getQty(), item.getTotal(), item.getImageUrl().getImage().getUrl(), "placed"));
                 }
 
                 boolean res = ordersBo.saveOrder(orders, list);
-                if (res){
-                    Boolean res1 = generateBill(orderId, Double.parseDouble(lblTotal.getText()));
-                    if (res1){
+                if (res) {
+                    Boolean bill = generateBill(orderId, Double.parseDouble(lblTotal.getText()));
+                    if (bill) {
+                        String receiveEmail = customerBo.searchById(customerId).getEmail();
+                        Boolean email = sendEmail(receiveEmail, orderId);
+                        if (email) {
+                            // bill generate and send email after
+                            cartList.clear();
+                            refreshOnAction();
+                            txtCustomerId.setText("");
 
-                    }else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "bill print fail");
-                }else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Fail");
+                        } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Email not send");
+                    } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "bill print fail");
+                } else AlertMessage.getInstance().informerAlert(AlertType.ERROR, "Fail");
             }
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             AlertMessage.getInstance().informerAlert(AlertType.WARNING, "Please enter valid customer id and select payment method");
         }
     }
 
-    private Boolean generateBill(Integer orderId, Double netTotal){
-        try(Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/clothify_store", "root", "yash");) {
+    // Generate bill
+    private Boolean generateBill(Integer orderId, Double netTotal) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/clothify_store", "root", "yash");) {
             JasperDesign design = JRXmlLoader.load("src/main/resources/reports/Bills.jrxml");
             JRDesignQuery designQuery = new JRDesignQuery();
 
@@ -296,18 +313,54 @@ public class PlaceOrderController implements Initializable {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, conn);
             JasperViewer.viewReport(jasperPrint, false);
 
-            String pdfName = "Order"+orderId;
-
-            String outputFile = "src/main/resources/reports/bill/"+pdfName+".pdf";  // Specify your file path here
+            String outputFile = "src/main/resources/reports/bill/Order" + orderId + ".pdf";  // Specify your file path here
             JasperExportManager.exportReportToPdfFile(jasperPrint, outputFile);
-
-            cartList.clear();
-            refreshOnAction();
-            txtCustomerId.setText("");
             return true;
 
         } catch (JRException | SQLException e) {
             AlertMessage.getInstance().informerAlert(AlertType.ERROR, e.getMessage());
+            return false;
+        }
+    }
+
+    // Send bill to Email
+    private Boolean sendEmail(String receiveEmail, Integer orderId) {
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        String email = "yashodadilshan@gmail.com";
+        String password = "rbxt stdk vyqy esgp";
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(email, password);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(email));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiveEmail));
+            message.setSubject("Thank you to purchasing. Come again to Clothify Store");
+            String filename = "src/main/resources/reports/bill/Order" + orderId + ".pdf";
+
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
+            DataSource source = new FileDataSource(filename);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName("Order" + orderId + ".pdf");
+
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            message.setContent(multipart);
+
+            Transport.send(message);
+            return true;
+        } catch (MessagingException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             return false;
         }
     }
@@ -383,6 +436,7 @@ public class PlaceOrderController implements Initializable {
         scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
+
     @FXML
     void orderPageNavigation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Orders.fxml"));
@@ -397,6 +451,7 @@ public class PlaceOrderController implements Initializable {
         scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
+
     @FXML
     void customerPageNavigation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Customer.fxml"));
@@ -411,6 +466,7 @@ public class PlaceOrderController implements Initializable {
         scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
+
     @FXML
     void supplierPageNavigation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Supplier.fxml"));
@@ -425,6 +481,7 @@ public class PlaceOrderController implements Initializable {
         scene.setFill(Color.TRANSPARENT);
         stage.show();
     }
+
     @FXML
     void profilePageNavigation() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Profile.fxml"));

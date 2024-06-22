@@ -64,9 +64,9 @@
 					<text><![CDATA[Clothify Store]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="87" y="71" width="72" height="16" forecolor="#575757" uuid="ce67a7e8-9691-4587-a0f4-4e8bcf6ee8b8"/>
+					<reportElement x="78" y="72" width="72" height="16" forecolor="#575757" uuid="ce67a7e8-9691-4587-a0f4-4e8bcf6ee8b8"/>
 					<textElement>
-						<font fontName="Arial Black" size="10"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{orderId}]]></textFieldExpression>
 				</textField>
@@ -82,16 +82,23 @@
 					<text><![CDATA[No.235, Main road, Panadura  |  0123456789]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="32" y="71" width="60" height="16" forecolor="#575757" uuid="9e68e1c2-e6a0-474e-81f6-25c45fd7b64b"/>
+					<reportElement x="32" y="72" width="45" height="16" forecolor="#575757" uuid="9e68e1c2-e6a0-474e-81f6-25c45fd7b64b"/>
 					<textElement>
-						<font fontName="Arial Black" size="10"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 					<text><![CDATA[Order Id : ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="167" y="72" width="28" height="14" forecolor="#575757" uuid="6ec5629f-2b64-4256-abea-d9a5f8515669"/>
+					<reportElement x="167" y="71" width="28" height="14" forecolor="#575757" uuid="6ec5629f-2b64-4256-abea-d9a5f8515669"/>
 					<text><![CDATA[Date :]]></text>
 				</staticText>
+				<textField pattern="yyyy MMM dd ">
+					<reportElement x="195" y="72" width="56" height="17" forecolor="#575757" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Right">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
 			</frame>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="90" width="380" height="1" uuid="634e6468-5f51-4c08-b5b2-17b7cf40c769"/>
@@ -108,13 +115,6 @@
 		<band height="33" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="6" width="379" height="20" forecolor="#000000" backcolor="#153448" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
-				<textField pattern="yyyy MMM dd ">
-					<reportElement x="192" y="-25" width="56" height="20" forecolor="#575757" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
-					<textElement textAlignment="Right">
-						<font size="9"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
 				<staticText>
 					<reportElement style="Column header" x="237" y="4" width="40" height="18" forecolor="#E6E6E6" uuid="377442ba-1e47-4579-8fac-ef24b3fd11ee">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5f29e9f4-97b1-4c65-9a5b-5ec4888e8389"/>
@@ -220,7 +220,7 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="269" y="12" width="78" height="20" forecolor="#153448" uuid="d8550e7e-6c6a-44f5-b2bf-0102bb35080f">
+				<reportElement x="273" y="12" width="78" height="20" forecolor="#153448" uuid="d8550e7e-6c6a-44f5-b2bf-0102bb35080f">
 					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right">
