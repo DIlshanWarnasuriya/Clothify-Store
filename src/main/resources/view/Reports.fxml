@@ -217,43 +217,13 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Pane layoutX="293.0" layoutY="68.0" prefHeight="520.0" prefWidth="862.0" style="-fx-border-color: #a6a6a6;">
+            <Pane layoutX="293.0" layoutY="124.0" prefHeight="458.0" prefWidth="862.0" style="-fx-border-color: #a6a6a6;">
                <children>
-                  <ScrollPane layoutY="2.0" prefHeight="516.0" prefWidth="862.0" style="-fx-background-color: none;">
+                  <ScrollPane layoutY="2.0" prefHeight="452.0" prefWidth="862.0" style="-fx-background-color: none;">
                      <content>
-                        <Pane prefHeight="660.0" prefWidth="847.0" style="-fx-background-color: #f4f4f4;">
+                        <Pane prefHeight="590.0" prefWidth="847.0" style="-fx-background-color: #f4f4f4;">
                            <children>
-                              <Pane layoutX="26.0" layoutY="18.0" onMouseClicked="#homePageNavigation" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #153448; -fx-background-radius: 19;">
-                                 <children>
-                                    <Label contentDisplay="CENTER" layoutX="291.0" layoutY="6.0" prefHeight="26.0" prefWidth="42.0" text="Today" textAlignment="CENTER" textFill="#cfcfcf">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label contentDisplay="CENTER" layoutX="487.0" layoutY="6.0" prefHeight="26.0" prefWidth="49.0" text="Month" textAlignment="CENTER" textFill="#cfcfcf">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label contentDisplay="CENTER" layoutX="676.0" layoutY="6.0" prefHeight="26.0" prefWidth="49.0" text="Annual" textAlignment="CENTER" textFill="#cfcfcf">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label contentDisplay="CENTER" layoutX="93.0" layoutY="7.0" prefHeight="26.0" prefWidth="31.0" text="Title" textAlignment="CENTER" textFill="#cfcfcf">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Line endX="99.99998474121094" endY="-211.0" layoutX="115.0" layoutY="247.0" startX="100.0" startY="-246.99998474121094" stroke="#d4d4d4" />
-                                    <Line endX="99.99998474121094" endY="-211.0" layoutX="308.0" layoutY="248.0" startX="100.0" startY="-246.99998474121094" stroke="#d4d4d4" />
-                                    <Line endX="99.99998474121094" endY="-211.0" layoutX="500.0" layoutY="247.0" startX="100.0" startY="-246.99998474121094" stroke="#d4d4d4" />
-                                 </children>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Pane>
-                              <Pane layoutX="26.0" layoutY="77.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="14.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="income" textFill="#4d4d4d">
                                        <font>
@@ -277,7 +247,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="125.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="62.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Orders" textFill="#4d4d4d">
                                        <font>
@@ -301,7 +271,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="174.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="111.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Sold Products count" textFill="#4d4d4d">
                                        <font>
@@ -325,7 +295,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="221.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="158.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Sold Product - Mens" textFill="#4d4d4d">
                                        <font>
@@ -349,7 +319,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="269.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="206.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Sold Product - Women" textFill="#4d4d4d">
                                        <font>
@@ -373,7 +343,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="317.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="254.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Sold Product - Kid" textFill="#4d4d4d">
                                        <font>
@@ -397,7 +367,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="364.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="301.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Return Order Count" textFill="#4d4d4d">
                                        <font>
@@ -421,7 +391,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="412.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="349.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="changed Ordr Count" textFill="#4d4d4d">
                                        <font>
@@ -445,7 +415,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="460.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="397.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Return Item - Men" textFill="#4d4d4d">
                                        <font>
@@ -469,7 +439,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="507.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="444.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Return Item - Women" textFill="#4d4d4d">
                                        <font>
@@ -493,7 +463,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="556.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="493.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Return Item - Kid" textFill="#4d4d4d">
                                        <font>
@@ -517,7 +487,7 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Pane layoutX="26.0" layoutY="604.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
+                              <Pane layoutX="26.0" layoutY="541.0" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #EBEBEB; -fx-background-radius: 18;">
                                  <children>
                                     <Label layoutX="24.0" layoutY="10.0" text="Purchased product" textFill="#4d4d4d">
                                        <font>
@@ -541,9 +511,9 @@
                                     </Label>
                                  </children>
                               </Pane>
-                              <Line endX="99.99998474121094" endY="314.39996337890625" layoutX="141.0" layoutY="325.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
-                              <Line endX="99.99998474121094" endY="314.39996337890625" layoutX="334.0" layoutY="324.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
-                              <Line endX="99.99998474121094" endY="314.39996337890625" layoutX="526.0" layoutY="324.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
+                              <Line endX="99.99998474121094" endY="314.39996337890625" layoutX="141.0" layoutY="262.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
+                              <Line endX="99.99998474121094" endY="314.39996337890625" layoutX="334.0" layoutY="261.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
+                              <Line endX="99.99998474121094" endY="314.39996337890625" layoutX="526.0" layoutY="261.0" startX="100.0" startY="-246.99998474121094" stroke="#a6a6a6" />
                            </children>
                         </Pane>
                      </content>
@@ -558,6 +528,36 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Pane layoutX="321.0" layoutY="71.0" onMouseClicked="#homePageNavigation" prefHeight="36.0" prefWidth="794.0" style="-fx-background-color: #153448; -fx-background-radius: 19;">
+               <children>
+                  <Label contentDisplay="CENTER" layoutX="291.0" layoutY="6.0" prefHeight="26.0" prefWidth="42.0" text="Today" textAlignment="CENTER" textFill="#cfcfcf">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" layoutX="487.0" layoutY="6.0" prefHeight="26.0" prefWidth="49.0" text="Month" textAlignment="CENTER" textFill="#cfcfcf">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" layoutX="676.0" layoutY="6.0" prefHeight="26.0" prefWidth="49.0" text="Annual" textAlignment="CENTER" textFill="#cfcfcf">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" layoutX="93.0" layoutY="7.0" prefHeight="26.0" prefWidth="31.0" text="Title" textAlignment="CENTER" textFill="#cfcfcf">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Line endX="99.99998474121094" endY="-211.0" layoutX="115.0" layoutY="247.0" startX="100.0" startY="-246.99998474121094" stroke="#d4d4d4" />
+                  <Line endX="99.99998474121094" endY="-211.0" layoutX="308.0" layoutY="248.0" startX="100.0" startY="-246.99998474121094" stroke="#d4d4d4" />
+                  <Line endX="99.99998474121094" endY="-211.0" layoutX="500.0" layoutY="247.0" startX="100.0" startY="-246.99998474121094" stroke="#d4d4d4" />
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Pane>
          </children></AnchorPane>
     </children>
 </StackPane>

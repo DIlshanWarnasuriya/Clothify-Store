@@ -496,16 +496,12 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblBestSellingProductQty" layoutX="134.0" layoutY="43.0" text="16 items" textFill="#7d7d7d">
+                        <Label fx:id="lblBestSellingProductQty" layoutX="134.0" layoutY="43.0" prefHeight="21.0" prefWidth="170.0" textFill="#7d7d7d">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
-                        <ImageView fx:id="bestSellingProductImage" fitHeight="63.0" fitWidth="70.0" layoutX="42.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/items/Tshirt.png" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="bestSellingProductImage" fitHeight="63.0" fitWidth="70.0" layoutX="42.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
                   <Pane layoutX="475.0" layoutY="248.0" onMouseClicked="#userOnAction" prefHeight="81.0" prefWidth="193.89" style="-fx-background-color: #D9D9D9; -fx-background-radius: 18;">
@@ -520,7 +516,7 @@
                               <Image url="@../images/icons/user.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblUserCount" layoutX="71.0" layoutY="41.0" text="3 categories" textFill="#545454">
+                        <Label fx:id="lblUserCount" layoutX="71.0" layoutY="41.0" prefHeight="21.0" prefWidth="96.0" textFill="#545454">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -542,7 +538,7 @@
                               <Image url="@../images/icons/reports.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="73.0" layoutY="40.0" text="1 report" textFill="#545454">
+                        <Label layoutX="73.0" layoutY="40.0" text="Many report" textFill="#545454">
                            <font>
                               <Font size="15.0" />
                            </font>

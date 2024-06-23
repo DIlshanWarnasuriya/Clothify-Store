@@ -62,7 +62,7 @@
 					<textElement>
 						<font fontName="Arial Black" size="16" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Sales Report]]></text>
+					<text><![CDATA[Return Report]]></text>
 				</staticText>
 				<textField pattern="yyyy MMM dd ">
 					<reportElement x="220" y="80" width="144" height="20" forecolor="#575757" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
