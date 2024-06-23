@@ -2,6 +2,7 @@ package edu.icet.project.controller;
 
 import edu.icet.project.bo.BoFactory;
 import edu.icet.project.bo.custom.UserBo;
+import edu.icet.project.dto.User;
 import edu.icet.project.util.BoType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Objects;
 import javafx.application.Platform;
 import javafx.stage.StageStyle;
@@ -30,8 +32,12 @@ public class SplashController {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    userBo.getAll(); // for hibernate start
-
+                    User user1 = userBo.searchByEmail("admin@gmail.com");
+                    if (user1==null){
+                        String password = Base64.getEncoder().encodeToString("admin".getBytes());
+                        User user = new User("-", "admin@gmail.com", password, "-", "-", "-", "Admin", "images/profile/Male.png", "Active");
+                        userBo.saveUser(user);
+                    }
                     Stage thisStage = (Stage) imageView.getScene().getWindow();
                     thisStage.close();
 
